@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="GraphQLAPIClient\Generated\Queries\**" />
+    <Content Remove="GraphQLAPIClient\Generated\Queries\**" />
+    <EmbeddedResource Remove="GraphQLAPIClient\Generated\Queries\**" />
+    <GraphQL Remove="GraphQLAPIClient\Generated\Queries\**" />
+    <GraphQLConfig Remove="GraphQLAPIClient\Generated\Queries\**" />
+    <None Remove="GraphQLAPIClient\Generated\Queries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="6.0.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Graph" Version="4.45.0" />
+    <PackageReference Include="StrawberryShake.CodeGeneration.CSharp.Analyzers" Version="12.15.0" />
+    <PackageReference Include="StrawberryShake.Transport.Http" Version="12.15.0" />
+    <PackageReference Include="Syncfusion.Blazor.Calendars" Version="20.3.0.50" />
+    <PackageReference Include="Syncfusion.Blazor.Cards" Version="20.3.0.52" />
+    <PackageReference Include="Syncfusion.Blazor.Grid" Version="20.3.0.50" />
+    <PackageReference Include="Syncfusion.Blazor.Notifications" Version="20.3.0.52" />
+    <PackageReference Include="Syncfusion.Blazor.ProgressBar" Version="20.3.0.57" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="GraphQLAPIClient\propertes.graphql" />
+  </ItemGroup>
+
+  <Target Name="tailwindcss" BeforeTargets="BeforeBuild">
+    <Exec Command="npx tailwindcss -i ./Styles/app.css -o ./wwwroot/css/app.css"></Exec>
+  </Target>
+
+  <ItemGroup>
+    <GraphQL Remove="GraphQLAPIClient\Mutations\Property.graphql" />
+    <GraphQL Remove="GraphQLAPIClient\Queries\properties.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="GraphQLAPIClient\Mutations\Property.graphql" />
+    <None Remove="GraphQLAPIClient\Queries\properties.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <GraphQLConfig Include="GraphQLAPIClient\Mutations\Loan.graphql" />
+    <GraphQLConfig Include="GraphQLAPIClient\Mutations\Property.graphql" />
+    <GraphQLConfig Include="GraphQLAPIClient\Queries\properties.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="GraphQLAPIClient\Mutations\Loan.graphql" />
+  </ItemGroup>
+</Project>

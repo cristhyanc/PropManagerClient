@@ -1,0 +1,62 @@
+﻿@page "/property/{Id}"
+@page "/property/{Id}/{Tab}"
+@using PropManagerSite.Pages.Property.Edit.Details
+@using PropManagerSite.Pages.Property.Edit.Loan
+@inherits PropertyViewBase
+
+<div class="flex flex-row justify-between">
+    <div class="font-bold">Property</div>
+
+    @if (this.PropertyDetails != null)
+    {
+        <div>@PropertyDetails.Name</div>
+
+    }
+</div>
+@if (@IsBusy)
+{
+    <SfProgressBar Type="ProgressType.Circular" Value="20" Height="60" IsIndeterminate="true" Minimum="0" Maximum="100">
+        <ProgressBarAnimation Enable="true"></ProgressBarAnimation>
+    </SfProgressBar>
+}
+else
+{
+    <div class="border-2 rounded p-5">
+        <SfTab @bind-SelectedItem="SelectedTab">
+            <TabItems>
+                <TabItem>
+                    <ChildContent>
+                        <TabHeader Text="Details">
+
+                        </TabHeader>
+                    </ChildContent>
+                    <ContentTemplate>
+                        <DetailsView OnPropertySaved="PropertySaved" PropertyDetails="@PropertyDetails"> </DetailsView>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem>
+                    <ChildContent>
+                        <TabHeader Text="Loans">
+
+                        </TabHeader>
+                    </ChildContent>
+                    <ContentTemplate>
+                        <Loans PropertyDetails="@PropertyDetails" OnLoanDeleted="LoanProperty"></Loans>
+                    </ContentTemplate>
+                </TabItem>
+                <TabItem>
+                    <ChildContent>
+                        <TabHeader Text="Expenses">
+
+                        </TabHeader>
+                    </ChildContent>
+                    <ContentTemplate>
+                        <div>
+                            Expenses Details here
+                        </div>
+                    </ContentTemplate>
+                </TabItem>
+            </TabItems>
+        </SfTab>
+    </div>
+}

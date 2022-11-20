@@ -1,0 +1,21 @@
+mutation CreateProperty($data: AddPropertyInput!)  {
+  addProperty(input: $data) {
+      property{
+        id
+      }
+  }
+ }
+
+ mutation EditProperty($data: EditPropertyInput!)  {
+  editProperty(input: $data) {
+      property{
+        ...propertyDetails
+      }
+  }
+ }
+
+mutation DeleteProperty($data: DeletePropertyInput!)  {
+  deleteProperty(input: $data) {
+      boolean
+  }
+ }

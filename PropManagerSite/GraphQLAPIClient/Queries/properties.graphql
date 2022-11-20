@@ -1,0 +1,67 @@
+query GetProperties{
+  properties
+  {
+    ...propertySearchDetails
+  }
+}
+
+fragment propertySearchDetails on Property {
+    id
+    name
+    address
+    rooms
+    bathrooms    
+    carpark
+}
+
+query GetProperty($propertyId:UUID)
+{
+    properties(where:{id: { eq: $propertyId}})
+    { 
+        ...propertyDetails 
+    }
+}
+
+query GetLoan($loanId:UUID)
+{
+    loans(where:{id: { eq: $loanId}})
+    { 
+        id
+          lenderName
+          amount
+          interest      
+          lMI
+          loanType
+          years
+          property
+          {
+            id
+            name
+          }
+    }
+}
+
+
+fragment propertyDetails on Property {
+    id
+    name
+    purchasePrice
+    registrationTransferFee
+    rooms
+    bathrooms
+    landSize
+    address
+    propertyType
+    stampDuty
+    carpark
+    loans{
+        id
+          lenderName
+          amount
+          interest      
+          lMI
+          loanType
+          years
+    }
+}
+

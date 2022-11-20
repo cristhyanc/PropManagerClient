@@ -1,0 +1,49 @@
+﻿@inherits LoansBase
+
+@if (@IsBusy)
+{
+    <SfProgressBar Type="ProgressType.Circular" Value="20" Height="60" IsIndeterminate="true" Minimum="0" Maximum="100">
+        <ProgressBarAnimation Enable="true"></ProgressBarAnimation>
+    </SfProgressBar>
+}
+else
+{
+
+    @if (PropertyDetails != null && PropertyDetails.Loans != null && PropertyDetails.Loans.Count > 0)
+    {
+
+
+
+        <div class="flex flex-row justify-between mt-2">
+            <div class="font-bold">Loans</div>
+            <SfButton @onclick="()=> NewLoan()" CssClass="e-info"> Add</SfButton>
+        </div>
+
+        <SfGrid class="mt-2" DataSource="@PropertyDetails.Loans">
+            <GridColumns>
+                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Loans.Id) HeaderText=" ID" IsPrimaryKey="true" Visible=false></GridColumn>
+                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Loans.LenderName) HeaderText="Lender Name"></GridColumn>
+                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Loans.Interest) HeaderText="Interest"></GridColumn>
+                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Loans.Amount) HeaderText="Amount" Format="C2"></GridColumn>
+                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Loans.LMI) HeaderText="LMI" Format="C2"></GridColumn>
+                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Loans.Years) HeaderText="Years"></GridColumn>
+
+                <GridColumn HeaderText="Manage Records" Width="150">
+                    <Template>
+                        @{
+                            var value = (context as IEditProperty_EditProperty_Property_Loans);
+                            <SfButton @onclick="()=> EditLoan(value!)" CssClass="e-outline">Edit</SfButton>
+                            <SfButton @onclick="()=> DeleteLoan(value!)" CssClass="e-outline">Delete</SfButton>
+                        }
+                    </Template>
+                </GridColumn>
+            </GridColumns>
+        </SfGrid>
+    }
+    else
+    {
+        <div class="flex rounded  bg-slate-200 py-9 justify-center">
+            <SfButton CssClass="e-info" @onclick="()=> NewLoan()"> Add New Loan</SfButton>
+        </div>
+    }
+}

@@ -1,0 +1,261 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  properties(where: PropertyFilterInput): [Property!]!
+  loans(where: LoanFilterInput): [Loan!]!
+}
+
+type Mutation {
+  addProperty(input: AddPropertyInput!): AddPropertyPayload!
+  editProperty(input: EditPropertyInput!): EditPropertyPayload!
+  deleteProperty(input: DeletePropertyInput!): DeletePropertyPayload!
+  addLoan(input: AddLoanInput!): AddLoanPayload!
+  editLoan(input: EditLoanInput!): EditLoanPayload!
+  deleteLoan(input: DeleteLoanInput!): DeleteLoanPayload!
+}
+
+input PropertyFilterInput {
+  and: [PropertyFilterInput!]
+  or: [PropertyFilterInput!]
+  id: ComparableGuidOperationFilterInput
+  address: StringOperationFilterInput
+  propertyType: PropertyTypesOperationFilterInput
+  name: StringOperationFilterInput
+  stampDuty: ComparableNullableOfDecimalOperationFilterInput
+  purchasePrice: ComparableNullableOfDecimalOperationFilterInput
+  registrationTransferFee: ComparableNullableOfDecimalOperationFilterInput
+  rooms: ComparableNullableOfDecimalOperationFilterInput
+  bathrooms: ComparableNullableOfDecimalOperationFilterInput
+  carpark: ComparableNullableOfDecimalOperationFilterInput
+  landSize: ComparableNullableOfDecimalOperationFilterInput
+  loans: ListFilterInputTypeOfLoanFilterInput
+  deleted: BooleanOperationFilterInput
+}
+
+input LoanFilterInput {
+  and: [LoanFilterInput!]
+  or: [LoanFilterInput!]
+  id: ComparableGuidOperationFilterInput
+  lenderName: StringOperationFilterInput
+  amount: ComparableNullableOfDecimalOperationFilterInput
+  interest: ComparableNullableOfDecimalOperationFilterInput
+  loanType: LoanTypesOperationFilterInput
+  lMI: ComparableNullableOfDecimalOperationFilterInput
+  property: PropertyFilterInput
+  propertyId: ComparableGuidOperationFilterInput
+  years: ComparableNullableOfInt32OperationFilterInput
+  deleted: BooleanOperationFilterInput
+}
+
+input ComparableGuidOperationFilterInput {
+  eq: UUID
+  neq: UUID
+  in: [UUID!]
+  nin: [UUID!]
+  gt: UUID
+  ngt: UUID
+  gte: UUID
+  ngte: UUID
+  lt: UUID
+  nlt: UUID
+  lte: UUID
+  nlte: UUID
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+input PropertyTypesOperationFilterInput {
+  eq: PropertyTypes
+  neq: PropertyTypes
+  in: [PropertyTypes!]
+  nin: [PropertyTypes!]
+}
+
+input ComparableNullableOfDecimalOperationFilterInput {
+  eq: Decimal
+  neq: Decimal
+  in: [Decimal]
+  nin: [Decimal]
+  gt: Decimal
+  ngt: Decimal
+  gte: Decimal
+  ngte: Decimal
+  lt: Decimal
+  nlt: Decimal
+  lte: Decimal
+  nlte: Decimal
+}
+
+input ListFilterInputTypeOfLoanFilterInput {
+  all: LoanFilterInput
+  none: LoanFilterInput
+  some: LoanFilterInput
+  any: Boolean
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input LoanTypesOperationFilterInput {
+  eq: LoanTypes
+  neq: LoanTypes
+  in: [LoanTypes!]
+  nin: [LoanTypes!]
+}
+
+input ComparableNullableOfInt32OperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input DeleteLoanInput {
+  id: UUID!
+}
+
+input EditLoanInput {
+  id: UUID!
+  lenderName: String!
+  amount: Decimal!
+  interest: Decimal
+  loanType: LoanTypes!
+  lMI: Decimal
+  years: Int
+}
+
+input AddLoanInput {
+  lenderName: String!
+  amount: Decimal!
+  interest: Decimal
+  loanType: LoanTypes!
+  lMI: Decimal
+  years: Int
+  propertyId: UUID!
+}
+
+input DeletePropertyInput {
+  id: UUID!
+}
+
+input EditPropertyInput {
+  id: UUID!
+  address: String!
+  name: String!
+  stampDuty: Decimal
+  purchasePrice: Decimal
+  registrationTransferFee: Decimal
+  rooms: Decimal
+  bathrooms: Decimal
+  carpark: Decimal
+  landSize: Decimal
+  propertyType: PropertyTypes
+}
+
+input AddPropertyInput {
+  address: String!
+  name: String!
+  stampDuty: Decimal
+  purchasePrice: Decimal
+  registrationTransferFee: Decimal
+  rooms: Decimal
+  bathrooms: Decimal
+  carpark: Decimal
+  landSize: Decimal
+  propertyType: PropertyTypes
+}
+
+type Loan {
+  id: UUID!
+  lenderName: String!
+  amount: Decimal
+  interest: Decimal
+  loanType: LoanTypes!
+  lMI: Decimal
+  property: Property!
+  propertyId: UUID!
+  years: Int
+  deleted: Boolean!
+}
+
+type Property {
+  id: UUID!
+  address: String!
+  propertyType: PropertyTypes!
+  name: String
+  stampDuty: Decimal
+  purchasePrice: Decimal
+  registrationTransferFee: Decimal
+  rooms: Decimal
+  bathrooms: Decimal
+  carpark: Decimal
+  landSize: Decimal
+  loans: [Loan!]!
+  deleted: Boolean!
+}
+
+scalar UUID
+
+enum PropertyTypes {
+  UNIT
+  HOUSE
+  TOWN_HOUSE
+}
+
+"The built-in `Decimal` scalar type."
+scalar Decimal
+
+enum LoanTypes {
+  INTEREST_ONLY
+  PRINCIPAL_AND_INTEREST
+}
+
+type AddPropertyPayload {
+  property: Property
+}
+
+type EditPropertyPayload {
+  property: Property
+}
+
+type DeletePropertyPayload {
+  boolean: Boolean
+}
+
+type AddLoanPayload {
+  loan: Loan
+}
+
+type EditLoanPayload {
+  loan: Loan
+}
+
+type DeleteLoanPayload {
+  boolean: Boolean
+}

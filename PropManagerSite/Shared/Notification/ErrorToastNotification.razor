@@ -1,0 +1,13 @@
+﻿@inherits ErrorToastNotificationBase
+<div>
+    <style>
+       
+            .toast_error {
+              background-color: red !important;
+              color:white !important;
+            }
+    </style>
+    <SfToast ID="toast_error" @ref="errorToast" Title="Error" CssClass="toast_error" Timeout="3000" Icon="e-meeting">
+        <ToastPosition X="Right"></ToastPosition>
+    </SfToast>
+</div>

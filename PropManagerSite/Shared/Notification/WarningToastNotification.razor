@@ -1,0 +1,13 @@
+﻿@inherits WarningToastNotificationBase
+<div>
+    <style>
+        .toast_warnin {
+            background-color: #FFBF00 !important;
+            color: white !important;
+        }
+
+    </style>
+    <SfToast ID="toast_warnin" @ref="warningToast" CssClass="toast_warnin" Title="Warning" Timeout="3000" Icon="e-meeting">
+        <ToastPosition X="Right"></ToastPosition>
+    </SfToast>
+</div>

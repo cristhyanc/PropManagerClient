@@ -1,0 +1,60 @@
+﻿@page "/property/new"
+@inherits CreatePropertyBase
+
+<EditForm Model="addPropertyModel" OnValidSubmit="Save">
+    <DataAnnotationsValidator />
+
+    <div class="flex flex-col gap-1">
+
+        <h1 class="font-bold text-lg">New Property</h1>
+
+        @if (@IsBusy)
+        {
+            <SfProgressBar Type="ProgressType.Circular" Value="20" Height="60" IsIndeterminate="true" Minimum="0" Maximum="100">
+                <ProgressBarAnimation Enable="true"></ProgressBarAnimation>
+            </SfProgressBar>
+        }
+        else
+        {
+            <div>
+                <SfTextBox CssClass="!h-11" Placeholder="Property Name" @bind-Value="@addPropertyModel.Name" FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+                <ValidationMessage For="() => addPropertyModel.Name" />
+            </div>
+
+            <div>
+                <SfTextBox CssClass="!h-11" Placeholder="Address" @bind-Value="@addPropertyModel.Address" FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+                <ValidationMessage For="() => addPropertyModel.Address" />
+            </div>
+
+            <div class="flex flex-row gap-5 items-center">
+                <SfDropDownList TValue="PropManagerSite.GraphQL.PropertyTypes?" TItem="string" Placeholder="Property Type" FloatLabelType="@FloatLabelType.Auto" DataSource="@EnumValues" @bind-Value="@addPropertyModel.PropertyType">
+                </SfDropDownList>
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal?" @bind-Value="@addPropertyModel.PurchasePrice" Placeholder="Purchase Price" FloatLabelType="@FloatLabelType.Auto" Format="C2"></SfNumericTextBox>
+            </div>
+            <div class="flex flex-row gap-5">
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal?" @bind-Value="@addPropertyModel.StampDuty" Placeholder="Stamp Duty" FloatLabelType="@FloatLabelType.Auto" Format="C2"></SfNumericTextBox>
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal?" @bind-Value="@addPropertyModel.RegistrationTransferFee" Placeholder="Registration Transfer Fee" FloatLabelType="@FloatLabelType.Auto" Format="C2"></SfNumericTextBox>
+            </div>
+            <div class="flex flex-row gap-5">
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal?" Placeholder="Rooms" @bind-Value="@addPropertyModel.Rooms" FloatLabelType="@FloatLabelType.Auto"></SfNumericTextBox>
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal?" Placeholder="Bathrooms" @bind-Value="@addPropertyModel.Bathrooms" FloatLabelType="@FloatLabelType.Auto"></SfNumericTextBox>
+            </div>
+            <div class="flex flex-row gap-5">
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal?" Placeholder="Carparks" @bind-Value="@addPropertyModel.Carpark" FloatLabelType="@FloatLabelType.Auto"></SfNumericTextBox>
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal?" Placeholder="LandSize" @bind-Value="@addPropertyModel.LandSize" FloatLabelType="@FloatLabelType.Auto"></SfNumericTextBox>
+            </div>
+
+            <div class="flex flex-row justify-end gap-2 mt-4">
+                <SfButton @onclick="Cancel" CssClass="e-danger">Cancel</SfButton>
+                <SfButton CssClass="e-primary">Save</SfButton>
+
+            </div>
+        }
+    </div>
+</EditForm>
+
+<style>
+    .e-control-container {
+        height: 45px !important
+    }
+</style>

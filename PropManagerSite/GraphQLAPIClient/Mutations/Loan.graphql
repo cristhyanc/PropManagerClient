@@ -1,0 +1,21 @@
+mutation AddLoan($data: AddLoanInput!)  {
+  addLoan(input: $data) {
+      loan {
+        id
+      }
+  }
+ }
+
+ mutation EddLoan($data: EditLoanInput!)  {
+  editLoan(input: $data) {
+      loan {
+        id
+      }
+  }
+ }
+
+ mutation DeleteLoan($data: DeleteLoanInput!)  {
+  deleteLoan(input: $data) {
+      boolean
+  }
+ }

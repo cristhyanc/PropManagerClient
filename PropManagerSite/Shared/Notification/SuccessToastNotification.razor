@@ -1,0 +1,13 @@
+﻿@inherits SuccessToastNotificationBase
+<div>
+    <style>
+        .toast_success {
+            background-color: forestgreen !important;
+            color: white !important;
+        }
+
+    </style>
+    <SfToast ID="toast_success" @ref="successToast" CssClass="toast_success"   Timeout="3000"  >
+        <ToastPosition X="Right"></ToastPosition>
+    </SfToast>
+</div>
