@@ -6,6 +6,7 @@
 type Query {
   properties(where: PropertyFilterInput): [Property!]!
   loans(where: LoanFilterInput): [Loan!]!
+  expenses(where: ExpenseFilterInput): [Expense!]!
 }
 
 type Mutation {
@@ -15,6 +16,9 @@ type Mutation {
   addLoan(input: AddLoanInput!): AddLoanPayload!
   editLoan(input: EditLoanInput!): EditLoanPayload!
   deleteLoan(input: DeleteLoanInput!): DeleteLoanPayload!
+  addExpense(input: AddExpenseInput!): AddExpensePayload!
+  editExpense(input: EditExpenseInput!): EditExpensePayload!
+  deleteExpense(input: DeleteExpenseInput!): DeleteExpensePayload!
 }
 
 input PropertyFilterInput {
@@ -32,6 +36,7 @@ input PropertyFilterInput {
   carpark: ComparableNullableOfDecimalOperationFilterInput
   landSize: ComparableNullableOfDecimalOperationFilterInput
   loans: ListFilterInputTypeOfLoanFilterInput
+  expenses: ListFilterInputTypeOfExpenseFilterInput
   deleted: BooleanOperationFilterInput
 }
 
@@ -48,6 +53,21 @@ input LoanFilterInput {
   propertyId: ComparableGuidOperationFilterInput
   years: ComparableNullableOfInt32OperationFilterInput
   deleted: BooleanOperationFilterInput
+  dateOfLoan: ComparableNullableOfDateTimeOffsetOperationFilterInput
+}
+
+input ExpenseFilterInput {
+  and: [ExpenseFilterInput!]
+  or: [ExpenseFilterInput!]
+  id: ComparableGuidOperationFilterInput
+  title: StringOperationFilterInput
+  description: StringOperationFilterInput
+  price: ComparableNullableOfDecimalOperationFilterInput
+  totalDeductable: ComparableDecimalOperationFilterInput
+  property: PropertyFilterInput
+  propertyId: ComparableGuidOperationFilterInput
+  deleted: BooleanOperationFilterInput
+  expenseDate: ComparableDateTimeOffsetOperationFilterInput
 }
 
 input ComparableGuidOperationFilterInput {
@@ -109,6 +129,13 @@ input ListFilterInputTypeOfLoanFilterInput {
   any: Boolean
 }
 
+input ListFilterInputTypeOfExpenseFilterInput {
+  all: ExpenseFilterInput
+  none: ExpenseFilterInput
+  some: ExpenseFilterInput
+  any: Boolean
+}
+
 input BooleanOperationFilterInput {
   eq: Boolean
   neq: Boolean
@@ -136,6 +163,85 @@ input ComparableNullableOfInt32OperationFilterInput {
   nlte: Int
 }
 
+input ComparableNullableOfDateTimeOffsetOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input ComparableDecimalOperationFilterInput {
+  eq: Decimal
+  neq: Decimal
+  in: [Decimal!]
+  nin: [Decimal!]
+  gt: Decimal
+  ngt: Decimal
+  gte: Decimal
+  ngte: Decimal
+  lt: Decimal
+  nlt: Decimal
+  lte: Decimal
+  nlte: Decimal
+}
+
+input ComparableDateTimeOffsetOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime!]
+  nin: [DateTime!]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input DeleteExpenseInput {
+  id: UUID!
+}
+
+input EditExpenseInput {
+  title: String!
+  description: String
+  price: Decimal
+  totalDeductable: Decimal!
+  id: UUID!
+  expenseDate: DateTime!
+}
+
+input AddExpenseInput {
+  title: String!
+  description: String
+  price: Decimal
+  totalDeductable: Decimal!
+  propertyId: UUID!
+  expenseDate: DateTime!
+}
+
+type Expense {
+  id: UUID!
+  title: String!
+  description: String
+  price: Decimal
+  totalDeductable: Decimal!
+  property: Property!
+  propertyId: UUID!
+  deleted: Boolean!
+  expenseDate: DateTime!
+}
+
 input DeleteLoanInput {
   id: UUID!
 }
@@ -148,6 +254,7 @@ input EditLoanInput {
   loanType: LoanTypes!
   lMI: Decimal
   years: Int
+  dateOfLoan: DateTime
 }
 
 input AddLoanInput {
@@ -157,6 +264,7 @@ input AddLoanInput {
   loanType: LoanTypes!
   lMI: Decimal
   years: Int
+  dateOfLoan: DateTime
   propertyId: UUID!
 }
 
@@ -202,6 +310,7 @@ type Loan {
   propertyId: UUID!
   years: Int
   deleted: Boolean!
+  dateOfLoan: DateTime
 }
 
 type Property {
@@ -217,6 +326,7 @@ type Property {
   carpark: Decimal
   landSize: Decimal
   loans: [Loan!]!
+  expenses: [Expense!]!
   deleted: Boolean!
 }
 
@@ -235,6 +345,9 @@ enum LoanTypes {
   INTEREST_ONLY
   PRINCIPAL_AND_INTEREST
 }
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime
 
 type AddPropertyPayload {
   property: Property
@@ -257,5 +370,17 @@ type EditLoanPayload {
 }
 
 type DeleteLoanPayload {
+  boolean: Boolean
+}
+
+type AddExpensePayload {
+  expense: Expense
+}
+
+type EditExpensePayload {
+  expense: Expense
+}
+
+type DeleteExpensePayload {
   boolean: Boolean
 }

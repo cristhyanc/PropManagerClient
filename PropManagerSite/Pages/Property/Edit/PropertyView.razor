@@ -2,14 +2,15 @@
 @page "/property/{Id}/{Tab}"
 @using PropManagerSite.Pages.Property.Edit.Details
 @using PropManagerSite.Pages.Property.Edit.Loan
+@using PropManagerSite.Pages.Property.Edit.Expense
 @inherits PropertyViewBase
 
-<div class="flex flex-row justify-between">
-    <div class="font-bold">Property</div>
+<div class="flex flex-row ">
+    <div class="font-bold ">Property: </div>
 
     @if (this.PropertyDetails != null)
     {
-        <div>@PropertyDetails.Name</div>
+        <div class="ml-2">@PropertyDetails.Name</div>
 
     }
 </div>
@@ -47,13 +48,11 @@ else
                 <TabItem>
                     <ChildContent>
                         <TabHeader Text="Expenses">
-
+                           
                         </TabHeader>
                     </ChildContent>
                     <ContentTemplate>
-                        <div>
-                            Expenses Details here
-                        </div>
+                        <Expenses PropertyDetails="@PropertyDetails" OnExpenseDeleted="LoanProperty"></Expenses>
                     </ContentTemplate>
                 </TabItem>
             </TabItems>

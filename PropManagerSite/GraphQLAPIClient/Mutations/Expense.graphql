@@ -1,0 +1,21 @@
+mutation EditExpense($data: EditExpenseInput!)  {
+  editExpense(input: $data) {
+      expense {
+        id
+      }
+  }
+ }
+
+ mutation AddExpense($data: AddExpenseInput!)  {
+  addExpense(input: $data) {
+      expense {
+        id
+      }
+  }
+ }
+
+  mutation DeleteExpense($data: DeleteExpenseInput!)  {
+  deleteExpense(input: $data) {
+      boolean
+  }
+ }

@@ -44,11 +44,18 @@
                 <SfNumericTextBox CssClass="!h-11" TValue="decimal?" Placeholder="LMI" @bind-Value="@editLoanForm.LMI" FloatLabelType="@FloatLabelType.Auto"></SfNumericTextBox>
             </div>
 
+            <div class="flex flex-row gap-5 mt-4 ">
+                <div class="w-full">
+                    <p class="text-sm">Date of loan</p>
+                    <SfDatePicker TValue="DateTimeOffset?" @bind-Value="@editLoanForm.DateOfLoan" Placeholder="Choose a Date" ShowClearButton="true"></SfDatePicker>
+                </div>                   
+                
 
-            <div class="flex flex-row justify-end gap-2 mt-4">
-                <SfButton @onclick="Cancel" CssClass="e-danger">Cancel</SfButton>
-                <SfButton CssClass="e-primary">Save</SfButton>
+                <div class="w-full flex flex-row justify-end gap-2 mt-8 " >
+                    <SfButton @onclick="Cancel" CssClass="e-danger">Cancel</SfButton>
+                    <SfButton CssClass="e-primary">Save</SfButton>
 
+                </div>
             </div>
         }
     </div>

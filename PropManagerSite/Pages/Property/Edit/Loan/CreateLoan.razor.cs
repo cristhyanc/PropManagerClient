@@ -13,13 +13,7 @@ namespace PropManagerSite.Pages.Property.Edit.Loan
         protected record TypeItem(string Display, LoanTypes Value);
 
         protected AddCreateLoan addCreateLoan = new();
-
-        [Inject]
-        PropManagerSiteQL PropManagerSiteQL { get; set; } = default!;
-
-        [Inject]
-        NavigationManager NavManager { get; set; } = default!;
-
+              
         [Parameter]
         public string Id { get; set; }
 
@@ -43,7 +37,8 @@ namespace PropManagerSite.Pages.Property.Edit.Loan
                     LMI = addCreateLoan.LMI,
                     LoanType = addCreateLoan.LoanType,
                     Years   = addCreateLoan.Years,
-                    PropertyId = this.PropertyId
+                    PropertyId = this.PropertyId,
+                    DateOfLoan = addCreateLoan.DateOfLoan
                 };
 
                var result= await PropManagerSiteQL.AddLoan.ExecuteAsync(input);
@@ -85,6 +80,7 @@ namespace PropManagerSite.Pages.Property.Edit.Loan
         public LoanTypes LoanType { get; set; }
         public decimal? LMI { get; set; }
         public int? Years { get; set; }
+        public DateTimeOffset? DateOfLoan { get; set; }
 
     }
 }

@@ -15,6 +15,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 return new ClientServiceProvider(global::Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(serviceCollection));
             });
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => new global::PropManagerSite.GraphQL.State.PropManagerSiteQLStoreAccessor(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IEntityStore>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IEntityIdSerializer>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::System.Collections.Generic.IEnumerable<global::StrawberryShake.IOperationRequestFactory>>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::System.Collections.Generic.IEnumerable<global::StrawberryShake.IOperationResultDataFactory>>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp))));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.EditExpenseMutation>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.AddExpenseMutation>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.DeleteExpenseMutation>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.AddLoanMutation>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.EddLoanMutation>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.DeleteLoanMutation>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
@@ -24,6 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.GetPropertiesQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.GetPropertyQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.GetLoanQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.GetExpenseQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.PropManagerSiteQL>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.IPropManagerSiteQL>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             return new global::StrawberryShake.ClientBuilder<global::PropManagerSite.GraphQL.State.PropManagerSiteQLStoreAccessor>("PropManagerSiteQL", services, serviceCollection);
@@ -38,16 +42,26 @@ namespace Microsoft.Extensions.DependencyInjection
                 var clientFactory = global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::System.Net.Http.IHttpClientFactory>(parentServices);
                 return new global::StrawberryShake.Transport.Http.HttpConnection(() => clientFactory.CreateClient("PropManagerSiteQL"));
             });
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, global::PropManagerSite.GraphQL.EditExpense_EditExpense_Expense_Expense>, global::PropManagerSite.GraphQL.State.EditExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, global::PropManagerSite.GraphQL.AddExpense_AddExpense_Expense_Expense>, global::PropManagerSite.GraphQL.State.AddExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, global::PropManagerSite.GraphQL.AddLoan_AddLoan_Loan_Loan>, global::PropManagerSite.GraphQL.State.AddLoan_AddLoan_Loan_LoanFromLoanEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, global::PropManagerSite.GraphQL.EddLoan_EditLoan_Loan_Loan>, global::PropManagerSite.GraphQL.State.EddLoan_EditLoan_Loan_LoanFromLoanEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.CreateProperty_AddProperty_Property_Property>, global::PropManagerSite.GraphQL.State.CreateProperty_AddProperty_Property_PropertyFromPropertyEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.EditProperty_EditProperty_Property_Property>, global::PropManagerSite.GraphQL.State.EditProperty_EditProperty_Property_PropertyFromPropertyEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, global::PropManagerSite.GraphQL.EditProperty_EditProperty_Property_Loans_Loan>, global::PropManagerSite.GraphQL.State.EditProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, global::PropManagerSite.GraphQL.EditProperty_EditProperty_Property_Expenses_Expense>, global::PropManagerSite.GraphQL.State.EditProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.EditProperty_EditProperty_Property_Loans_Property_Property>, global::PropManagerSite.GraphQL.State.EditProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.EditProperty_EditProperty_Property_Expenses_Property_Property>, global::PropManagerSite.GraphQL.State.EditProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.GetProperties_Properties_Property>, global::PropManagerSite.GraphQL.State.GetProperties_Properties_PropertyFromPropertyEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.GetProperty_Properties_Property>, global::PropManagerSite.GraphQL.State.GetProperty_Properties_PropertyFromPropertyEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, global::PropManagerSite.GraphQL.GetProperty_Properties_Loans_Loan>, global::PropManagerSite.GraphQL.State.GetProperty_Properties_Loans_LoanFromLoanEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, global::PropManagerSite.GraphQL.GetProperty_Properties_Expenses_Expense>, global::PropManagerSite.GraphQL.State.GetProperty_Properties_Expenses_ExpenseFromExpenseEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.GetProperty_Properties_Loans_Property_Property>, global::PropManagerSite.GraphQL.State.GetProperty_Properties_Loans_Property_PropertyFromPropertyEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.GetProperty_Properties_Expenses_Property_Property>, global::PropManagerSite.GraphQL.State.GetProperty_Properties_Expenses_Property_PropertyFromPropertyEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, global::PropManagerSite.GraphQL.GetLoan_Loans_Loan>, global::PropManagerSite.GraphQL.State.GetLoan_Loans_LoanFromLoanEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.GetLoan_Loans_Property_Property>, global::PropManagerSite.GraphQL.State.GetLoan_Loans_Property_PropertyFromPropertyEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, global::PropManagerSite.GraphQL.GetExpense_Expenses_Expense>, global::PropManagerSite.GraphQL.State.GetExpense_Expenses_ExpenseFromExpenseEntityMapper>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, global::PropManagerSite.GraphQL.GetExpense_Expenses_Property_Property>, global::PropManagerSite.GraphQL.State.GetExpense_Expenses_Property_PropertyFromPropertyEntityMapper>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.LoanTypesSerializer>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.PropertyTypesSerializer>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::StrawberryShake.Serialization.StringSerializer>(services);
@@ -66,6 +80,9 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::StrawberryShake.Serialization.ByteArraySerializer>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::StrawberryShake.Serialization.TimeSpanSerializer>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::StrawberryShake.Serialization.JsonSerializer>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.EditExpenseInputInputValueFormatter>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.AddExpenseInputInputValueFormatter>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.DeleteExpenseInputInputValueFormatter>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.AddLoanInputInputValueFormatter>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.EditLoanInputInputValueFormatter>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.DeleteLoanInputInputValueFormatter>(services);
@@ -73,6 +90,27 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.EditPropertyInputInputValueFormatter>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializer, global::PropManagerSite.GraphQL.DeletePropertyInputInputValueFormatter>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.Serialization.ISerializerResolver>(services, sp => new global::StrawberryShake.Serialization.SerializerResolver(global::System.Linq.Enumerable.Concat(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::System.Collections.Generic.IEnumerable<global::StrawberryShake.Serialization.ISerializer>>(parentServices), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::System.Collections.Generic.IEnumerable<global::StrawberryShake.Serialization.ISerializer>>(sp))));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IEditExpenseResult>, global::PropManagerSite.GraphQL.State.EditExpenseResultFactory>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IEditExpenseResult>>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.IEditExpenseMutation>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IEditExpenseResult>, global::PropManagerSite.GraphQL.State.EditExpenseBuilder>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::PropManagerSite.GraphQL.IEditExpenseResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IEditExpenseResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IEditExpenseResult>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.EditExpenseMutation>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.IEditExpenseMutation>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.EditExpenseMutation>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddExpenseResult>, global::PropManagerSite.GraphQL.State.AddExpenseResultFactory>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddExpenseResult>>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.IAddExpenseMutation>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IAddExpenseResult>, global::PropManagerSite.GraphQL.State.AddExpenseBuilder>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::PropManagerSite.GraphQL.IAddExpenseResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IAddExpenseResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IAddExpenseResult>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.AddExpenseMutation>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.IAddExpenseMutation>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.AddExpenseMutation>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IDeleteExpenseResult>, global::PropManagerSite.GraphQL.State.DeleteExpenseResultFactory>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IDeleteExpenseResult>>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.IDeleteExpenseMutation>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IDeleteExpenseResult>, global::PropManagerSite.GraphQL.State.DeleteExpenseBuilder>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::PropManagerSite.GraphQL.IDeleteExpenseResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IDeleteExpenseResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IDeleteExpenseResult>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.DeleteExpenseMutation>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.IDeleteExpenseMutation>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.DeleteExpenseMutation>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddLoanResult>, global::PropManagerSite.GraphQL.State.AddLoanResultFactory>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddLoanResult>>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.IAddLoanMutation>(sp));
@@ -136,6 +174,13 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::PropManagerSite.GraphQL.IGetLoanResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IGetLoanResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IGetLoanResult>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.GetLoanQuery>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.IGetLoanQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.GetLoanQuery>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IGetExpenseResult>, global::PropManagerSite.GraphQL.State.GetExpenseResultFactory>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IGetExpenseResult>>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.IGetExpenseQuery>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IGetExpenseResult>, global::PropManagerSite.GraphQL.State.GetExpenseBuilder>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::PropManagerSite.GraphQL.IGetExpenseResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IGetExpenseResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IGetExpenseResult>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.GetExpenseQuery>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.IGetExpenseQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.GetExpenseQuery>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IEntityIdSerializer, global::PropManagerSite.GraphQL.State.PropManagerSiteQLEntityIdFactory>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.PropManagerSiteQL>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::PropManagerSite.GraphQL.IPropManagerSiteQL>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::PropManagerSite.GraphQL.PropManagerSiteQL>(sp));
@@ -168,6 +213,579 @@ namespace Microsoft.Extensions.DependencyInjection
 
 namespace PropManagerSite.GraphQL
 {
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpenseResult : global::System.IEquatable<EditExpenseResult>, IEditExpenseResult
+    {
+        public EditExpenseResult(global::PropManagerSite.GraphQL.IEditExpense_EditExpense editExpense)
+        {
+            EditExpense = editExpense;
+        }
+
+        public global::PropManagerSite.GraphQL.IEditExpense_EditExpense EditExpense { get; }
+
+        public virtual global::System.Boolean Equals(EditExpenseResult? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (EditExpense.Equals(other.EditExpense));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((EditExpenseResult)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * EditExpense.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpense_EditExpense_EditExpensePayload : global::System.IEquatable<EditExpense_EditExpense_EditExpensePayload>, IEditExpense_EditExpense_EditExpensePayload
+    {
+        public EditExpense_EditExpense_EditExpensePayload(global::PropManagerSite.GraphQL.IEditExpense_EditExpense_Expense? expense)
+        {
+            Expense = expense;
+        }
+
+        public global::PropManagerSite.GraphQL.IEditExpense_EditExpense_Expense? Expense { get; }
+
+        public virtual global::System.Boolean Equals(EditExpense_EditExpense_EditExpensePayload? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (((Expense is null && other.Expense is null) || Expense != null && Expense.Equals(other.Expense)));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((EditExpense_EditExpense_EditExpensePayload)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                if (Expense != null)
+                {
+                    hash ^= 397 * Expense.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpense_EditExpense_Expense_Expense : global::System.IEquatable<EditExpense_EditExpense_Expense_Expense>, IEditExpense_EditExpense_Expense_Expense
+    {
+        public EditExpense_EditExpense_Expense_Expense(global::System.Guid id)
+        {
+            Id = id;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public virtual global::System.Boolean Equals(EditExpense_EditExpense_Expense_Expense? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((EditExpense_EditExpense_Expense_Expense)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditExpenseResult
+    {
+        public global::PropManagerSite.GraphQL.IEditExpense_EditExpense EditExpense { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditExpense_EditExpense
+    {
+        public global::PropManagerSite.GraphQL.IEditExpense_EditExpense_Expense? Expense { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditExpense_EditExpense_EditExpensePayload : IEditExpense_EditExpense
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditExpense_EditExpense_Expense
+    {
+        public global::System.Guid Id { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditExpense_EditExpense_Expense_Expense : IEditExpense_EditExpense_Expense
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpenseResult : global::System.IEquatable<AddExpenseResult>, IAddExpenseResult
+    {
+        public AddExpenseResult(global::PropManagerSite.GraphQL.IAddExpense_AddExpense addExpense)
+        {
+            AddExpense = addExpense;
+        }
+
+        public global::PropManagerSite.GraphQL.IAddExpense_AddExpense AddExpense { get; }
+
+        public virtual global::System.Boolean Equals(AddExpenseResult? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (AddExpense.Equals(other.AddExpense));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((AddExpenseResult)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * AddExpense.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpense_AddExpense_AddExpensePayload : global::System.IEquatable<AddExpense_AddExpense_AddExpensePayload>, IAddExpense_AddExpense_AddExpensePayload
+    {
+        public AddExpense_AddExpense_AddExpensePayload(global::PropManagerSite.GraphQL.IAddExpense_AddExpense_Expense? expense)
+        {
+            Expense = expense;
+        }
+
+        public global::PropManagerSite.GraphQL.IAddExpense_AddExpense_Expense? Expense { get; }
+
+        public virtual global::System.Boolean Equals(AddExpense_AddExpense_AddExpensePayload? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (((Expense is null && other.Expense is null) || Expense != null && Expense.Equals(other.Expense)));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((AddExpense_AddExpense_AddExpensePayload)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                if (Expense != null)
+                {
+                    hash ^= 397 * Expense.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpense_AddExpense_Expense_Expense : global::System.IEquatable<AddExpense_AddExpense_Expense_Expense>, IAddExpense_AddExpense_Expense_Expense
+    {
+        public AddExpense_AddExpense_Expense_Expense(global::System.Guid id)
+        {
+            Id = id;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public virtual global::System.Boolean Equals(AddExpense_AddExpense_Expense_Expense? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((AddExpense_AddExpense_Expense_Expense)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IAddExpenseResult
+    {
+        public global::PropManagerSite.GraphQL.IAddExpense_AddExpense AddExpense { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IAddExpense_AddExpense
+    {
+        public global::PropManagerSite.GraphQL.IAddExpense_AddExpense_Expense? Expense { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IAddExpense_AddExpense_AddExpensePayload : IAddExpense_AddExpense
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IAddExpense_AddExpense_Expense
+    {
+        public global::System.Guid Id { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IAddExpense_AddExpense_Expense_Expense : IAddExpense_AddExpense_Expense
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpenseResult : global::System.IEquatable<DeleteExpenseResult>, IDeleteExpenseResult
+    {
+        public DeleteExpenseResult(global::PropManagerSite.GraphQL.IDeleteExpense_DeleteExpense deleteExpense)
+        {
+            DeleteExpense = deleteExpense;
+        }
+
+        public global::PropManagerSite.GraphQL.IDeleteExpense_DeleteExpense DeleteExpense { get; }
+
+        public virtual global::System.Boolean Equals(DeleteExpenseResult? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (DeleteExpense.Equals(other.DeleteExpense));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((DeleteExpenseResult)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * DeleteExpense.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpense_DeleteExpense_DeleteExpensePayload : global::System.IEquatable<DeleteExpense_DeleteExpense_DeleteExpensePayload>, IDeleteExpense_DeleteExpense_DeleteExpensePayload
+    {
+        public DeleteExpense_DeleteExpense_DeleteExpensePayload(global::System.Boolean? boolean)
+        {
+            Boolean = boolean;
+        }
+
+        public global::System.Boolean? Boolean { get; }
+
+        public virtual global::System.Boolean Equals(DeleteExpense_DeleteExpense_DeleteExpensePayload? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Boolean == other.Boolean);
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((DeleteExpense_DeleteExpense_DeleteExpensePayload)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                if (Boolean != null)
+                {
+                    hash ^= 397 * Boolean.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IDeleteExpenseResult
+    {
+        public global::PropManagerSite.GraphQL.IDeleteExpense_DeleteExpense DeleteExpense { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IDeleteExpense_DeleteExpense
+    {
+        public global::System.Boolean? Boolean { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IDeleteExpense_DeleteExpense_DeleteExpensePayload : IDeleteExpense_DeleteExpense
+    {
+    }
+
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class AddLoanResult : global::System.IEquatable<AddLoanResult>, IAddLoanResult
     {
@@ -1085,7 +1703,7 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class EditProperty_EditProperty_Property_Property : global::System.IEquatable<EditProperty_EditProperty_Property_Property>, IEditProperty_EditProperty_Property_Property
     {
-        public EditProperty_EditProperty_Property_Property(global::System.Guid id, global::System.String? name, global::System.Decimal? purchasePrice, global::System.Decimal? registrationTransferFee, global::System.Decimal? rooms, global::System.Decimal? bathrooms, global::System.Decimal? landSize, global::System.String address, global::PropManagerSite.GraphQL.PropertyTypes propertyType, global::System.Decimal? stampDuty, global::System.Decimal? carpark, global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> loans)
+        public EditProperty_EditProperty_Property_Property(global::System.Guid id, global::System.String? name, global::System.Decimal? purchasePrice, global::System.Decimal? registrationTransferFee, global::System.Decimal? rooms, global::System.Decimal? bathrooms, global::System.Decimal? landSize, global::System.String address, global::PropManagerSite.GraphQL.PropertyTypes propertyType, global::System.Decimal? stampDuty, global::System.Decimal? carpark, global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> loans, global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses> expenses)
         {
             Id = id;
             Name = name;
@@ -1099,6 +1717,7 @@ namespace PropManagerSite.GraphQL
             StampDuty = stampDuty;
             Carpark = carpark;
             Loans = loans;
+            Expenses = expenses;
         }
 
         public global::System.Guid Id { get; }
@@ -1125,6 +1744,8 @@ namespace PropManagerSite.GraphQL
 
         public global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> Loans { get; }
 
+        public global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses> Expenses { get; }
+
         public virtual global::System.Boolean Equals(EditProperty_EditProperty_Property_Property? other)
         {
             if (ReferenceEquals(null, other))
@@ -1142,7 +1763,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && ((Name is null && other.Name is null) || Name != null && Name.Equals(other.Name)) && PurchasePrice == other.PurchasePrice && RegistrationTransferFee == other.RegistrationTransferFee && Rooms == other.Rooms && Bathrooms == other.Bathrooms && LandSize == other.LandSize && Address.Equals(other.Address) && PropertyType.Equals(other.PropertyType) && StampDuty == other.StampDuty && Carpark == other.Carpark && global::StrawberryShake.Helper.ComparisonHelper.SequenceEqual(Loans, other.Loans);
+            return (Id.Equals(other.Id)) && ((Name is null && other.Name is null) || Name != null && Name.Equals(other.Name)) && PurchasePrice == other.PurchasePrice && RegistrationTransferFee == other.RegistrationTransferFee && Rooms == other.Rooms && Bathrooms == other.Bathrooms && LandSize == other.LandSize && Address.Equals(other.Address) && PropertyType.Equals(other.PropertyType) && StampDuty == other.StampDuty && Carpark == other.Carpark && global::StrawberryShake.Helper.ComparisonHelper.SequenceEqual(Loans, other.Loans) && global::StrawberryShake.Helper.ComparisonHelper.SequenceEqual(Expenses, other.Expenses);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -1218,6 +1839,11 @@ namespace PropManagerSite.GraphQL
                     hash ^= 397 * Loans_elm.GetHashCode();
                 }
 
+                foreach (var Expenses_elm in Expenses)
+                {
+                    hash ^= 397 * Expenses_elm.GetHashCode();
+                }
+
                 return hash;
             }
         }
@@ -1226,7 +1852,7 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class EditProperty_EditProperty_Property_Loans_Loan : global::System.IEquatable<EditProperty_EditProperty_Property_Loans_Loan>, IEditProperty_EditProperty_Property_Loans_Loan
     {
-        public EditProperty_EditProperty_Property_Loans_Loan(global::System.Guid id, global::System.String lenderName, global::System.Decimal? amount, global::System.Decimal? interest, global::System.Decimal? lMI, global::PropManagerSite.GraphQL.LoanTypes loanType, global::System.Int32? years)
+        public EditProperty_EditProperty_Property_Loans_Loan(global::System.Guid id, global::System.String lenderName, global::System.Decimal? amount, global::System.Decimal? interest, global::System.Decimal? lMI, global::PropManagerSite.GraphQL.LoanTypes loanType, global::System.Int32? years, global::System.DateTimeOffset? dateOfLoan, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property property)
         {
             Id = id;
             LenderName = lenderName;
@@ -1235,6 +1861,8 @@ namespace PropManagerSite.GraphQL
             LMI = lMI;
             LoanType = loanType;
             Years = years;
+            DateOfLoan = dateOfLoan;
+            Property = property;
         }
 
         public global::System.Guid Id { get; }
@@ -1250,6 +1878,10 @@ namespace PropManagerSite.GraphQL
         public global::PropManagerSite.GraphQL.LoanTypes LoanType { get; }
 
         public global::System.Int32? Years { get; }
+
+        public global::System.DateTimeOffset? DateOfLoan { get; }
+
+        public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property Property { get; }
 
         public virtual global::System.Boolean Equals(EditProperty_EditProperty_Property_Loans_Loan? other)
         {
@@ -1268,7 +1900,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && LenderName.Equals(other.LenderName) && Amount == other.Amount && Interest == other.Interest && LMI == other.LMI && LoanType.Equals(other.LoanType) && Years == other.Years;
+            return (Id.Equals(other.Id)) && LenderName.Equals(other.LenderName) && Amount == other.Amount && Interest == other.Interest && LMI == other.LMI && LoanType.Equals(other.LoanType) && Years == other.Years && ((DateOfLoan is null && other.DateOfLoan is null) || DateOfLoan != null && DateOfLoan.Equals(other.DateOfLoan)) && Property.Equals(other.Property);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -1319,6 +1951,243 @@ namespace PropManagerSite.GraphQL
                     hash ^= 397 * Years.GetHashCode();
                 }
 
+                if (DateOfLoan != null)
+                {
+                    hash ^= 397 * DateOfLoan.GetHashCode();
+                }
+
+                hash ^= 397 * Property.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditProperty_EditProperty_Property_Expenses_Expense : global::System.IEquatable<EditProperty_EditProperty_Property_Expenses_Expense>, IEditProperty_EditProperty_Property_Expenses_Expense
+    {
+        public EditProperty_EditProperty_Property_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            Price = price;
+            TotalDeductable = totalDeductable;
+            PropertyId = propertyId;
+            ExpenseDate = expenseDate;
+            Property = property;
+            Deleted = deleted;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public global::System.String Title { get; }
+
+        public global::System.String? Description { get; }
+
+        public global::System.Decimal? Price { get; }
+
+        public global::System.Decimal TotalDeductable { get; }
+
+        public global::System.Guid PropertyId { get; }
+
+        public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property Property { get; }
+
+        public global::System.Boolean Deleted { get; }
+
+        public virtual global::System.Boolean Equals(EditProperty_EditProperty_Property_Expenses_Expense? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && Property.Equals(other.Property) && Deleted == other.Deleted;
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((EditProperty_EditProperty_Property_Expenses_Expense)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                hash ^= 397 * Title.GetHashCode();
+                if (Description != null)
+                {
+                    hash ^= 397 * Description.GetHashCode();
+                }
+
+                if (Price != null)
+                {
+                    hash ^= 397 * Price.GetHashCode();
+                }
+
+                hash ^= 397 * TotalDeductable.GetHashCode();
+                hash ^= 397 * PropertyId.GetHashCode();
+                hash ^= 397 * ExpenseDate.GetHashCode();
+                hash ^= 397 * Property.GetHashCode();
+                hash ^= 397 * Deleted.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditProperty_EditProperty_Property_Loans_Property_Property : global::System.IEquatable<EditProperty_EditProperty_Property_Loans_Property_Property>, IEditProperty_EditProperty_Property_Loans_Property_Property
+    {
+        public EditProperty_EditProperty_Property_Loans_Property_Property(global::System.Guid id, global::System.String? name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public global::System.String? Name { get; }
+
+        public virtual global::System.Boolean Equals(EditProperty_EditProperty_Property_Loans_Property_Property? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id)) && ((Name is null && other.Name is null) || Name != null && Name.Equals(other.Name));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((EditProperty_EditProperty_Property_Loans_Property_Property)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                if (Name != null)
+                {
+                    hash ^= 397 * Name.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditProperty_EditProperty_Property_Expenses_Property_Property : global::System.IEquatable<EditProperty_EditProperty_Property_Expenses_Property_Property>, IEditProperty_EditProperty_Property_Expenses_Property_Property
+    {
+        public EditProperty_EditProperty_Property_Expenses_Property_Property(global::System.Guid id)
+        {
+            Id = id;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public virtual global::System.Boolean Equals(EditProperty_EditProperty_Property_Expenses_Property_Property? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((EditProperty_EditProperty_Property_Expenses_Property_Property)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
                 return hash;
             }
         }
@@ -1367,6 +2236,8 @@ namespace PropManagerSite.GraphQL
         public global::System.Decimal? Carpark { get; }
 
         public global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> Loans { get; }
+
+        public global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses> Expenses { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
@@ -1380,7 +2251,7 @@ namespace PropManagerSite.GraphQL
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
-    public partial interface IEditProperty_EditProperty_Property_Loans
+    public partial interface ILoan
     {
         public global::System.Guid Id { get; }
 
@@ -1395,10 +2266,75 @@ namespace PropManagerSite.GraphQL
         public global::PropManagerSite.GraphQL.LoanTypes LoanType { get; }
 
         public global::System.Int32? Years { get; }
+
+        public global::System.DateTimeOffset? DateOfLoan { get; }
+
+        public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property Property { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditProperty_EditProperty_Property_Loans : ILoan
+    {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial interface IEditProperty_EditProperty_Property_Loans_Loan : IEditProperty_EditProperty_Property_Loans
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IExpense
+    {
+        public global::System.Guid Id { get; }
+
+        public global::System.String Title { get; }
+
+        public global::System.String? Description { get; }
+
+        public global::System.Decimal? Price { get; }
+
+        public global::System.Decimal TotalDeductable { get; }
+
+        public global::System.Guid PropertyId { get; }
+
+        public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property Property { get; }
+
+        public global::System.Boolean Deleted { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditProperty_EditProperty_Property_Expenses : IExpense
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditProperty_EditProperty_Property_Expenses_Expense : IEditProperty_EditProperty_Property_Expenses
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditProperty_EditProperty_Property_Loans_Property
+    {
+        public global::System.Guid Id { get; }
+
+        public global::System.String? Name { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditProperty_EditProperty_Property_Loans_Property_Property : IEditProperty_EditProperty_Property_Loans_Property
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditProperty_EditProperty_Property_Expenses_Property
+    {
+        public global::System.Guid Id { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditProperty_EditProperty_Property_Expenses_Property_Property : IEditProperty_EditProperty_Property_Expenses_Property
     {
     }
 
@@ -1807,7 +2743,7 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class GetProperty_Properties_Property : global::System.IEquatable<GetProperty_Properties_Property>, IGetProperty_Properties_Property
     {
-        public GetProperty_Properties_Property(global::System.Guid id, global::System.String? name, global::System.Decimal? purchasePrice, global::System.Decimal? registrationTransferFee, global::System.Decimal? rooms, global::System.Decimal? bathrooms, global::System.Decimal? landSize, global::System.String address, global::PropManagerSite.GraphQL.PropertyTypes propertyType, global::System.Decimal? stampDuty, global::System.Decimal? carpark, global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> loans)
+        public GetProperty_Properties_Property(global::System.Guid id, global::System.String? name, global::System.Decimal? purchasePrice, global::System.Decimal? registrationTransferFee, global::System.Decimal? rooms, global::System.Decimal? bathrooms, global::System.Decimal? landSize, global::System.String address, global::PropManagerSite.GraphQL.PropertyTypes propertyType, global::System.Decimal? stampDuty, global::System.Decimal? carpark, global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> loans, global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses> expenses)
         {
             Id = id;
             Name = name;
@@ -1821,6 +2757,7 @@ namespace PropManagerSite.GraphQL
             StampDuty = stampDuty;
             Carpark = carpark;
             Loans = loans;
+            Expenses = expenses;
         }
 
         public global::System.Guid Id { get; }
@@ -1847,6 +2784,8 @@ namespace PropManagerSite.GraphQL
 
         public global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> Loans { get; }
 
+        public global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses> Expenses { get; }
+
         public virtual global::System.Boolean Equals(GetProperty_Properties_Property? other)
         {
             if (ReferenceEquals(null, other))
@@ -1864,7 +2803,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && ((Name is null && other.Name is null) || Name != null && Name.Equals(other.Name)) && PurchasePrice == other.PurchasePrice && RegistrationTransferFee == other.RegistrationTransferFee && Rooms == other.Rooms && Bathrooms == other.Bathrooms && LandSize == other.LandSize && Address.Equals(other.Address) && PropertyType.Equals(other.PropertyType) && StampDuty == other.StampDuty && Carpark == other.Carpark && global::StrawberryShake.Helper.ComparisonHelper.SequenceEqual(Loans, other.Loans);
+            return (Id.Equals(other.Id)) && ((Name is null && other.Name is null) || Name != null && Name.Equals(other.Name)) && PurchasePrice == other.PurchasePrice && RegistrationTransferFee == other.RegistrationTransferFee && Rooms == other.Rooms && Bathrooms == other.Bathrooms && LandSize == other.LandSize && Address.Equals(other.Address) && PropertyType.Equals(other.PropertyType) && StampDuty == other.StampDuty && Carpark == other.Carpark && global::StrawberryShake.Helper.ComparisonHelper.SequenceEqual(Loans, other.Loans) && global::StrawberryShake.Helper.ComparisonHelper.SequenceEqual(Expenses, other.Expenses);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -1940,6 +2879,11 @@ namespace PropManagerSite.GraphQL
                     hash ^= 397 * Loans_elm.GetHashCode();
                 }
 
+                foreach (var Expenses_elm in Expenses)
+                {
+                    hash ^= 397 * Expenses_elm.GetHashCode();
+                }
+
                 return hash;
             }
         }
@@ -1948,7 +2892,7 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class GetProperty_Properties_Loans_Loan : global::System.IEquatable<GetProperty_Properties_Loans_Loan>, IGetProperty_Properties_Loans_Loan
     {
-        public GetProperty_Properties_Loans_Loan(global::System.Guid id, global::System.String lenderName, global::System.Decimal? amount, global::System.Decimal? interest, global::System.Decimal? lMI, global::PropManagerSite.GraphQL.LoanTypes loanType, global::System.Int32? years)
+        public GetProperty_Properties_Loans_Loan(global::System.Guid id, global::System.String lenderName, global::System.Decimal? amount, global::System.Decimal? interest, global::System.Decimal? lMI, global::PropManagerSite.GraphQL.LoanTypes loanType, global::System.Int32? years, global::System.DateTimeOffset? dateOfLoan, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property property)
         {
             Id = id;
             LenderName = lenderName;
@@ -1957,6 +2901,8 @@ namespace PropManagerSite.GraphQL
             LMI = lMI;
             LoanType = loanType;
             Years = years;
+            DateOfLoan = dateOfLoan;
+            Property = property;
         }
 
         public global::System.Guid Id { get; }
@@ -1972,6 +2918,10 @@ namespace PropManagerSite.GraphQL
         public global::PropManagerSite.GraphQL.LoanTypes LoanType { get; }
 
         public global::System.Int32? Years { get; }
+
+        public global::System.DateTimeOffset? DateOfLoan { get; }
+
+        public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property Property { get; }
 
         public virtual global::System.Boolean Equals(GetProperty_Properties_Loans_Loan? other)
         {
@@ -1990,7 +2940,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && LenderName.Equals(other.LenderName) && Amount == other.Amount && Interest == other.Interest && LMI == other.LMI && LoanType.Equals(other.LoanType) && Years == other.Years;
+            return (Id.Equals(other.Id)) && LenderName.Equals(other.LenderName) && Amount == other.Amount && Interest == other.Interest && LMI == other.LMI && LoanType.Equals(other.LoanType) && Years == other.Years && ((DateOfLoan is null && other.DateOfLoan is null) || DateOfLoan != null && DateOfLoan.Equals(other.DateOfLoan)) && Property.Equals(other.Property);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -2041,6 +2991,243 @@ namespace PropManagerSite.GraphQL
                     hash ^= 397 * Years.GetHashCode();
                 }
 
+                if (DateOfLoan != null)
+                {
+                    hash ^= 397 * DateOfLoan.GetHashCode();
+                }
+
+                hash ^= 397 * Property.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetProperty_Properties_Expenses_Expense : global::System.IEquatable<GetProperty_Properties_Expenses_Expense>, IGetProperty_Properties_Expenses_Expense
+    {
+        public GetProperty_Properties_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            Price = price;
+            TotalDeductable = totalDeductable;
+            PropertyId = propertyId;
+            ExpenseDate = expenseDate;
+            Property = property;
+            Deleted = deleted;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public global::System.String Title { get; }
+
+        public global::System.String? Description { get; }
+
+        public global::System.Decimal? Price { get; }
+
+        public global::System.Decimal TotalDeductable { get; }
+
+        public global::System.Guid PropertyId { get; }
+
+        public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property Property { get; }
+
+        public global::System.Boolean Deleted { get; }
+
+        public virtual global::System.Boolean Equals(GetProperty_Properties_Expenses_Expense? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && Property.Equals(other.Property) && Deleted == other.Deleted;
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetProperty_Properties_Expenses_Expense)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                hash ^= 397 * Title.GetHashCode();
+                if (Description != null)
+                {
+                    hash ^= 397 * Description.GetHashCode();
+                }
+
+                if (Price != null)
+                {
+                    hash ^= 397 * Price.GetHashCode();
+                }
+
+                hash ^= 397 * TotalDeductable.GetHashCode();
+                hash ^= 397 * PropertyId.GetHashCode();
+                hash ^= 397 * ExpenseDate.GetHashCode();
+                hash ^= 397 * Property.GetHashCode();
+                hash ^= 397 * Deleted.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetProperty_Properties_Loans_Property_Property : global::System.IEquatable<GetProperty_Properties_Loans_Property_Property>, IGetProperty_Properties_Loans_Property_Property
+    {
+        public GetProperty_Properties_Loans_Property_Property(global::System.Guid id, global::System.String? name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public global::System.String? Name { get; }
+
+        public virtual global::System.Boolean Equals(GetProperty_Properties_Loans_Property_Property? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id)) && ((Name is null && other.Name is null) || Name != null && Name.Equals(other.Name));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetProperty_Properties_Loans_Property_Property)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                if (Name != null)
+                {
+                    hash ^= 397 * Name.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetProperty_Properties_Expenses_Property_Property : global::System.IEquatable<GetProperty_Properties_Expenses_Property_Property>, IGetProperty_Properties_Expenses_Property_Property
+    {
+        public GetProperty_Properties_Expenses_Property_Property(global::System.Guid id)
+        {
+            Id = id;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public virtual global::System.Boolean Equals(GetProperty_Properties_Expenses_Property_Property? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetProperty_Properties_Expenses_Property_Property)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
                 return hash;
             }
         }
@@ -2063,25 +3250,46 @@ namespace PropManagerSite.GraphQL
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
-    public partial interface IGetProperty_Properties_Loans
+    public partial interface IGetProperty_Properties_Loans : ILoan
     {
-        public global::System.Guid Id { get; }
-
-        public global::System.String LenderName { get; }
-
-        public global::System.Decimal? Amount { get; }
-
-        public global::System.Decimal? Interest { get; }
-
-        public global::System.Decimal? LMI { get; }
-
-        public global::PropManagerSite.GraphQL.LoanTypes LoanType { get; }
-
-        public global::System.Int32? Years { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial interface IGetProperty_Properties_Loans_Loan : IGetProperty_Properties_Loans
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetProperty_Properties_Expenses : IExpense
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetProperty_Properties_Expenses_Expense : IGetProperty_Properties_Expenses
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetProperty_Properties_Loans_Property
+    {
+        public global::System.Guid Id { get; }
+
+        public global::System.String? Name { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetProperty_Properties_Loans_Property_Property : IGetProperty_Properties_Loans_Property
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetProperty_Properties_Expenses_Property
+    {
+        public global::System.Guid Id { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetProperty_Properties_Expenses_Property_Property : IGetProperty_Properties_Expenses_Property
     {
     }
 
@@ -2153,7 +3361,7 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class GetLoan_Loans_Loan : global::System.IEquatable<GetLoan_Loans_Loan>, IGetLoan_Loans_Loan
     {
-        public GetLoan_Loans_Loan(global::System.Guid id, global::System.String lenderName, global::System.Decimal? amount, global::System.Decimal? interest, global::System.Decimal? lMI, global::PropManagerSite.GraphQL.LoanTypes loanType, global::System.Int32? years, global::PropManagerSite.GraphQL.IGetLoan_Loans_Property property)
+        public GetLoan_Loans_Loan(global::System.Guid id, global::System.String lenderName, global::System.Decimal? amount, global::System.Decimal? interest, global::System.Decimal? lMI, global::PropManagerSite.GraphQL.LoanTypes loanType, global::System.Int32? years, global::System.DateTimeOffset? dateOfLoan, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property property)
         {
             Id = id;
             LenderName = lenderName;
@@ -2162,6 +3370,7 @@ namespace PropManagerSite.GraphQL
             LMI = lMI;
             LoanType = loanType;
             Years = years;
+            DateOfLoan = dateOfLoan;
             Property = property;
         }
 
@@ -2179,7 +3388,9 @@ namespace PropManagerSite.GraphQL
 
         public global::System.Int32? Years { get; }
 
-        public global::PropManagerSite.GraphQL.IGetLoan_Loans_Property Property { get; }
+        public global::System.DateTimeOffset? DateOfLoan { get; }
+
+        public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property Property { get; }
 
         public virtual global::System.Boolean Equals(GetLoan_Loans_Loan? other)
         {
@@ -2198,7 +3409,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && LenderName.Equals(other.LenderName) && Amount == other.Amount && Interest == other.Interest && LMI == other.LMI && LoanType.Equals(other.LoanType) && Years == other.Years && Property.Equals(other.Property);
+            return (Id.Equals(other.Id)) && LenderName.Equals(other.LenderName) && Amount == other.Amount && Interest == other.Interest && LMI == other.LMI && LoanType.Equals(other.LoanType) && Years == other.Years && ((DateOfLoan is null && other.DateOfLoan is null) || DateOfLoan != null && DateOfLoan.Equals(other.DateOfLoan)) && Property.Equals(other.Property);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -2247,6 +3458,11 @@ namespace PropManagerSite.GraphQL
                 if (Years != null)
                 {
                     hash ^= 397 * Years.GetHashCode();
+                }
+
+                if (DateOfLoan != null)
+                {
+                    hash ^= 397 * DateOfLoan.GetHashCode();
                 }
 
                 hash ^= 397 * Property.GetHashCode();
@@ -2331,23 +3547,8 @@ namespace PropManagerSite.GraphQL
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
-    public partial interface IGetLoan_Loans
+    public partial interface IGetLoan_Loans : ILoan
     {
-        public global::System.Guid Id { get; }
-
-        public global::System.String LenderName { get; }
-
-        public global::System.Decimal? Amount { get; }
-
-        public global::System.Decimal? Interest { get; }
-
-        public global::System.Decimal? LMI { get; }
-
-        public global::PropManagerSite.GraphQL.LoanTypes LoanType { get; }
-
-        public global::System.Int32? Years { get; }
-
-        public global::PropManagerSite.GraphQL.IGetLoan_Loans_Property Property { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
@@ -2369,12 +3570,894 @@ namespace PropManagerSite.GraphQL
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpenseResult : global::System.IEquatable<GetExpenseResult>, IGetExpenseResult
+    {
+        public GetExpenseResult(global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IGetExpense_Expenses> expenses)
+        {
+            Expenses = expenses;
+        }
+
+        public global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IGetExpense_Expenses> Expenses { get; }
+
+        public virtual global::System.Boolean Equals(GetExpenseResult? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::StrawberryShake.Helper.ComparisonHelper.SequenceEqual(Expenses, other.Expenses));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetExpenseResult)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                foreach (var Expenses_elm in Expenses)
+                {
+                    hash ^= 397 * Expenses_elm.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpense_Expenses_Expense : global::System.IEquatable<GetExpense_Expenses_Expense>, IGetExpense_Expenses_Expense
+    {
+        public GetExpense_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            Price = price;
+            TotalDeductable = totalDeductable;
+            PropertyId = propertyId;
+            ExpenseDate = expenseDate;
+            Property = property;
+            Deleted = deleted;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public global::System.String Title { get; }
+
+        public global::System.String? Description { get; }
+
+        public global::System.Decimal? Price { get; }
+
+        public global::System.Decimal TotalDeductable { get; }
+
+        public global::System.Guid PropertyId { get; }
+
+        public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property Property { get; }
+
+        public global::System.Boolean Deleted { get; }
+
+        public virtual global::System.Boolean Equals(GetExpense_Expenses_Expense? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && Property.Equals(other.Property) && Deleted == other.Deleted;
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetExpense_Expenses_Expense)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                hash ^= 397 * Title.GetHashCode();
+                if (Description != null)
+                {
+                    hash ^= 397 * Description.GetHashCode();
+                }
+
+                if (Price != null)
+                {
+                    hash ^= 397 * Price.GetHashCode();
+                }
+
+                hash ^= 397 * TotalDeductable.GetHashCode();
+                hash ^= 397 * PropertyId.GetHashCode();
+                hash ^= 397 * ExpenseDate.GetHashCode();
+                hash ^= 397 * Property.GetHashCode();
+                hash ^= 397 * Deleted.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpense_Expenses_Property_Property : global::System.IEquatable<GetExpense_Expenses_Property_Property>, IGetExpense_Expenses_Property_Property
+    {
+        public GetExpense_Expenses_Property_Property(global::System.Guid id)
+        {
+            Id = id;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public virtual global::System.Boolean Equals(GetExpense_Expenses_Property_Property? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetExpense_Expenses_Property_Property)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetExpenseResult
+    {
+        public global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IGetExpense_Expenses> Expenses { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetExpense_Expenses : IExpense
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetExpense_Expenses_Expense : IGetExpense_Expenses
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetExpense_Expenses_Property
+    {
+        public global::System.Guid Id { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetExpense_Expenses_Property_Property : IGetExpense_Expenses_Property
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpenseInputInputValueFormatter : global::StrawberryShake.Serialization.IInputObjectFormatter
+    {
+        private global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _decimalFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _dateTimeFormatter = default !;
+        public global::System.String TypeName => "EditExpenseInput";
+        public void Initialize(global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _stringFormatter = serializerResolver.GetInputValueFormatter("String");
+            _decimalFormatter = serializerResolver.GetInputValueFormatter("Decimal");
+            _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
+            _dateTimeFormatter = serializerResolver.GetInputValueFormatter("DateTime");
+        }
+
+        public global::System.Object? Format(global::System.Object? runtimeValue)
+        {
+            if (runtimeValue is null)
+            {
+                return null;
+            }
+
+            var input = runtimeValue as global::PropManagerSite.GraphQL.EditExpenseInput;
+            var inputInfo = runtimeValue as global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo;
+            if (input is null || inputInfo is null)
+            {
+                throw new global::System.ArgumentException(nameof(runtimeValue));
+            }
+
+            var fields = new global::System.Collections.Generic.List<global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>>();
+            if (inputInfo.IsTitleSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("title", FormatTitle(input.Title)));
+            }
+
+            if (inputInfo.IsDescriptionSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("description", FormatDescription(input.Description)));
+            }
+
+            if (inputInfo.IsPriceSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("price", FormatPrice(input.Price)));
+            }
+
+            if (inputInfo.IsTotalDeductableSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("totalDeductable", FormatTotalDeductable(input.TotalDeductable)));
+            }
+
+            if (inputInfo.IsIdSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("id", FormatId(input.Id)));
+            }
+
+            if (inputInfo.IsExpenseDateSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("expenseDate", FormatExpenseDate(input.ExpenseDate)));
+            }
+
+            return fields;
+        }
+
+        private global::System.Object? FormatTitle(global::System.String input)
+        {
+            if (input is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(input));
+            }
+
+            return _stringFormatter.Format(input);
+        }
+
+        private global::System.Object? FormatDescription(global::System.String? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _stringFormatter.Format(input);
+            }
+        }
+
+        private global::System.Object? FormatPrice(global::System.Decimal? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _decimalFormatter.Format(input);
+            }
+        }
+
+        private global::System.Object? FormatTotalDeductable(global::System.Decimal input)
+        {
+            return _decimalFormatter.Format(input);
+        }
+
+        private global::System.Object? FormatId(global::System.Guid input)
+        {
+            return _uUIDFormatter.Format(input);
+        }
+
+        private global::System.Object? FormatExpenseDate(global::System.DateTimeOffset input)
+        {
+            return _dateTimeFormatter.Format(input);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpenseInput : global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo, global::System.IEquatable<EditExpenseInput>
+    {
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((EditExpenseInput)obj);
+        }
+
+        public virtual global::System.Boolean Equals(EditExpenseInput? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Title.Equals(other.Title)) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && Id.Equals(other.Id) && ExpenseDate.Equals(other.ExpenseDate);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Title.GetHashCode();
+                if (Description != null)
+                {
+                    hash ^= 397 * Description.GetHashCode();
+                }
+
+                if (Price != null)
+                {
+                    hash ^= 397 * Price.GetHashCode();
+                }
+
+                hash ^= 397 * TotalDeductable.GetHashCode();
+                hash ^= 397 * Id.GetHashCode();
+                hash ^= 397 * ExpenseDate.GetHashCode();
+                return hash;
+            }
+        }
+
+        private global::System.String _value_title = default !;
+        private global::System.Boolean _set_title;
+        private global::System.String? _value_description;
+        private global::System.Boolean _set_description;
+        private global::System.Decimal? _value_price;
+        private global::System.Boolean _set_price;
+        private global::System.Decimal _value_totalDeductable;
+        private global::System.Boolean _set_totalDeductable;
+        private global::System.Guid _value_id;
+        private global::System.Boolean _set_id;
+        private global::System.DateTimeOffset _value_expenseDate;
+        private global::System.Boolean _set_expenseDate;
+        public global::System.String Title
+        {
+            get => _value_title;
+            set
+            {
+                _set_title = true;
+                _value_title = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsTitleSet => _set_title;
+        public global::System.String? Description
+        {
+            get => _value_description;
+            set
+            {
+                _set_description = true;
+                _value_description = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsDescriptionSet => _set_description;
+        public global::System.Decimal? Price
+        {
+            get => _value_price;
+            set
+            {
+                _set_price = true;
+                _value_price = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsPriceSet => _set_price;
+        public global::System.Decimal TotalDeductable
+        {
+            get => _value_totalDeductable;
+            set
+            {
+                _set_totalDeductable = true;
+                _value_totalDeductable = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsTotalDeductableSet => _set_totalDeductable;
+        public global::System.Guid Id
+        {
+            get => _value_id;
+            set
+            {
+                _set_id = true;
+                _value_id = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsIdSet => _set_id;
+        public global::System.DateTimeOffset ExpenseDate
+        {
+            get => _value_expenseDate;
+            set
+            {
+                _set_expenseDate = true;
+                _value_expenseDate = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsExpenseDateSet => _set_expenseDate;
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpenseInputInputValueFormatter : global::StrawberryShake.Serialization.IInputObjectFormatter
+    {
+        private global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _decimalFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _dateTimeFormatter = default !;
+        public global::System.String TypeName => "AddExpenseInput";
+        public void Initialize(global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _stringFormatter = serializerResolver.GetInputValueFormatter("String");
+            _decimalFormatter = serializerResolver.GetInputValueFormatter("Decimal");
+            _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
+            _dateTimeFormatter = serializerResolver.GetInputValueFormatter("DateTime");
+        }
+
+        public global::System.Object? Format(global::System.Object? runtimeValue)
+        {
+            if (runtimeValue is null)
+            {
+                return null;
+            }
+
+            var input = runtimeValue as global::PropManagerSite.GraphQL.AddExpenseInput;
+            var inputInfo = runtimeValue as global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo;
+            if (input is null || inputInfo is null)
+            {
+                throw new global::System.ArgumentException(nameof(runtimeValue));
+            }
+
+            var fields = new global::System.Collections.Generic.List<global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>>();
+            if (inputInfo.IsTitleSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("title", FormatTitle(input.Title)));
+            }
+
+            if (inputInfo.IsDescriptionSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("description", FormatDescription(input.Description)));
+            }
+
+            if (inputInfo.IsPriceSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("price", FormatPrice(input.Price)));
+            }
+
+            if (inputInfo.IsTotalDeductableSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("totalDeductable", FormatTotalDeductable(input.TotalDeductable)));
+            }
+
+            if (inputInfo.IsPropertyIdSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("propertyId", FormatPropertyId(input.PropertyId)));
+            }
+
+            if (inputInfo.IsExpenseDateSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("expenseDate", FormatExpenseDate(input.ExpenseDate)));
+            }
+
+            return fields;
+        }
+
+        private global::System.Object? FormatTitle(global::System.String input)
+        {
+            if (input is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(input));
+            }
+
+            return _stringFormatter.Format(input);
+        }
+
+        private global::System.Object? FormatDescription(global::System.String? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _stringFormatter.Format(input);
+            }
+        }
+
+        private global::System.Object? FormatPrice(global::System.Decimal? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _decimalFormatter.Format(input);
+            }
+        }
+
+        private global::System.Object? FormatTotalDeductable(global::System.Decimal input)
+        {
+            return _decimalFormatter.Format(input);
+        }
+
+        private global::System.Object? FormatPropertyId(global::System.Guid input)
+        {
+            return _uUIDFormatter.Format(input);
+        }
+
+        private global::System.Object? FormatExpenseDate(global::System.DateTimeOffset input)
+        {
+            return _dateTimeFormatter.Format(input);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpenseInput : global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo, global::System.IEquatable<AddExpenseInput>
+    {
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((AddExpenseInput)obj);
+        }
+
+        public virtual global::System.Boolean Equals(AddExpenseInput? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Title.Equals(other.Title)) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Title.GetHashCode();
+                if (Description != null)
+                {
+                    hash ^= 397 * Description.GetHashCode();
+                }
+
+                if (Price != null)
+                {
+                    hash ^= 397 * Price.GetHashCode();
+                }
+
+                hash ^= 397 * TotalDeductable.GetHashCode();
+                hash ^= 397 * PropertyId.GetHashCode();
+                hash ^= 397 * ExpenseDate.GetHashCode();
+                return hash;
+            }
+        }
+
+        private global::System.String _value_title = default !;
+        private global::System.Boolean _set_title;
+        private global::System.String? _value_description;
+        private global::System.Boolean _set_description;
+        private global::System.Decimal? _value_price;
+        private global::System.Boolean _set_price;
+        private global::System.Decimal _value_totalDeductable;
+        private global::System.Boolean _set_totalDeductable;
+        private global::System.Guid _value_propertyId;
+        private global::System.Boolean _set_propertyId;
+        private global::System.DateTimeOffset _value_expenseDate;
+        private global::System.Boolean _set_expenseDate;
+        public global::System.String Title
+        {
+            get => _value_title;
+            set
+            {
+                _set_title = true;
+                _value_title = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsTitleSet => _set_title;
+        public global::System.String? Description
+        {
+            get => _value_description;
+            set
+            {
+                _set_description = true;
+                _value_description = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsDescriptionSet => _set_description;
+        public global::System.Decimal? Price
+        {
+            get => _value_price;
+            set
+            {
+                _set_price = true;
+                _value_price = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsPriceSet => _set_price;
+        public global::System.Decimal TotalDeductable
+        {
+            get => _value_totalDeductable;
+            set
+            {
+                _set_totalDeductable = true;
+                _value_totalDeductable = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsTotalDeductableSet => _set_totalDeductable;
+        public global::System.Guid PropertyId
+        {
+            get => _value_propertyId;
+            set
+            {
+                _set_propertyId = true;
+                _value_propertyId = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsPropertyIdSet => _set_propertyId;
+        public global::System.DateTimeOffset ExpenseDate
+        {
+            get => _value_expenseDate;
+            set
+            {
+                _set_expenseDate = true;
+                _value_expenseDate = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsExpenseDateSet => _set_expenseDate;
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpenseInputInputValueFormatter : global::StrawberryShake.Serialization.IInputObjectFormatter
+    {
+        private global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter = default !;
+        public global::System.String TypeName => "DeleteExpenseInput";
+        public void Initialize(global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
+        }
+
+        public global::System.Object? Format(global::System.Object? runtimeValue)
+        {
+            if (runtimeValue is null)
+            {
+                return null;
+            }
+
+            var input = runtimeValue as global::PropManagerSite.GraphQL.DeleteExpenseInput;
+            var inputInfo = runtimeValue as global::PropManagerSite.GraphQL.State.IDeleteExpenseInputInfo;
+            if (input is null || inputInfo is null)
+            {
+                throw new global::System.ArgumentException(nameof(runtimeValue));
+            }
+
+            var fields = new global::System.Collections.Generic.List<global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>>();
+            if (inputInfo.IsIdSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("id", FormatId(input.Id)));
+            }
+
+            return fields;
+        }
+
+        private global::System.Object? FormatId(global::System.Guid input)
+        {
+            return _uUIDFormatter.Format(input);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpenseInput : global::PropManagerSite.GraphQL.State.IDeleteExpenseInputInfo, global::System.IEquatable<DeleteExpenseInput>
+    {
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((DeleteExpenseInput)obj);
+        }
+
+        public virtual global::System.Boolean Equals(DeleteExpenseInput? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Id.Equals(other.Id));
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                return hash;
+            }
+        }
+
+        private global::System.Guid _value_id;
+        private global::System.Boolean _set_id;
+        public global::System.Guid Id
+        {
+            get => _value_id;
+            set
+            {
+                _set_id = true;
+                _value_id = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IDeleteExpenseInputInfo.IsIdSet => _set_id;
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class AddLoanInputInputValueFormatter : global::StrawberryShake.Serialization.IInputObjectFormatter
     {
         private global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _decimalFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _loanTypesFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _intFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _dateTimeFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter = default !;
         public global::System.String TypeName => "AddLoanInput";
         public void Initialize(global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
@@ -2383,6 +4466,7 @@ namespace PropManagerSite.GraphQL
             _decimalFormatter = serializerResolver.GetInputValueFormatter("Decimal");
             _loanTypesFormatter = serializerResolver.GetInputValueFormatter("LoanTypes");
             _intFormatter = serializerResolver.GetInputValueFormatter("Int");
+            _dateTimeFormatter = serializerResolver.GetInputValueFormatter("DateTime");
             _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
         }
 
@@ -2429,6 +4513,11 @@ namespace PropManagerSite.GraphQL
             if (inputInfo.IsYearsSet)
             {
                 fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("years", FormatYears(input.Years)));
+            }
+
+            if (inputInfo.IsDateOfLoanSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("dateOfLoan", FormatDateOfLoan(input.DateOfLoan)));
             }
 
             if (inputInfo.IsPropertyIdSet)
@@ -2495,6 +4584,18 @@ namespace PropManagerSite.GraphQL
             }
         }
 
+        private global::System.Object? FormatDateOfLoan(global::System.DateTimeOffset? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _dateTimeFormatter.Format(input);
+            }
+        }
+
         private global::System.Object? FormatPropertyId(global::System.Guid input)
         {
             return _uUIDFormatter.Format(input);
@@ -2541,7 +4642,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (LenderName.Equals(other.LenderName)) && Amount == other.Amount && Interest == other.Interest && LoanType.Equals(other.LoanType) && LMI == other.LMI && Years == other.Years && PropertyId.Equals(other.PropertyId);
+            return (LenderName.Equals(other.LenderName)) && Amount == other.Amount && Interest == other.Interest && LoanType.Equals(other.LoanType) && LMI == other.LMI && Years == other.Years && ((DateOfLoan is null && other.DateOfLoan is null) || DateOfLoan != null && DateOfLoan.Equals(other.DateOfLoan)) && PropertyId.Equals(other.PropertyId);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -2567,6 +4668,11 @@ namespace PropManagerSite.GraphQL
                     hash ^= 397 * Years.GetHashCode();
                 }
 
+                if (DateOfLoan != null)
+                {
+                    hash ^= 397 * DateOfLoan.GetHashCode();
+                }
+
                 hash ^= 397 * PropertyId.GetHashCode();
                 return hash;
             }
@@ -2584,6 +4690,8 @@ namespace PropManagerSite.GraphQL
         private global::System.Boolean _set_lMI;
         private global::System.Int32? _value_years;
         private global::System.Boolean _set_years;
+        private global::System.DateTimeOffset? _value_dateOfLoan;
+        private global::System.Boolean _set_dateOfLoan;
         private global::System.Guid _value_propertyId;
         private global::System.Boolean _set_propertyId;
         public global::System.String LenderName
@@ -2652,6 +4760,17 @@ namespace PropManagerSite.GraphQL
         }
 
         global::System.Boolean global::PropManagerSite.GraphQL.State.IAddLoanInputInfo.IsYearsSet => _set_years;
+        public global::System.DateTimeOffset? DateOfLoan
+        {
+            get => _value_dateOfLoan;
+            set
+            {
+                _set_dateOfLoan = true;
+                _value_dateOfLoan = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddLoanInputInfo.IsDateOfLoanSet => _set_dateOfLoan;
         public global::System.Guid PropertyId
         {
             get => _value_propertyId;
@@ -2673,6 +4792,7 @@ namespace PropManagerSite.GraphQL
         private global::StrawberryShake.Serialization.IInputValueFormatter _decimalFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _loanTypesFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _intFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _dateTimeFormatter = default !;
         public global::System.String TypeName => "EditLoanInput";
         public void Initialize(global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
@@ -2681,6 +4801,7 @@ namespace PropManagerSite.GraphQL
             _decimalFormatter = serializerResolver.GetInputValueFormatter("Decimal");
             _loanTypesFormatter = serializerResolver.GetInputValueFormatter("LoanTypes");
             _intFormatter = serializerResolver.GetInputValueFormatter("Int");
+            _dateTimeFormatter = serializerResolver.GetInputValueFormatter("DateTime");
         }
 
         public global::System.Object? Format(global::System.Object? runtimeValue)
@@ -2731,6 +4852,11 @@ namespace PropManagerSite.GraphQL
             if (inputInfo.IsYearsSet)
             {
                 fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("years", FormatYears(input.Years)));
+            }
+
+            if (inputInfo.IsDateOfLoanSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("dateOfLoan", FormatDateOfLoan(input.DateOfLoan)));
             }
 
             return fields;
@@ -2796,6 +4922,18 @@ namespace PropManagerSite.GraphQL
                 return _intFormatter.Format(input);
             }
         }
+
+        private global::System.Object? FormatDateOfLoan(global::System.DateTimeOffset? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _dateTimeFormatter.Format(input);
+            }
+        }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
@@ -2838,7 +4976,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && LenderName.Equals(other.LenderName) && Amount == other.Amount && Interest == other.Interest && LoanType.Equals(other.LoanType) && LMI == other.LMI && Years == other.Years;
+            return (Id.Equals(other.Id)) && LenderName.Equals(other.LenderName) && Amount == other.Amount && Interest == other.Interest && LoanType.Equals(other.LoanType) && LMI == other.LMI && Years == other.Years && ((DateOfLoan is null && other.DateOfLoan is null) || DateOfLoan != null && DateOfLoan.Equals(other.DateOfLoan));
         }
 
         public override global::System.Int32 GetHashCode()
@@ -2865,6 +5003,11 @@ namespace PropManagerSite.GraphQL
                     hash ^= 397 * Years.GetHashCode();
                 }
 
+                if (DateOfLoan != null)
+                {
+                    hash ^= 397 * DateOfLoan.GetHashCode();
+                }
+
                 return hash;
             }
         }
@@ -2883,6 +5026,8 @@ namespace PropManagerSite.GraphQL
         private global::System.Boolean _set_lMI;
         private global::System.Int32? _value_years;
         private global::System.Boolean _set_years;
+        private global::System.DateTimeOffset? _value_dateOfLoan;
+        private global::System.Boolean _set_dateOfLoan;
         public global::System.Guid Id
         {
             get => _value_id;
@@ -2960,6 +5105,17 @@ namespace PropManagerSite.GraphQL
         }
 
         global::System.Boolean global::PropManagerSite.GraphQL.State.IEditLoanInputInfo.IsYearsSet => _set_years;
+        public global::System.DateTimeOffset? DateOfLoan
+        {
+            get => _value_dateOfLoan;
+            set
+            {
+                _set_dateOfLoan = true;
+                _value_dateOfLoan = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditLoanInputInfo.IsDateOfLoanSet => _set_dateOfLoan;
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
@@ -4116,6 +6272,381 @@ namespace PropManagerSite.GraphQL
     }
 
     /// <summary>
+    /// Represents the operation service of the EditExpense GraphQL operation
+    /// <code>
+    /// mutation EditExpense($data: EditExpenseInput!) {
+    ///   editExpense(input: $data) {
+    ///     __typename
+    ///     expense {
+    ///       __typename
+    ///       id
+    ///       ... on Expense {
+    ///         id
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpenseMutationDocument : global::StrawberryShake.IDocument
+    {
+        private EditExpenseMutationDocument()
+        {
+        }
+
+        public static EditExpenseMutationDocument Instance { get; } = new EditExpenseMutationDocument();
+        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Mutation;
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x6d, 0x75, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x45, 0x64, 0x69, 0x74, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x24, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x20, 0x45, 0x64, 0x69, 0x74, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x21, 0x29, 0x20, 0x7b, 0x20, 0x65, 0x64, 0x69, 0x74, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x3a, 0x20, 0x24, 0x64, 0x61, 0x74, 0x61, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "eaa29b70bf4725b806bcad7c20dfe698");
+        public override global::System.String ToString()
+        {
+#if NETSTANDARD2_0
+        return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
+#else
+            return global::System.Text.Encoding.UTF8.GetString(Body);
+#endif
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the EditExpense GraphQL operation
+    /// <code>
+    /// mutation EditExpense($data: EditExpenseInput!) {
+    ///   editExpense(input: $data) {
+    ///     __typename
+    ///     expense {
+    ///       __typename
+    ///       id
+    ///       ... on Expense {
+    ///         id
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpenseMutation : global::PropManagerSite.GraphQL.IEditExpenseMutation
+    {
+        private readonly global::StrawberryShake.IOperationExecutor<IEditExpenseResult> _operationExecutor;
+        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _editExpenseInputFormatter;
+        public EditExpenseMutation(global::StrawberryShake.IOperationExecutor<IEditExpenseResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
+            _editExpenseInputFormatter = serializerResolver.GetInputValueFormatter("EditExpenseInput");
+        }
+
+        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(IEditExpenseResult);
+        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IEditExpenseResult>> ExecuteAsync(global::PropManagerSite.GraphQL.EditExpenseInput data, global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var request = CreateRequest(data);
+            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+
+        public global::System.IObservable<global::StrawberryShake.IOperationResult<IEditExpenseResult>> Watch(global::PropManagerSite.GraphQL.EditExpenseInput data, global::StrawberryShake.ExecutionStrategy? strategy = null)
+        {
+            var request = CreateRequest(data);
+            return _operationExecutor.Watch(request, strategy);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::PropManagerSite.GraphQL.EditExpenseInput data)
+        {
+            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
+            variables.Add("data", FormatData(data));
+            return CreateRequest(variables);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return new global::StrawberryShake.OperationRequest(id: EditExpenseMutationDocument.Instance.Hash.Value, name: "EditExpense", document: EditExpenseMutationDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
+        }
+
+        private global::System.Object? FormatData(global::PropManagerSite.GraphQL.EditExpenseInput value)
+        {
+            if (value is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(value));
+            }
+
+            return _editExpenseInputFormatter.Format(value);
+        }
+
+        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return CreateRequest(variables!);
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the EditExpense GraphQL operation
+    /// <code>
+    /// mutation EditExpense($data: EditExpenseInput!) {
+    ///   editExpense(input: $data) {
+    ///     __typename
+    ///     expense {
+    ///       __typename
+    ///       id
+    ///       ... on Expense {
+    ///         id
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IEditExpenseMutation : global::StrawberryShake.IOperationRequestFactory
+    {
+        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IEditExpenseResult>> ExecuteAsync(global::PropManagerSite.GraphQL.EditExpenseInput data, global::System.Threading.CancellationToken cancellationToken = default);
+        global::System.IObservable<global::StrawberryShake.IOperationResult<IEditExpenseResult>> Watch(global::PropManagerSite.GraphQL.EditExpenseInput data, global::StrawberryShake.ExecutionStrategy? strategy = null);
+    }
+
+    /// <summary>
+    /// Represents the operation service of the AddExpense GraphQL operation
+    /// <code>
+    /// mutation AddExpense($data: AddExpenseInput!) {
+    ///   addExpense(input: $data) {
+    ///     __typename
+    ///     expense {
+    ///       __typename
+    ///       id
+    ///       ... on Expense {
+    ///         id
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpenseMutationDocument : global::StrawberryShake.IDocument
+    {
+        private AddExpenseMutationDocument()
+        {
+        }
+
+        public static AddExpenseMutationDocument Instance { get; } = new AddExpenseMutationDocument();
+        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Mutation;
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x6d, 0x75, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x41, 0x64, 0x64, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x24, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x20, 0x41, 0x64, 0x64, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x21, 0x29, 0x20, 0x7b, 0x20, 0x61, 0x64, 0x64, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x3a, 0x20, 0x24, 0x64, 0x61, 0x74, 0x61, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "661a222e8aacc20b37d383e0342f5622");
+        public override global::System.String ToString()
+        {
+#if NETSTANDARD2_0
+        return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
+#else
+            return global::System.Text.Encoding.UTF8.GetString(Body);
+#endif
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the AddExpense GraphQL operation
+    /// <code>
+    /// mutation AddExpense($data: AddExpenseInput!) {
+    ///   addExpense(input: $data) {
+    ///     __typename
+    ///     expense {
+    ///       __typename
+    ///       id
+    ///       ... on Expense {
+    ///         id
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpenseMutation : global::PropManagerSite.GraphQL.IAddExpenseMutation
+    {
+        private readonly global::StrawberryShake.IOperationExecutor<IAddExpenseResult> _operationExecutor;
+        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _addExpenseInputFormatter;
+        public AddExpenseMutation(global::StrawberryShake.IOperationExecutor<IAddExpenseResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
+            _addExpenseInputFormatter = serializerResolver.GetInputValueFormatter("AddExpenseInput");
+        }
+
+        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(IAddExpenseResult);
+        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IAddExpenseResult>> ExecuteAsync(global::PropManagerSite.GraphQL.AddExpenseInput data, global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var request = CreateRequest(data);
+            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+
+        public global::System.IObservable<global::StrawberryShake.IOperationResult<IAddExpenseResult>> Watch(global::PropManagerSite.GraphQL.AddExpenseInput data, global::StrawberryShake.ExecutionStrategy? strategy = null)
+        {
+            var request = CreateRequest(data);
+            return _operationExecutor.Watch(request, strategy);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::PropManagerSite.GraphQL.AddExpenseInput data)
+        {
+            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
+            variables.Add("data", FormatData(data));
+            return CreateRequest(variables);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return new global::StrawberryShake.OperationRequest(id: AddExpenseMutationDocument.Instance.Hash.Value, name: "AddExpense", document: AddExpenseMutationDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
+        }
+
+        private global::System.Object? FormatData(global::PropManagerSite.GraphQL.AddExpenseInput value)
+        {
+            if (value is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(value));
+            }
+
+            return _addExpenseInputFormatter.Format(value);
+        }
+
+        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return CreateRequest(variables!);
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the AddExpense GraphQL operation
+    /// <code>
+    /// mutation AddExpense($data: AddExpenseInput!) {
+    ///   addExpense(input: $data) {
+    ///     __typename
+    ///     expense {
+    ///       __typename
+    ///       id
+    ///       ... on Expense {
+    ///         id
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IAddExpenseMutation : global::StrawberryShake.IOperationRequestFactory
+    {
+        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IAddExpenseResult>> ExecuteAsync(global::PropManagerSite.GraphQL.AddExpenseInput data, global::System.Threading.CancellationToken cancellationToken = default);
+        global::System.IObservable<global::StrawberryShake.IOperationResult<IAddExpenseResult>> Watch(global::PropManagerSite.GraphQL.AddExpenseInput data, global::StrawberryShake.ExecutionStrategy? strategy = null);
+    }
+
+    /// <summary>
+    /// Represents the operation service of the DeleteExpense GraphQL operation
+    /// <code>
+    /// mutation DeleteExpense($data: DeleteExpenseInput!) {
+    ///   deleteExpense(input: $data) {
+    ///     __typename
+    ///     boolean
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpenseMutationDocument : global::StrawberryShake.IDocument
+    {
+        private DeleteExpenseMutationDocument()
+        {
+        }
+
+        public static DeleteExpenseMutationDocument Instance { get; } = new DeleteExpenseMutationDocument();
+        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Mutation;
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x6d, 0x75, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x24, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x20, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x21, 0x29, 0x20, 0x7b, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x3a, 0x20, 0x24, 0x64, 0x61, 0x74, 0x61, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x62, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x20, 0x7d, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "bf183f1306139e86f118c85c25d31ed6");
+        public override global::System.String ToString()
+        {
+#if NETSTANDARD2_0
+        return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
+#else
+            return global::System.Text.Encoding.UTF8.GetString(Body);
+#endif
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the DeleteExpense GraphQL operation
+    /// <code>
+    /// mutation DeleteExpense($data: DeleteExpenseInput!) {
+    ///   deleteExpense(input: $data) {
+    ///     __typename
+    ///     boolean
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpenseMutation : global::PropManagerSite.GraphQL.IDeleteExpenseMutation
+    {
+        private readonly global::StrawberryShake.IOperationExecutor<IDeleteExpenseResult> _operationExecutor;
+        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _deleteExpenseInputFormatter;
+        public DeleteExpenseMutation(global::StrawberryShake.IOperationExecutor<IDeleteExpenseResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
+            _deleteExpenseInputFormatter = serializerResolver.GetInputValueFormatter("DeleteExpenseInput");
+        }
+
+        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(IDeleteExpenseResult);
+        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IDeleteExpenseResult>> ExecuteAsync(global::PropManagerSite.GraphQL.DeleteExpenseInput data, global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var request = CreateRequest(data);
+            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+
+        public global::System.IObservable<global::StrawberryShake.IOperationResult<IDeleteExpenseResult>> Watch(global::PropManagerSite.GraphQL.DeleteExpenseInput data, global::StrawberryShake.ExecutionStrategy? strategy = null)
+        {
+            var request = CreateRequest(data);
+            return _operationExecutor.Watch(request, strategy);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::PropManagerSite.GraphQL.DeleteExpenseInput data)
+        {
+            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
+            variables.Add("data", FormatData(data));
+            return CreateRequest(variables);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return new global::StrawberryShake.OperationRequest(id: DeleteExpenseMutationDocument.Instance.Hash.Value, name: "DeleteExpense", document: DeleteExpenseMutationDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
+        }
+
+        private global::System.Object? FormatData(global::PropManagerSite.GraphQL.DeleteExpenseInput value)
+        {
+            if (value is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(value));
+            }
+
+            return _deleteExpenseInputFormatter.Format(value);
+        }
+
+        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return CreateRequest(variables!);
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the DeleteExpense GraphQL operation
+    /// <code>
+    /// mutation DeleteExpense($data: DeleteExpenseInput!) {
+    ///   deleteExpense(input: $data) {
+    ///     __typename
+    ///     boolean
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IDeleteExpenseMutation : global::StrawberryShake.IOperationRequestFactory
+    {
+        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IDeleteExpenseResult>> ExecuteAsync(global::PropManagerSite.GraphQL.DeleteExpenseInput data, global::System.Threading.CancellationToken cancellationToken = default);
+        global::System.IObservable<global::StrawberryShake.IOperationResult<IDeleteExpenseResult>> Watch(global::PropManagerSite.GraphQL.DeleteExpenseInput data, global::StrawberryShake.ExecutionStrategy? strategy = null);
+    }
+
+    /// <summary>
     /// Represents the operation service of the AddLoan GraphQL operation
     /// <code>
     /// mutation AddLoan($data: AddLoanInput!) {
@@ -4651,17 +7182,55 @@ namespace PropManagerSite.GraphQL
     ///   carpark
     ///   loans {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
+    ///     ... loan
     ///     ... on Loan {
     ///       id
     ///     }
     ///   }
+    ///   expenses {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
     /// }
     /// </code>
     /// </summary>
@@ -4674,8 +7243,8 @@ namespace PropManagerSite.GraphQL
 
         public static EditPropertyMutationDocument Instance { get; } = new EditPropertyMutationDocument();
         public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Mutation;
-        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x6d, 0x75, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x45, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x24, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x20, 0x45, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x21, 0x29, 0x20, 0x7b, 0x20, 0x65, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x3a, 0x20, 0x24, 0x64, 0x61, 0x74, 0x61, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x20, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x46, 0x65, 0x65, 0x20, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x62, 0x61, 0x74, 0x68, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x6c, 0x61, 0x6e, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x20, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x54, 0x79, 0x70, 0x65, 0x20, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x44, 0x75, 0x74, 0x79, 0x20, 0x63, 0x61, 0x72, 0x70, 0x61, 0x72, 0x6b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d};
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "daf751b29ab411d17932c93f26b70e35");
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x6d, 0x75, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x45, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x24, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x20, 0x45, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x21, 0x29, 0x20, 0x7b, 0x20, 0x65, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x3a, 0x20, 0x24, 0x64, 0x61, 0x74, 0x61, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x20, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x46, 0x65, 0x65, 0x20, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x62, 0x61, 0x74, 0x68, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x6c, 0x61, 0x6e, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x20, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x54, 0x79, 0x70, 0x65, 0x20, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x44, 0x75, 0x74, 0x79, 0x20, 0x63, 0x61, 0x72, 0x70, 0x61, 0x72, 0x6b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x66, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "2dcc8bc58d8c70a0d25c26588a4c7787");
         public override global::System.String ToString()
         {
 #if NETSTANDARD2_0
@@ -4716,17 +7285,55 @@ namespace PropManagerSite.GraphQL
     ///   carpark
     ///   loans {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
+    ///     ... loan
     ///     ... on Loan {
     ///       id
     ///     }
     ///   }
+    ///   expenses {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
     /// }
     /// </code>
     /// </summary>
@@ -4812,17 +7419,55 @@ namespace PropManagerSite.GraphQL
     ///   carpark
     ///   loans {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
+    ///     ... loan
     ///     ... on Loan {
     ///       id
     ///     }
     ///   }
+    ///   expenses {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
     /// }
     /// </code>
     /// </summary>
@@ -5108,17 +7753,55 @@ namespace PropManagerSite.GraphQL
     ///   carpark
     ///   loans {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
+    ///     ... loan
     ///     ... on Loan {
     ///       id
     ///     }
     ///   }
+    ///   expenses {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
     /// }
     /// </code>
     /// </summary>
@@ -5131,8 +7814,8 @@ namespace PropManagerSite.GraphQL
 
         public static GetPropertyQueryDocument Instance { get; } = new GetPropertyQueryDocument();
         public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
-        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x24, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x20, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x46, 0x65, 0x65, 0x20, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x62, 0x61, 0x74, 0x68, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x6c, 0x61, 0x6e, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x20, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x54, 0x79, 0x70, 0x65, 0x20, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x44, 0x75, 0x74, 0x79, 0x20, 0x63, 0x61, 0x72, 0x70, 0x61, 0x72, 0x6b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d};
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "96d5d818a30c09ee6dbb0c0f37b24115");
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x24, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x20, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x46, 0x65, 0x65, 0x20, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x62, 0x61, 0x74, 0x68, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x6c, 0x61, 0x6e, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x20, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x54, 0x79, 0x70, 0x65, 0x20, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x44, 0x75, 0x74, 0x79, 0x20, 0x63, 0x61, 0x72, 0x70, 0x61, 0x72, 0x6b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x66, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "111fac70ed5db51c17fb291ce2536536");
         public override global::System.String ToString()
         {
 #if NETSTANDARD2_0
@@ -5170,17 +7853,55 @@ namespace PropManagerSite.GraphQL
     ///   carpark
     ///   loans {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
+    ///     ... loan
     ///     ... on Loan {
     ///       id
     ///     }
     ///   }
+    ///   expenses {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
     /// }
     /// </code>
     /// </summary>
@@ -5265,17 +7986,55 @@ namespace PropManagerSite.GraphQL
     ///   carpark
     ///   loans {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
+    ///     ... loan
     ///     ... on Loan {
     ///       id
     ///     }
     ///   }
+    ///   expenses {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
     /// }
     /// </code>
     /// </summary>
@@ -5292,22 +8051,27 @@ namespace PropManagerSite.GraphQL
     /// query GetLoan($loanId: UUID) {
     ///   loans(where: { id: { eq: $loanId } }) {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
-    ///     property {
-    ///       __typename
-    ///       id
-    ///       name
-    ///       ... on Property {
-    ///         id
-    ///       }
-    ///     }
+    ///     ... loan
     ///     ... on Loan {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
     ///       id
     ///     }
     ///   }
@@ -5323,8 +8087,8 @@ namespace PropManagerSite.GraphQL
 
         public static GetLoanQueryDocument Instance { get; } = new GetLoanQueryDocument();
         public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
-        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x4c, 0x6f, 0x61, 0x6e, 0x28, 0x24, 0x6c, 0x6f, 0x61, 0x6e, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x6c, 0x6f, 0x61, 0x6e, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d};
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "485d534a3914afde565314ecc9fc8388");
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x4c, 0x6f, 0x61, 0x6e, 0x28, 0x24, 0x6c, 0x6f, 0x61, 0x6e, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x6c, 0x6f, 0x61, 0x6e, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x66, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "b84614e8f0c544daa357f873ff10ba7c");
         public override global::System.String ToString()
         {
 #if NETSTANDARD2_0
@@ -5341,22 +8105,27 @@ namespace PropManagerSite.GraphQL
     /// query GetLoan($loanId: UUID) {
     ///   loans(where: { id: { eq: $loanId } }) {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
-    ///     property {
-    ///       __typename
-    ///       id
-    ///       name
-    ///       ... on Property {
-    ///         id
-    ///       }
-    ///     }
+    ///     ... loan
     ///     ... on Loan {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
     ///       id
     ///     }
     ///   }
@@ -5423,22 +8192,27 @@ namespace PropManagerSite.GraphQL
     /// query GetLoan($loanId: UUID) {
     ///   loans(where: { id: { eq: $loanId } }) {
     ///     __typename
-    ///     id
-    ///     lenderName
-    ///     amount
-    ///     interest
-    ///     lMI
-    ///     loanType
-    ///     years
-    ///     property {
-    ///       __typename
-    ///       id
-    ///       name
-    ///       ... on Property {
-    ///         id
-    ///       }
-    ///     }
+    ///     ... loan
     ///     ... on Loan {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment loan on Loan {
+    ///   id
+    ///   lenderName
+    ///   amount
+    ///   interest
+    ///   lMI
+    ///   loanType
+    ///   years
+    ///   dateOfLoan
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     name
+    ///     ... on Property {
     ///       id
     ///     }
     ///   }
@@ -5453,11 +8227,192 @@ namespace PropManagerSite.GraphQL
     }
 
     /// <summary>
+    /// Represents the operation service of the GetExpense GraphQL operation
+    /// <code>
+    /// query GetExpense($expenseId: UUID) {
+    ///   expenses(where: { id: { eq: $expenseId } }) {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpenseQueryDocument : global::StrawberryShake.IDocument
+    {
+        private GetExpenseQueryDocument()
+        {
+        }
+
+        public static GetExpenseQueryDocument Instance { get; } = new GetExpenseQueryDocument();
+        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x24, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "07ad8e42e6aa4af6d30e1efaf06bcf3f");
+        public override global::System.String ToString()
+        {
+#if NETSTANDARD2_0
+        return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
+#else
+            return global::System.Text.Encoding.UTF8.GetString(Body);
+#endif
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the GetExpense GraphQL operation
+    /// <code>
+    /// query GetExpense($expenseId: UUID) {
+    ///   expenses(where: { id: { eq: $expenseId } }) {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpenseQuery : global::PropManagerSite.GraphQL.IGetExpenseQuery
+    {
+        private readonly global::StrawberryShake.IOperationExecutor<IGetExpenseResult> _operationExecutor;
+        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter;
+        public GetExpenseQuery(global::StrawberryShake.IOperationExecutor<IGetExpenseResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
+            _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
+        }
+
+        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(IGetExpenseResult);
+        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IGetExpenseResult>> ExecuteAsync(global::System.Guid? expenseId, global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var request = CreateRequest(expenseId);
+            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+
+        public global::System.IObservable<global::StrawberryShake.IOperationResult<IGetExpenseResult>> Watch(global::System.Guid? expenseId, global::StrawberryShake.ExecutionStrategy? strategy = null)
+        {
+            var request = CreateRequest(expenseId);
+            return _operationExecutor.Watch(request, strategy);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Guid? expenseId)
+        {
+            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
+            variables.Add("expenseId", FormatExpenseId(expenseId));
+            return CreateRequest(variables);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return new global::StrawberryShake.OperationRequest(id: GetExpenseQueryDocument.Instance.Hash.Value, name: "GetExpense", document: GetExpenseQueryDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
+        }
+
+        private global::System.Object? FormatExpenseId(global::System.Guid? value)
+        {
+            if (value is null)
+            {
+                return value;
+            }
+            else
+            {
+                return _uUIDFormatter.Format(value);
+            }
+        }
+
+        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return CreateRequest(variables!);
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the GetExpense GraphQL operation
+    /// <code>
+    /// query GetExpense($expenseId: UUID) {
+    ///   expenses(where: { id: { eq: $expenseId } }) {
+    ///     __typename
+    ///     ... expense
+    ///     ... on Expense {
+    ///       id
+    ///     }
+    ///   }
+    /// }
+    /// 
+    /// fragment expense on Expense {
+    ///   id
+    ///   title
+    ///   description
+    ///   price
+    ///   totalDeductable
+    ///   propertyId
+    ///   expenseDate
+    ///   property {
+    ///     __typename
+    ///     id
+    ///     ... on Property {
+    ///       id
+    ///     }
+    ///   }
+    ///   deleted
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial interface IGetExpenseQuery : global::StrawberryShake.IOperationRequestFactory
+    {
+        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IGetExpenseResult>> ExecuteAsync(global::System.Guid? expenseId, global::System.Threading.CancellationToken cancellationToken = default);
+        global::System.IObservable<global::StrawberryShake.IOperationResult<IGetExpenseResult>> Watch(global::System.Guid? expenseId, global::StrawberryShake.ExecutionStrategy? strategy = null);
+    }
+
+    /// <summary>
     /// Represents the PropManagerSiteQL GraphQL client
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class PropManagerSiteQL : global::PropManagerSite.GraphQL.IPropManagerSiteQL
     {
+        private readonly global::PropManagerSite.GraphQL.IEditExpenseMutation _editExpense;
+        private readonly global::PropManagerSite.GraphQL.IAddExpenseMutation _addExpense;
+        private readonly global::PropManagerSite.GraphQL.IDeleteExpenseMutation _deleteExpense;
         private readonly global::PropManagerSite.GraphQL.IAddLoanMutation _addLoan;
         private readonly global::PropManagerSite.GraphQL.IEddLoanMutation _eddLoan;
         private readonly global::PropManagerSite.GraphQL.IDeleteLoanMutation _deleteLoan;
@@ -5467,8 +8422,12 @@ namespace PropManagerSite.GraphQL
         private readonly global::PropManagerSite.GraphQL.IGetPropertiesQuery _getProperties;
         private readonly global::PropManagerSite.GraphQL.IGetPropertyQuery _getProperty;
         private readonly global::PropManagerSite.GraphQL.IGetLoanQuery _getLoan;
-        public PropManagerSiteQL(global::PropManagerSite.GraphQL.IAddLoanMutation addLoan, global::PropManagerSite.GraphQL.IEddLoanMutation eddLoan, global::PropManagerSite.GraphQL.IDeleteLoanMutation deleteLoan, global::PropManagerSite.GraphQL.ICreatePropertyMutation createProperty, global::PropManagerSite.GraphQL.IEditPropertyMutation editProperty, global::PropManagerSite.GraphQL.IDeletePropertyMutation deleteProperty, global::PropManagerSite.GraphQL.IGetPropertiesQuery getProperties, global::PropManagerSite.GraphQL.IGetPropertyQuery getProperty, global::PropManagerSite.GraphQL.IGetLoanQuery getLoan)
+        private readonly global::PropManagerSite.GraphQL.IGetExpenseQuery _getExpense;
+        public PropManagerSiteQL(global::PropManagerSite.GraphQL.IEditExpenseMutation editExpense, global::PropManagerSite.GraphQL.IAddExpenseMutation addExpense, global::PropManagerSite.GraphQL.IDeleteExpenseMutation deleteExpense, global::PropManagerSite.GraphQL.IAddLoanMutation addLoan, global::PropManagerSite.GraphQL.IEddLoanMutation eddLoan, global::PropManagerSite.GraphQL.IDeleteLoanMutation deleteLoan, global::PropManagerSite.GraphQL.ICreatePropertyMutation createProperty, global::PropManagerSite.GraphQL.IEditPropertyMutation editProperty, global::PropManagerSite.GraphQL.IDeletePropertyMutation deleteProperty, global::PropManagerSite.GraphQL.IGetPropertiesQuery getProperties, global::PropManagerSite.GraphQL.IGetPropertyQuery getProperty, global::PropManagerSite.GraphQL.IGetLoanQuery getLoan, global::PropManagerSite.GraphQL.IGetExpenseQuery getExpense)
         {
+            _editExpense = editExpense ?? throw new global::System.ArgumentNullException(nameof(editExpense));
+            _addExpense = addExpense ?? throw new global::System.ArgumentNullException(nameof(addExpense));
+            _deleteExpense = deleteExpense ?? throw new global::System.ArgumentNullException(nameof(deleteExpense));
             _addLoan = addLoan ?? throw new global::System.ArgumentNullException(nameof(addLoan));
             _eddLoan = eddLoan ?? throw new global::System.ArgumentNullException(nameof(eddLoan));
             _deleteLoan = deleteLoan ?? throw new global::System.ArgumentNullException(nameof(deleteLoan));
@@ -5478,9 +8437,13 @@ namespace PropManagerSite.GraphQL
             _getProperties = getProperties ?? throw new global::System.ArgumentNullException(nameof(getProperties));
             _getProperty = getProperty ?? throw new global::System.ArgumentNullException(nameof(getProperty));
             _getLoan = getLoan ?? throw new global::System.ArgumentNullException(nameof(getLoan));
+            _getExpense = getExpense ?? throw new global::System.ArgumentNullException(nameof(getExpense));
         }
 
         public static global::System.String ClientName => "PropManagerSiteQL";
+        public global::PropManagerSite.GraphQL.IEditExpenseMutation EditExpense => _editExpense;
+        public global::PropManagerSite.GraphQL.IAddExpenseMutation AddExpense => _addExpense;
+        public global::PropManagerSite.GraphQL.IDeleteExpenseMutation DeleteExpense => _deleteExpense;
         public global::PropManagerSite.GraphQL.IAddLoanMutation AddLoan => _addLoan;
         public global::PropManagerSite.GraphQL.IEddLoanMutation EddLoan => _eddLoan;
         public global::PropManagerSite.GraphQL.IDeleteLoanMutation DeleteLoan => _deleteLoan;
@@ -5490,6 +8453,7 @@ namespace PropManagerSite.GraphQL
         public global::PropManagerSite.GraphQL.IGetPropertiesQuery GetProperties => _getProperties;
         public global::PropManagerSite.GraphQL.IGetPropertyQuery GetProperty => _getProperty;
         public global::PropManagerSite.GraphQL.IGetLoanQuery GetLoan => _getLoan;
+        public global::PropManagerSite.GraphQL.IGetExpenseQuery GetExpense => _getExpense;
     }
 
     /// <summary>
@@ -5498,6 +8462,12 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial interface IPropManagerSiteQL
     {
+        global::PropManagerSite.GraphQL.IEditExpenseMutation EditExpense { get; }
+
+        global::PropManagerSite.GraphQL.IAddExpenseMutation AddExpense { get; }
+
+        global::PropManagerSite.GraphQL.IDeleteExpenseMutation DeleteExpense { get; }
+
         global::PropManagerSite.GraphQL.IAddLoanMutation AddLoan { get; }
 
         global::PropManagerSite.GraphQL.IEddLoanMutation EddLoan { get; }
@@ -5515,15 +8485,52 @@ namespace PropManagerSite.GraphQL
         global::PropManagerSite.GraphQL.IGetPropertyQuery GetProperty { get; }
 
         global::PropManagerSite.GraphQL.IGetLoanQuery GetLoan { get; }
+
+        global::PropManagerSite.GraphQL.IGetExpenseQuery GetExpense { get; }
     }
 }
 
 namespace PropManagerSite.GraphQL.State
 {
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class ExpenseEntity
+    {
+        public ExpenseEntity(global::System.Guid id = default !, global::System.String title = default !, global::System.String? description = default !, global::System.Decimal? price = default !, global::System.Decimal totalDeductable = default !, global::System.Guid propertyId = default !, global::System.DateTimeOffset expenseDate = default !, global::StrawberryShake.EntityId property = default !, global::System.Boolean deleted = default !)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            Price = price;
+            TotalDeductable = totalDeductable;
+            PropertyId = propertyId;
+            ExpenseDate = expenseDate;
+            Property = property;
+            Deleted = deleted;
+        }
+
+        public global::System.Guid Id { get; }
+
+        public global::System.String Title { get; }
+
+        public global::System.String? Description { get; }
+
+        public global::System.Decimal? Price { get; }
+
+        public global::System.Decimal TotalDeductable { get; }
+
+        public global::System.Guid PropertyId { get; }
+
+        public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::StrawberryShake.EntityId Property { get; }
+
+        public global::System.Boolean Deleted { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class LoanEntity
     {
-        public LoanEntity(global::System.Guid id = default !, global::System.String lenderName = default !, global::System.Decimal? amount = default !, global::System.Decimal? interest = default !, global::System.Decimal? lMI = default !, global::PropManagerSite.GraphQL.LoanTypes loanType = default !, global::System.Int32? years = default !, global::StrawberryShake.EntityId property = default !)
+        public LoanEntity(global::System.Guid id = default !, global::System.String lenderName = default !, global::System.Decimal? amount = default !, global::System.Decimal? interest = default !, global::System.Decimal? lMI = default !, global::PropManagerSite.GraphQL.LoanTypes loanType = default !, global::System.Int32? years = default !, global::System.DateTimeOffset? dateOfLoan = default !, global::StrawberryShake.EntityId property = default !)
         {
             Id = id;
             LenderName = lenderName;
@@ -5532,6 +8539,7 @@ namespace PropManagerSite.GraphQL.State
             LMI = lMI;
             LoanType = loanType;
             Years = years;
+            DateOfLoan = dateOfLoan;
             Property = property;
         }
 
@@ -5549,13 +8557,15 @@ namespace PropManagerSite.GraphQL.State
 
         public global::System.Int32? Years { get; }
 
+        public global::System.DateTimeOffset? DateOfLoan { get; }
+
         public global::StrawberryShake.EntityId Property { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class PropertyEntity
     {
-        public PropertyEntity(global::System.Guid id = default !, global::System.String? name = default !, global::System.Decimal? purchasePrice = default !, global::System.Decimal? registrationTransferFee = default !, global::System.Decimal? rooms = default !, global::System.Decimal? bathrooms = default !, global::System.Decimal? landSize = default !, global::System.String address = default !, global::PropManagerSite.GraphQL.PropertyTypes propertyType = default !, global::System.Decimal? stampDuty = default !, global::System.Decimal? carpark = default !, global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> loans = default !)
+        public PropertyEntity(global::System.Guid id = default !, global::System.String? name = default !, global::System.Decimal? purchasePrice = default !, global::System.Decimal? registrationTransferFee = default !, global::System.Decimal? rooms = default !, global::System.Decimal? bathrooms = default !, global::System.Decimal? landSize = default !, global::System.String address = default !, global::PropManagerSite.GraphQL.PropertyTypes propertyType = default !, global::System.Decimal? stampDuty = default !, global::System.Decimal? carpark = default !, global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> loans = default !, global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> expenses = default !)
         {
             Id = id;
             Name = name;
@@ -5569,6 +8579,7 @@ namespace PropManagerSite.GraphQL.State
             StampDuty = stampDuty;
             Carpark = carpark;
             Loans = loans;
+            Expenses = expenses;
         }
 
         public global::System.Guid Id { get; }
@@ -5594,6 +8605,286 @@ namespace PropManagerSite.GraphQL.State
         public global::System.Decimal? Carpark { get; }
 
         public global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> Loans { get; }
+
+        public global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> Expenses { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpenseResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.EditExpenseResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditExpense_EditExpense_Expense_Expense> _editExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper;
+        public EditExpenseResultFactory(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditExpense_EditExpense_Expense_Expense> editExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _editExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper = editExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper));
+        }
+
+        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::PropManagerSite.GraphQL.IEditExpenseResult);
+        public EditExpenseResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            if (dataInfo is EditExpenseResultInfo info)
+            {
+                return new EditExpenseResult(MapNonNullableIEditExpense_EditExpense(info.EditExpense, snapshot));
+            }
+
+            throw new global::System.ArgumentException("EditExpenseResultInfo expected.");
+        }
+
+        private global::PropManagerSite.GraphQL.IEditExpense_EditExpense MapNonNullableIEditExpense_EditExpense(global::PropManagerSite.GraphQL.State.EditExpensePayloadData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IEditExpense_EditExpense returnValue = default !;
+            if (data.__typename.Equals("EditExpensePayload", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new EditExpense_EditExpense_EditExpensePayload(MapIEditExpense_EditExpense_Expense(data.Expense, snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::PropManagerSite.GraphQL.IEditExpense_EditExpense_Expense? MapIEditExpense_EditExpense_Expense(global::StrawberryShake.EntityId? entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId is null)
+            {
+                return null;
+            }
+
+            if (entityId.Value.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                return _editExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.ExpenseEntity>(entityId.Value) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
+        {
+            return Create(dataInfo, snapshot);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpenseResultInfo : global::StrawberryShake.IOperationResultDataInfo
+    {
+        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
+        private readonly global::System.UInt64 _version;
+        public EditExpenseResultInfo(global::PropManagerSite.GraphQL.State.EditExpensePayloadData editExpense, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
+        {
+            EditExpense = editExpense;
+            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
+            _version = version;
+        }
+
+        public global::PropManagerSite.GraphQL.State.EditExpensePayloadData EditExpense { get; }
+
+        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
+        public global::System.UInt64 Version => _version;
+        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
+        {
+            return new EditExpenseResultInfo(EditExpense, _entityIds, version);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditExpense_EditExpense_Expense_Expense>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public EditExpense_EditExpense_Expense_ExpenseFromExpenseEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        public EditExpense_EditExpense_Expense_Expense Map(global::PropManagerSite.GraphQL.State.ExpenseEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new EditExpense_EditExpense_Expense_Expense(entity.Id);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpenseResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.AddExpenseResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, AddExpense_AddExpense_Expense_Expense> _addExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper;
+        public AddExpenseResultFactory(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, AddExpense_AddExpense_Expense_Expense> addExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _addExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper = addExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper ?? throw new global::System.ArgumentNullException(nameof(addExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper));
+        }
+
+        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::PropManagerSite.GraphQL.IAddExpenseResult);
+        public AddExpenseResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            if (dataInfo is AddExpenseResultInfo info)
+            {
+                return new AddExpenseResult(MapNonNullableIAddExpense_AddExpense(info.AddExpense, snapshot));
+            }
+
+            throw new global::System.ArgumentException("AddExpenseResultInfo expected.");
+        }
+
+        private global::PropManagerSite.GraphQL.IAddExpense_AddExpense MapNonNullableIAddExpense_AddExpense(global::PropManagerSite.GraphQL.State.AddExpensePayloadData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IAddExpense_AddExpense returnValue = default !;
+            if (data.__typename.Equals("AddExpensePayload", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new AddExpense_AddExpense_AddExpensePayload(MapIAddExpense_AddExpense_Expense(data.Expense, snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::PropManagerSite.GraphQL.IAddExpense_AddExpense_Expense? MapIAddExpense_AddExpense_Expense(global::StrawberryShake.EntityId? entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId is null)
+            {
+                return null;
+            }
+
+            if (entityId.Value.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                return _addExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.ExpenseEntity>(entityId.Value) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
+        {
+            return Create(dataInfo, snapshot);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpenseResultInfo : global::StrawberryShake.IOperationResultDataInfo
+    {
+        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
+        private readonly global::System.UInt64 _version;
+        public AddExpenseResultInfo(global::PropManagerSite.GraphQL.State.AddExpensePayloadData addExpense, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
+        {
+            AddExpense = addExpense;
+            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
+            _version = version;
+        }
+
+        public global::PropManagerSite.GraphQL.State.AddExpensePayloadData AddExpense { get; }
+
+        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
+        public global::System.UInt64 Version => _version;
+        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
+        {
+            return new AddExpenseResultInfo(AddExpense, _entityIds, version);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, AddExpense_AddExpense_Expense_Expense>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public AddExpense_AddExpense_Expense_ExpenseFromExpenseEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        public AddExpense_AddExpense_Expense_Expense Map(global::PropManagerSite.GraphQL.State.ExpenseEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new AddExpense_AddExpense_Expense_Expense(entity.Id);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpenseResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.DeleteExpenseResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public DeleteExpenseResultFactory(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::PropManagerSite.GraphQL.IDeleteExpenseResult);
+        public DeleteExpenseResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            if (dataInfo is DeleteExpenseResultInfo info)
+            {
+                return new DeleteExpenseResult(MapNonNullableIDeleteExpense_DeleteExpense(info.DeleteExpense, snapshot));
+            }
+
+            throw new global::System.ArgumentException("DeleteExpenseResultInfo expected.");
+        }
+
+        private global::PropManagerSite.GraphQL.IDeleteExpense_DeleteExpense MapNonNullableIDeleteExpense_DeleteExpense(global::PropManagerSite.GraphQL.State.DeleteExpensePayloadData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IDeleteExpense_DeleteExpense returnValue = default !;
+            if (data.__typename.Equals("DeleteExpensePayload", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new DeleteExpense_DeleteExpense_DeleteExpensePayload(data.Boolean);
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
+        {
+            return Create(dataInfo, snapshot);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpenseResultInfo : global::StrawberryShake.IOperationResultDataInfo
+    {
+        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
+        private readonly global::System.UInt64 _version;
+        public DeleteExpenseResultInfo(global::PropManagerSite.GraphQL.State.DeleteExpensePayloadData deleteExpense, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
+        {
+            DeleteExpense = deleteExpense;
+            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
+            _version = version;
+        }
+
+        public global::PropManagerSite.GraphQL.State.DeleteExpensePayloadData DeleteExpense { get; }
+
+        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
+        public global::System.UInt64 Version => _version;
+        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
+        {
+            return new DeleteExpenseResultInfo(DeleteExpense, _entityIds, version);
+        }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
@@ -5985,11 +9276,17 @@ namespace PropManagerSite.GraphQL.State
         private readonly global::StrawberryShake.IEntityStore _entityStore;
         private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Property> _editProperty_EditProperty_Property_PropertyFromPropertyEntityMapper;
         private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> _editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper;
-        public EditPropertyResultFactory(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Property> editProperty_EditProperty_Property_PropertyFromPropertyEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper)
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditProperty_EditProperty_Property_Expenses_Expense> _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper;
+        public EditPropertyResultFactory(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Property> editProperty_EditProperty_Property_PropertyFromPropertyEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditProperty_EditProperty_Property_Expenses_Expense> editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
             _editProperty_EditProperty_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_PropertyFromPropertyEntityMapper));
             _editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper = editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper));
+            _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper));
+            _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper = editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper));
+            _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper));
         }
 
         global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::PropManagerSite.GraphQL.IEditPropertyResult);
@@ -6064,6 +9361,52 @@ namespace PropManagerSite.GraphQL.State
             throw new global::System.NotSupportedException();
         }
 
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses> MapNonNullableIEditProperty_EditProperty_Property_ExpensesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var expenses = new global::System.Collections.Generic.List<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses>();
+            foreach (global::StrawberryShake.EntityId child in list)
+            {
+                expenses.Add(MapNonNullableIEditProperty_EditProperty_Property_Expenses(child, snapshot));
+            }
+
+            return expenses;
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses MapNonNullableIEditProperty_EditProperty_Property_Expenses(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.ExpenseEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
         global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
         {
             return Create(dataInfo, snapshot);
@@ -6097,10 +9440,16 @@ namespace PropManagerSite.GraphQL.State
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
         private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> _editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper;
-        public EditProperty_EditProperty_Property_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper)
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditProperty_EditProperty_Property_Expenses_Expense> _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper;
+        public EditProperty_EditProperty_Property_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditProperty_EditProperty_Property_Expenses_Expense> editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
             _editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper = editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper));
+            _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper));
+            _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper = editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper));
+            _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper));
         }
 
         public EditProperty_EditProperty_Property_Property Map(global::PropManagerSite.GraphQL.State.PropertyEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
@@ -6110,7 +9459,7 @@ namespace PropManagerSite.GraphQL.State
                 snapshot = _entityStore.CurrentSnapshot;
             }
 
-            return new EditProperty_EditProperty_Property_Property(entity.Id, entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, MapNonNullableIEditProperty_EditProperty_Property_LoansNonNullableArray(entity.Loans, snapshot));
+            return new EditProperty_EditProperty_Property_Property(entity.Id, entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, MapNonNullableIEditProperty_EditProperty_Property_LoansNonNullableArray(entity.Loans, snapshot), MapNonNullableIEditProperty_EditProperty_Property_ExpensesNonNullableArray(entity.Expenses, snapshot));
         }
 
         private global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> MapNonNullableIEditProperty_EditProperty_Property_LoansNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
@@ -6138,15 +9487,63 @@ namespace PropManagerSite.GraphQL.State
 
             throw new global::System.NotSupportedException();
         }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses> MapNonNullableIEditProperty_EditProperty_Property_ExpensesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var expenses = new global::System.Collections.Generic.List<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses>();
+            foreach (global::StrawberryShake.EntityId child in list)
+            {
+                expenses.Add(MapNonNullableIEditProperty_EditProperty_Property_Expenses(child, snapshot));
+            }
+
+            return expenses;
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses MapNonNullableIEditProperty_EditProperty_Property_Expenses(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.ExpenseEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class EditProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
-        public EditProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper;
+        public EditProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper));
         }
 
         public EditProperty_EditProperty_Property_Loans_Loan Map(global::PropManagerSite.GraphQL.State.LoanEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
@@ -6156,7 +9553,89 @@ namespace PropManagerSite.GraphQL.State
                 snapshot = _entityStore.CurrentSnapshot;
             }
 
-            return new EditProperty_EditProperty_Property_Loans_Loan(entity.Id, entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years);
+            return new EditProperty_EditProperty_Property_Loans_Loan(entity.Id, entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years, entity.DateOfLoan, MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(entity.Property, snapshot));
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditProperty_EditProperty_Property_Expenses_Expense>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper;
+        public EditProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper));
+        }
+
+        public EditProperty_EditProperty_Property_Expenses_Expense Map(global::PropManagerSite.GraphQL.State.ExpenseEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new EditProperty_EditProperty_Property_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public EditProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        public EditProperty_EditProperty_Property_Loans_Property_Property Map(global::PropManagerSite.GraphQL.State.PropertyEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new EditProperty_EditProperty_Property_Loans_Property_Property(entity.Id, entity.Name);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public EditProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        public EditProperty_EditProperty_Property_Expenses_Property_Property Map(global::PropManagerSite.GraphQL.State.PropertyEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new EditProperty_EditProperty_Property_Expenses_Property_Property(entity.Id);
         }
     }
 
@@ -6415,10 +9894,16 @@ namespace PropManagerSite.GraphQL.State
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
         private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> _editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper;
-        public GetProperty_Properties_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper)
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditProperty_EditProperty_Property_Expenses_Expense> _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper;
+        public GetProperty_Properties_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, EditProperty_EditProperty_Property_Loans_Loan> editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, EditProperty_EditProperty_Property_Expenses_Expense> editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
             _editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper = editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_LoanFromLoanEntityMapper));
+            _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper));
+            _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper = editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper));
+            _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper));
         }
 
         public GetProperty_Properties_Property Map(global::PropManagerSite.GraphQL.State.PropertyEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
@@ -6428,7 +9913,7 @@ namespace PropManagerSite.GraphQL.State
                 snapshot = _entityStore.CurrentSnapshot;
             }
 
-            return new GetProperty_Properties_Property(entity.Id, entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, MapNonNullableIEditProperty_EditProperty_Property_LoansNonNullableArray(entity.Loans, snapshot));
+            return new GetProperty_Properties_Property(entity.Id, entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, MapNonNullableIEditProperty_EditProperty_Property_LoansNonNullableArray(entity.Loans, snapshot), MapNonNullableIEditProperty_EditProperty_Property_ExpensesNonNullableArray(entity.Expenses, snapshot));
         }
 
         private global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans> MapNonNullableIEditProperty_EditProperty_Property_LoansNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
@@ -6456,15 +9941,63 @@ namespace PropManagerSite.GraphQL.State
 
             throw new global::System.NotSupportedException();
         }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses> MapNonNullableIEditProperty_EditProperty_Property_ExpensesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var expenses = new global::System.Collections.Generic.List<global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses>();
+            foreach (global::StrawberryShake.EntityId child in list)
+            {
+                expenses.Add(MapNonNullableIEditProperty_EditProperty_Property_Expenses(child, snapshot));
+            }
+
+            return expenses;
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses MapNonNullableIEditProperty_EditProperty_Property_Expenses(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_ExpenseFromExpenseEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.ExpenseEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class GetProperty_Properties_Loans_LoanFromLoanEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, GetProperty_Properties_Loans_Loan>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
-        public GetProperty_Properties_Loans_LoanFromLoanEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper;
+        public GetProperty_Properties_Loans_LoanFromLoanEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper));
         }
 
         public GetProperty_Properties_Loans_Loan Map(global::PropManagerSite.GraphQL.State.LoanEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
@@ -6474,7 +10007,89 @@ namespace PropManagerSite.GraphQL.State
                 snapshot = _entityStore.CurrentSnapshot;
             }
 
-            return new GetProperty_Properties_Loans_Loan(entity.Id, entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years);
+            return new GetProperty_Properties_Loans_Loan(entity.Id, entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years, entity.DateOfLoan, MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(entity.Property, snapshot));
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetProperty_Properties_Expenses_ExpenseFromExpenseEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, GetProperty_Properties_Expenses_Expense>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper;
+        public GetProperty_Properties_Expenses_ExpenseFromExpenseEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper));
+        }
+
+        public GetProperty_Properties_Expenses_Expense Map(global::PropManagerSite.GraphQL.State.ExpenseEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new GetProperty_Properties_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetProperty_Properties_Loans_Property_PropertyFromPropertyEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, GetProperty_Properties_Loans_Property_Property>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public GetProperty_Properties_Loans_Property_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        public GetProperty_Properties_Loans_Property_Property Map(global::PropManagerSite.GraphQL.State.PropertyEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new GetProperty_Properties_Loans_Property_Property(entity.Id, entity.Name);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetProperty_Properties_Expenses_Property_PropertyFromPropertyEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, GetProperty_Properties_Expenses_Property_Property>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public GetProperty_Properties_Expenses_Property_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        public GetProperty_Properties_Expenses_Property_Property Map(global::PropManagerSite.GraphQL.State.PropertyEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new GetProperty_Properties_Expenses_Property_Property(entity.Id);
         }
     }
 
@@ -6563,11 +10178,11 @@ namespace PropManagerSite.GraphQL.State
     public partial class GetLoan_Loans_LoanFromLoanEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.LoanEntity, GetLoan_Loans_Loan>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
-        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, GetLoan_Loans_Property_Property> _getLoan_Loans_Property_PropertyFromPropertyEntityMapper;
-        public GetLoan_Loans_LoanFromLoanEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, GetLoan_Loans_Property_Property> getLoan_Loans_Property_PropertyFromPropertyEntityMapper)
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper;
+        public GetLoan_Loans_LoanFromLoanEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Loans_Property_Property> editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
-            _getLoan_Loans_Property_PropertyFromPropertyEntityMapper = getLoan_Loans_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(getLoan_Loans_Property_PropertyFromPropertyEntityMapper));
+            _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper));
         }
 
         public GetLoan_Loans_Loan Map(global::PropManagerSite.GraphQL.State.LoanEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
@@ -6577,14 +10192,14 @@ namespace PropManagerSite.GraphQL.State
                 snapshot = _entityStore.CurrentSnapshot;
             }
 
-            return new GetLoan_Loans_Loan(entity.Id, entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years, MapNonNullableIGetLoan_Loans_Property(entity.Property, snapshot));
+            return new GetLoan_Loans_Loan(entity.Id, entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years, entity.DateOfLoan, MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(entity.Property, snapshot));
         }
 
-        private global::PropManagerSite.GraphQL.IGetLoan_Loans_Property MapNonNullableIGetLoan_Loans_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Loans_Property MapNonNullableIEditProperty_EditProperty_Property_Loans_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
             if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
             {
-                return _getLoan_Loans_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+                return _editProperty_EditProperty_Property_Loans_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
             }
 
             throw new global::System.NotSupportedException();
@@ -6612,6 +10227,177 @@ namespace PropManagerSite.GraphQL.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpenseResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.GetExpenseResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, GetExpense_Expenses_Expense> _getExpense_Expenses_ExpenseFromExpenseEntityMapper;
+        public GetExpenseResultFactory(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, GetExpense_Expenses_Expense> getExpense_Expenses_ExpenseFromExpenseEntityMapper)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _getExpense_Expenses_ExpenseFromExpenseEntityMapper = getExpense_Expenses_ExpenseFromExpenseEntityMapper ?? throw new global::System.ArgumentNullException(nameof(getExpense_Expenses_ExpenseFromExpenseEntityMapper));
+        }
+
+        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::PropManagerSite.GraphQL.IGetExpenseResult);
+        public GetExpenseResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            if (dataInfo is GetExpenseResultInfo info)
+            {
+                return new GetExpenseResult(MapNonNullableIGetExpense_ExpensesNonNullableArray(info.Expenses, snapshot));
+            }
+
+            throw new global::System.ArgumentException("GetExpenseResultInfo expected.");
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::PropManagerSite.GraphQL.IGetExpense_Expenses> MapNonNullableIGetExpense_ExpensesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var expenses = new global::System.Collections.Generic.List<global::PropManagerSite.GraphQL.IGetExpense_Expenses>();
+            foreach (global::StrawberryShake.EntityId child in list)
+            {
+                expenses.Add(MapNonNullableIGetExpense_Expenses(child, snapshot));
+            }
+
+            return expenses;
+        }
+
+        private global::PropManagerSite.GraphQL.IGetExpense_Expenses MapNonNullableIGetExpense_Expenses(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                return _getExpense_Expenses_ExpenseFromExpenseEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.ExpenseEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
+        {
+            return Create(dataInfo, snapshot);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpenseResultInfo : global::StrawberryShake.IOperationResultDataInfo
+    {
+        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
+        private readonly global::System.UInt64 _version;
+        public GetExpenseResultInfo(global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> expenses, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
+        {
+            Expenses = expenses;
+            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
+            _version = version;
+        }
+
+        public global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> Expenses { get; }
+
+        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
+        public global::System.UInt64 Version => _version;
+        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
+        {
+            return new GetExpenseResultInfo(Expenses, _entityIds, version);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpense_Expenses_ExpenseFromExpenseEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.ExpenseEntity, GetExpense_Expenses_Expense>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper;
+        public GetExpense_Expenses_ExpenseFromExpenseEntityMapper(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, EditProperty_EditProperty_Property_Expenses_Property_Property> editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper = editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper ?? throw new global::System.ArgumentNullException(nameof(editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper));
+        }
+
+        public GetExpense_Expenses_Expense Map(global::PropManagerSite.GraphQL.State.ExpenseEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new GetExpense_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
+        }
+
+        private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                return _editProperty_EditProperty_Property_Expenses_Property_PropertyFromPropertyEntityMapper.Map(snapshot.GetEntity<global::PropManagerSite.GraphQL.State.PropertyEntity>(entityId) ?? throw new global::StrawberryShake.GraphQLClientException());
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpense_Expenses_Property_PropertyFromPropertyEntityMapper : global::StrawberryShake.IEntityMapper<global::PropManagerSite.GraphQL.State.PropertyEntity, GetExpense_Expenses_Property_Property>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public GetExpense_Expenses_Property_PropertyFromPropertyEntityMapper(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        public GetExpense_Expenses_Property_Property Map(global::PropManagerSite.GraphQL.State.PropertyEntity entity, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            return new GetExpense_Expenses_Property_Property(entity.Id);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    internal interface IEditExpenseInputInfo
+    {
+        global::System.Boolean IsTitleSet { get; }
+
+        global::System.Boolean IsDescriptionSet { get; }
+
+        global::System.Boolean IsPriceSet { get; }
+
+        global::System.Boolean IsTotalDeductableSet { get; }
+
+        global::System.Boolean IsIdSet { get; }
+
+        global::System.Boolean IsExpenseDateSet { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    internal interface IAddExpenseInputInfo
+    {
+        global::System.Boolean IsTitleSet { get; }
+
+        global::System.Boolean IsDescriptionSet { get; }
+
+        global::System.Boolean IsPriceSet { get; }
+
+        global::System.Boolean IsTotalDeductableSet { get; }
+
+        global::System.Boolean IsPropertyIdSet { get; }
+
+        global::System.Boolean IsExpenseDateSet { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    internal interface IDeleteExpenseInputInfo
+    {
+        global::System.Boolean IsIdSet { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     internal interface IAddLoanInputInfo
     {
         global::System.Boolean IsLenderNameSet { get; }
@@ -6625,6 +10411,8 @@ namespace PropManagerSite.GraphQL.State
         global::System.Boolean IsLMISet { get; }
 
         global::System.Boolean IsYearsSet { get; }
+
+        global::System.Boolean IsDateOfLoanSet { get; }
 
         global::System.Boolean IsPropertyIdSet { get; }
     }
@@ -6645,6 +10433,8 @@ namespace PropManagerSite.GraphQL.State
         global::System.Boolean IsLMISet { get; }
 
         global::System.Boolean IsYearsSet { get; }
+
+        global::System.Boolean IsDateOfLoanSet { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
@@ -6710,6 +10500,361 @@ namespace PropManagerSite.GraphQL.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpenseBuilder : global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IEditExpenseResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
+        private readonly global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IEditExpenseResult> _resultDataFactory;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
+        public EditExpenseBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IEditExpenseResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
+            _resultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
+            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
+            _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
+            _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
+            _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
+        }
+
+        public global::StrawberryShake.IOperationResult<IEditExpenseResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
+        {
+            (IEditExpenseResult Result, EditExpenseResultInfo Info)? data = null;
+            global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.IClientError>? errors = null;
+            if (response.Exception is null)
+            {
+                try
+                {
+                    if (response.Body != null)
+                    {
+                        if (response.Body.RootElement.TryGetProperty("data", out global::System.Text.Json.JsonElement dataElement) && dataElement.ValueKind == global::System.Text.Json.JsonValueKind.Object)
+                        {
+                            data = BuildData(dataElement);
+                        }
+
+                        if (response.Body.RootElement.TryGetProperty("errors", out global::System.Text.Json.JsonElement errorsElement))
+                        {
+                            errors = global::StrawberryShake.Json.JsonErrorParser.ParseErrors(errorsElement);
+                        }
+                    }
+                }
+                catch (global::System.Exception ex)
+                {
+                    errors = new global::StrawberryShake.IClientError[]{new global::StrawberryShake.ClientError(ex.Message, exception: ex, extensions: new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>{{"body", response.Body?.RootElement.ToString()}})};
+                }
+            }
+            else
+            {
+                if (response.Body != null && response.Body.RootElement.TryGetProperty("errors", out global::System.Text.Json.JsonElement errorsElement))
+                {
+                    errors = global::StrawberryShake.Json.JsonErrorParser.ParseErrors(errorsElement);
+                }
+                else
+                {
+                    errors = new global::StrawberryShake.IClientError[]{new global::StrawberryShake.ClientError(response.Exception.Message, exception: response.Exception, extensions: new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>{{"body", response.Body?.RootElement.ToString()}})};
+                }
+            }
+
+            return new global::StrawberryShake.OperationResult<IEditExpenseResult>(data?.Result, data?.Info, _resultDataFactory, errors);
+        }
+
+        private (IEditExpenseResult, EditExpenseResultInfo) BuildData(global::System.Text.Json.JsonElement obj)
+        {
+            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
+            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
+            global::PropManagerSite.GraphQL.State.EditExpensePayloadData editExpenseId = default !;
+            _entityStore.Update(session =>
+            {
+                editExpenseId = DeserializeNonNullableIEditExpense_EditExpense(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "editExpense"), entityIds);
+                snapshot = session.CurrentSnapshot;
+            });
+            var resultInfo = new EditExpenseResultInfo(editExpenseId, entityIds, snapshot.Version);
+            return (_resultDataFactory.Create(resultInfo), resultInfo);
+        }
+
+        private global::PropManagerSite.GraphQL.State.EditExpensePayloadData DeserializeNonNullableIEditExpense_EditExpense(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("EditExpensePayload", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::PropManagerSite.GraphQL.State.EditExpensePayloadData(typename, expense: UpdateIEditExpense_EditExpense_ExpenseEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expense"), entityIds));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::StrawberryShake.EntityId? UpdateIEditExpense_EditExpense_ExpenseEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.Property, entity.Deleted));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Guid DeserializeNonNullableGuid(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _uUIDParser.Parse(obj.Value.GetString()!);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpenseBuilder : global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IAddExpenseResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
+        private readonly global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddExpenseResult> _resultDataFactory;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
+        public AddExpenseBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddExpenseResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
+            _resultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
+            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
+            _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
+            _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
+            _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
+        }
+
+        public global::StrawberryShake.IOperationResult<IAddExpenseResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
+        {
+            (IAddExpenseResult Result, AddExpenseResultInfo Info)? data = null;
+            global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.IClientError>? errors = null;
+            if (response.Exception is null)
+            {
+                try
+                {
+                    if (response.Body != null)
+                    {
+                        if (response.Body.RootElement.TryGetProperty("data", out global::System.Text.Json.JsonElement dataElement) && dataElement.ValueKind == global::System.Text.Json.JsonValueKind.Object)
+                        {
+                            data = BuildData(dataElement);
+                        }
+
+                        if (response.Body.RootElement.TryGetProperty("errors", out global::System.Text.Json.JsonElement errorsElement))
+                        {
+                            errors = global::StrawberryShake.Json.JsonErrorParser.ParseErrors(errorsElement);
+                        }
+                    }
+                }
+                catch (global::System.Exception ex)
+                {
+                    errors = new global::StrawberryShake.IClientError[]{new global::StrawberryShake.ClientError(ex.Message, exception: ex, extensions: new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>{{"body", response.Body?.RootElement.ToString()}})};
+                }
+            }
+            else
+            {
+                if (response.Body != null && response.Body.RootElement.TryGetProperty("errors", out global::System.Text.Json.JsonElement errorsElement))
+                {
+                    errors = global::StrawberryShake.Json.JsonErrorParser.ParseErrors(errorsElement);
+                }
+                else
+                {
+                    errors = new global::StrawberryShake.IClientError[]{new global::StrawberryShake.ClientError(response.Exception.Message, exception: response.Exception, extensions: new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>{{"body", response.Body?.RootElement.ToString()}})};
+                }
+            }
+
+            return new global::StrawberryShake.OperationResult<IAddExpenseResult>(data?.Result, data?.Info, _resultDataFactory, errors);
+        }
+
+        private (IAddExpenseResult, AddExpenseResultInfo) BuildData(global::System.Text.Json.JsonElement obj)
+        {
+            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
+            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
+            global::PropManagerSite.GraphQL.State.AddExpensePayloadData addExpenseId = default !;
+            _entityStore.Update(session =>
+            {
+                addExpenseId = DeserializeNonNullableIAddExpense_AddExpense(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "addExpense"), entityIds);
+                snapshot = session.CurrentSnapshot;
+            });
+            var resultInfo = new AddExpenseResultInfo(addExpenseId, entityIds, snapshot.Version);
+            return (_resultDataFactory.Create(resultInfo), resultInfo);
+        }
+
+        private global::PropManagerSite.GraphQL.State.AddExpensePayloadData DeserializeNonNullableIAddExpense_AddExpense(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("AddExpensePayload", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::PropManagerSite.GraphQL.State.AddExpensePayloadData(typename, expense: UpdateIAddExpense_AddExpense_ExpenseEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expense"), entityIds));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::StrawberryShake.EntityId? UpdateIAddExpense_AddExpense_ExpenseEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.Property, entity.Deleted));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Guid DeserializeNonNullableGuid(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _uUIDParser.Parse(obj.Value.GetString()!);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpenseBuilder : global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IDeleteExpenseResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
+        private readonly global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IDeleteExpenseResult> _resultDataFactory;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Boolean, global::System.Boolean> _booleanParser;
+        public DeleteExpenseBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IDeleteExpenseResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
+            _resultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
+            _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
+            _booleanParser = serializerResolver.GetLeafValueParser<global::System.Boolean, global::System.Boolean>("Boolean") ?? throw new global::System.ArgumentException("No serializer for type `Boolean` found.");
+        }
+
+        public global::StrawberryShake.IOperationResult<IDeleteExpenseResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
+        {
+            (IDeleteExpenseResult Result, DeleteExpenseResultInfo Info)? data = null;
+            global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.IClientError>? errors = null;
+            if (response.Exception is null)
+            {
+                try
+                {
+                    if (response.Body != null)
+                    {
+                        if (response.Body.RootElement.TryGetProperty("data", out global::System.Text.Json.JsonElement dataElement) && dataElement.ValueKind == global::System.Text.Json.JsonValueKind.Object)
+                        {
+                            data = BuildData(dataElement);
+                        }
+
+                        if (response.Body.RootElement.TryGetProperty("errors", out global::System.Text.Json.JsonElement errorsElement))
+                        {
+                            errors = global::StrawberryShake.Json.JsonErrorParser.ParseErrors(errorsElement);
+                        }
+                    }
+                }
+                catch (global::System.Exception ex)
+                {
+                    errors = new global::StrawberryShake.IClientError[]{new global::StrawberryShake.ClientError(ex.Message, exception: ex, extensions: new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>{{"body", response.Body?.RootElement.ToString()}})};
+                }
+            }
+            else
+            {
+                if (response.Body != null && response.Body.RootElement.TryGetProperty("errors", out global::System.Text.Json.JsonElement errorsElement))
+                {
+                    errors = global::StrawberryShake.Json.JsonErrorParser.ParseErrors(errorsElement);
+                }
+                else
+                {
+                    errors = new global::StrawberryShake.IClientError[]{new global::StrawberryShake.ClientError(response.Exception.Message, exception: response.Exception, extensions: new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>{{"body", response.Body?.RootElement.ToString()}})};
+                }
+            }
+
+            return new global::StrawberryShake.OperationResult<IDeleteExpenseResult>(data?.Result, data?.Info, _resultDataFactory, errors);
+        }
+
+        private (IDeleteExpenseResult, DeleteExpenseResultInfo) BuildData(global::System.Text.Json.JsonElement obj)
+        {
+            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
+            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
+            _entityStore.Update(session =>
+            {
+                snapshot = session.CurrentSnapshot;
+            });
+            var resultInfo = new DeleteExpenseResultInfo(DeserializeNonNullableIDeleteExpense_DeleteExpense(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleteExpense")), entityIds, snapshot.Version);
+            return (_resultDataFactory.Create(resultInfo), resultInfo);
+        }
+
+        private global::PropManagerSite.GraphQL.State.DeleteExpensePayloadData DeserializeNonNullableIDeleteExpense_DeleteExpense(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("DeleteExpensePayload", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::PropManagerSite.GraphQL.State.DeleteExpensePayloadData(typename, boolean: DeserializeBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "boolean")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Boolean? DeserializeBoolean(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            return _booleanParser.Parse(obj.Value.GetBoolean()!);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class AddLoanBuilder : global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IAddLoanResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -6719,6 +10864,7 @@ namespace PropManagerSite.GraphQL.State
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
         public AddLoanBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddLoanResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
@@ -6729,6 +10875,7 @@ namespace PropManagerSite.GraphQL.State
             _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
             _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
             _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
+            _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
             _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
         }
 
@@ -6816,11 +10963,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.LoanEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years, entity.Property));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years, entity.DateOfLoan, entity.Property));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !));
                 }
 
                 return entityId;
@@ -6851,6 +10998,7 @@ namespace PropManagerSite.GraphQL.State
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
         public EddLoanBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IEddLoanResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
@@ -6861,6 +11009,7 @@ namespace PropManagerSite.GraphQL.State
             _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
             _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
             _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
+            _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
         }
 
         public global::StrawberryShake.IOperationResult<IEddLoanResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
@@ -6947,11 +11096,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.LoanEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years, entity.Property));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.LenderName, entity.Amount, entity.Interest, entity.LMI, entity.LoanType, entity.Years, entity.DateOfLoan, entity.Property));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !));
                 }
 
                 return entityId;
@@ -7173,11 +11322,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans, entity.Expenses));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
                 }
 
                 return entityId;
@@ -7209,6 +11358,8 @@ namespace PropManagerSite.GraphQL.State
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Boolean, global::System.Boolean> _booleanParser;
         public EditPropertyBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IEditPropertyResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
@@ -7220,6 +11371,8 @@ namespace PropManagerSite.GraphQL.State
             _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
             _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
             _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
+            _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
+            _booleanParser = serializerResolver.GetLeafValueParser<global::System.Boolean, global::System.Boolean>("Boolean") ?? throw new global::System.ArgumentException("No serializer for type `Boolean` found.");
         }
 
         public global::StrawberryShake.IOperationResult<IEditPropertyResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
@@ -7306,11 +11459,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "purchasePrice")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "registrationTransferFee")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landSize")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), DeserializeNonNullablePropertyTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyType")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "stampDuty")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), UpdateNonNullableIEditProperty_EditProperty_Property_LoansEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loans"), entityIds)));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "purchasePrice")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "registrationTransferFee")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landSize")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), DeserializeNonNullablePropertyTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyType")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "stampDuty")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), UpdateNonNullableIEditProperty_EditProperty_Property_LoansEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loans"), entityIds), UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenses"), entityIds)));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "purchasePrice")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "registrationTransferFee")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landSize")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), DeserializeNonNullablePropertyTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyType")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "stampDuty")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), UpdateNonNullableIEditProperty_EditProperty_Property_LoansEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loans"), entityIds)));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "purchasePrice")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "registrationTransferFee")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landSize")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), DeserializeNonNullablePropertyTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyType")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "stampDuty")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), UpdateNonNullableIEditProperty_EditProperty_Property_LoansEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loans"), entityIds), UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenses"), entityIds)));
                 }
 
                 return entityId;
@@ -7398,11 +11551,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.LoanEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), entity.Property));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateOfLoan")), UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds)));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateOfLoan")), UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds)));
                 }
 
                 return entityId;
@@ -7429,6 +11582,140 @@ namespace PropManagerSite.GraphQL.State
             }
 
             return _intParser.Parse(obj.Value.GetInt32()!);
+        }
+
+        private global::System.DateTimeOffset? DeserializeDateTimeOffset(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            return _dateTimeParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans, entity.Expenses));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntityNonNullableArray(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var expenses = new global::System.Collections.Generic.List<global::StrawberryShake.EntityId>();
+            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
+            {
+                expenses.Add(UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntity(session, child, entityIds));
+            }
+
+            return expenses;
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Decimal DeserializeNonNullableDecimal(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _decimalParser.Parse(obj.Value.GetDecimal()!);
+        }
+
+        private global::System.DateTimeOffset DeserializeNonNullableDateTimeOffset(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _dateTimeParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans, entity.Expenses));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _booleanParser.Parse(obj.Value.GetBoolean()!);
         }
     }
 
@@ -7632,11 +11919,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), entity.PurchasePrice, entity.RegistrationTransferFee, DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), entity.LandSize, DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), entity.PropertyType, entity.StampDuty, DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), entity.Loans));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), entity.PurchasePrice, entity.RegistrationTransferFee, DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), entity.LandSize, DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), entity.PropertyType, entity.StampDuty, DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), entity.Loans, entity.Expenses));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), default !, default !, DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), default !, DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), default !, default !, DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), default !, default !, DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), default !, DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), default !, default !, DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), default !, default !));
                 }
 
                 return entityId;
@@ -7698,6 +11985,8 @@ namespace PropManagerSite.GraphQL.State
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Boolean, global::System.Boolean> _booleanParser;
         public GetPropertyBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IGetPropertyResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
@@ -7709,6 +11998,8 @@ namespace PropManagerSite.GraphQL.State
             _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
             _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
             _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
+            _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
+            _booleanParser = serializerResolver.GetLeafValueParser<global::System.Boolean, global::System.Boolean>("Boolean") ?? throw new global::System.ArgumentException("No serializer for type `Boolean` found.");
         }
 
         public global::StrawberryShake.IOperationResult<IGetPropertyResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
@@ -7795,11 +12086,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "purchasePrice")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "registrationTransferFee")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landSize")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), DeserializeNonNullablePropertyTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyType")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "stampDuty")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), UpdateNonNullableIEditProperty_EditProperty_Property_LoansEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loans"), entityIds)));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "purchasePrice")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "registrationTransferFee")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landSize")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), DeserializeNonNullablePropertyTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyType")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "stampDuty")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), UpdateNonNullableIEditProperty_EditProperty_Property_LoansEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loans"), entityIds), UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenses"), entityIds)));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "purchasePrice")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "registrationTransferFee")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landSize")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), DeserializeNonNullablePropertyTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyType")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "stampDuty")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), UpdateNonNullableIEditProperty_EditProperty_Property_LoansEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loans"), entityIds)));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "purchasePrice")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "registrationTransferFee")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "rooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "bathrooms")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landSize")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")), DeserializeNonNullablePropertyTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyType")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "stampDuty")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "carpark")), UpdateNonNullableIEditProperty_EditProperty_Property_LoansEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loans"), entityIds), UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenses"), entityIds)));
                 }
 
                 return entityId;
@@ -7887,11 +12178,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.LoanEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), entity.Property));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateOfLoan")), UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds)));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateOfLoan")), UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds)));
                 }
 
                 return entityId;
@@ -7919,6 +12210,140 @@ namespace PropManagerSite.GraphQL.State
 
             return _intParser.Parse(obj.Value.GetInt32()!);
         }
+
+        private global::System.DateTimeOffset? DeserializeDateTimeOffset(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            return _dateTimeParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans, entity.Expenses));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntityNonNullableArray(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var expenses = new global::System.Collections.Generic.List<global::StrawberryShake.EntityId>();
+            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
+            {
+                expenses.Add(UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntity(session, child, entityIds));
+            }
+
+            return expenses;
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_ExpensesEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Decimal DeserializeNonNullableDecimal(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _decimalParser.Parse(obj.Value.GetDecimal()!);
+        }
+
+        private global::System.DateTimeOffset DeserializeNonNullableDateTimeOffset(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _dateTimeParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans, entity.Expenses));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _booleanParser.Parse(obj.Value.GetBoolean()!);
+        }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
@@ -7932,6 +12357,7 @@ namespace PropManagerSite.GraphQL.State
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
         public GetLoanBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IGetLoanResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
@@ -7942,6 +12368,7 @@ namespace PropManagerSite.GraphQL.State
             _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
             _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
             _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
+            _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
         }
 
         public global::StrawberryShake.IOperationResult<IGetLoanResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
@@ -8028,11 +12455,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.LoanEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), UpdateNonNullableIGetLoan_Loans_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds)));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateOfLoan")), UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds)));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), UpdateNonNullableIGetLoan_Loans_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds)));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.LoanEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lenderName")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amount")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "interest")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lMI")), DeserializeNonNullableLoanTypes(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loanType")), DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "years")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateOfLoan")), UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds)));
                 }
 
                 return entityId;
@@ -8091,7 +12518,17 @@ namespace PropManagerSite.GraphQL.State
             return _intParser.Parse(obj.Value.GetInt32()!);
         }
 
-        private global::StrawberryShake.EntityId UpdateNonNullableIGetLoan_Loans_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        private global::System.DateTimeOffset? DeserializeDateTimeOffset(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            return _dateTimeParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Loans_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
         {
             if (!obj.HasValue)
             {
@@ -8104,11 +12541,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans, entity.Expenses));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
                 }
 
                 return entityId;
@@ -8126,6 +12563,265 @@ namespace PropManagerSite.GraphQL.State
 
             return _stringParser.Parse(obj.Value.GetString()!);
         }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class GetExpenseBuilder : global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::PropManagerSite.GraphQL.IGetExpenseResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
+        private readonly global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IGetExpenseResult> _resultDataFactory;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Boolean, global::System.Boolean> _booleanParser;
+        public GetExpenseBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IGetExpenseResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
+            _resultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
+            _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
+            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
+            _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
+            _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
+            _booleanParser = serializerResolver.GetLeafValueParser<global::System.Boolean, global::System.Boolean>("Boolean") ?? throw new global::System.ArgumentException("No serializer for type `Boolean` found.");
+        }
+
+        public global::StrawberryShake.IOperationResult<IGetExpenseResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
+        {
+            (IGetExpenseResult Result, GetExpenseResultInfo Info)? data = null;
+            global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.IClientError>? errors = null;
+            if (response.Exception is null)
+            {
+                try
+                {
+                    if (response.Body != null)
+                    {
+                        if (response.Body.RootElement.TryGetProperty("data", out global::System.Text.Json.JsonElement dataElement) && dataElement.ValueKind == global::System.Text.Json.JsonValueKind.Object)
+                        {
+                            data = BuildData(dataElement);
+                        }
+
+                        if (response.Body.RootElement.TryGetProperty("errors", out global::System.Text.Json.JsonElement errorsElement))
+                        {
+                            errors = global::StrawberryShake.Json.JsonErrorParser.ParseErrors(errorsElement);
+                        }
+                    }
+                }
+                catch (global::System.Exception ex)
+                {
+                    errors = new global::StrawberryShake.IClientError[]{new global::StrawberryShake.ClientError(ex.Message, exception: ex, extensions: new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>{{"body", response.Body?.RootElement.ToString()}})};
+                }
+            }
+            else
+            {
+                if (response.Body != null && response.Body.RootElement.TryGetProperty("errors", out global::System.Text.Json.JsonElement errorsElement))
+                {
+                    errors = global::StrawberryShake.Json.JsonErrorParser.ParseErrors(errorsElement);
+                }
+                else
+                {
+                    errors = new global::StrawberryShake.IClientError[]{new global::StrawberryShake.ClientError(response.Exception.Message, exception: response.Exception, extensions: new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>{{"body", response.Body?.RootElement.ToString()}})};
+                }
+            }
+
+            return new global::StrawberryShake.OperationResult<IGetExpenseResult>(data?.Result, data?.Info, _resultDataFactory, errors);
+        }
+
+        private (IGetExpenseResult, GetExpenseResultInfo) BuildData(global::System.Text.Json.JsonElement obj)
+        {
+            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
+            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
+            global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> expensesId = default !;
+            _entityStore.Update(session =>
+            {
+                expensesId = UpdateNonNullableIGetExpense_ExpensesEntityNonNullableArray(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenses"), entityIds);
+                snapshot = session.CurrentSnapshot;
+            });
+            var resultInfo = new GetExpenseResultInfo(expensesId, entityIds, snapshot.Version);
+            return (_resultDataFactory.Create(resultInfo), resultInfo);
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::StrawberryShake.EntityId> UpdateNonNullableIGetExpense_ExpensesEntityNonNullableArray(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var expenses = new global::System.Collections.Generic.List<global::StrawberryShake.EntityId>();
+            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
+            {
+                expenses.Add(UpdateNonNullableIGetExpense_ExpensesEntity(session, child, entityIds));
+            }
+
+            return expenses;
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIGetExpense_ExpensesEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Expense", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Guid DeserializeNonNullableGuid(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _uUIDParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::System.String DeserializeNonNullableString(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _stringParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::System.String? DeserializeString(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            return _stringParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::System.Decimal? DeserializeDecimal(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            return _decimalParser.Parse(obj.Value.GetDecimal()!);
+        }
+
+        private global::System.Decimal DeserializeNonNullableDecimal(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _decimalParser.Parse(obj.Value.GetDecimal()!);
+        }
+
+        private global::System.DateTimeOffset DeserializeNonNullableDateTimeOffset(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _dateTimeParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            global::StrawberryShake.EntityId entityId = _idSerializer.Parse(obj.Value);
+            entityIds.Add(entityId);
+            if (entityId.Name.Equals("Property", global::System.StringComparison.Ordinal))
+            {
+                if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.PropertyEntity? entity))
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Name, entity.PurchasePrice, entity.RegistrationTransferFee, entity.Rooms, entity.Bathrooms, entity.LandSize, entity.Address, entity.PropertyType, entity.StampDuty, entity.Carpark, entity.Loans, entity.Expenses));
+                }
+                else
+                {
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.PropertyEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
+                }
+
+                return entityId;
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _booleanParser.Parse(obj.Value.GetBoolean()!);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class EditExpensePayloadData
+    {
+        public EditExpensePayloadData(global::System.String __typename, global::StrawberryShake.EntityId? expense = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Expense = expense;
+        }
+
+        public global::System.String __typename { get; }
+
+        public global::StrawberryShake.EntityId? Expense { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class AddExpensePayloadData
+    {
+        public AddExpensePayloadData(global::System.String __typename, global::StrawberryShake.EntityId? expense = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Expense = expense;
+        }
+
+        public global::System.String __typename { get; }
+
+        public global::StrawberryShake.EntityId? Expense { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
+    public partial class DeleteExpensePayloadData
+    {
+        public DeleteExpensePayloadData(global::System.String __typename, global::System.Boolean? boolean = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Boolean = boolean;
+        }
+
+        public global::System.String __typename { get; }
+
+        public global::System.Boolean? Boolean { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
@@ -8222,6 +12918,7 @@ namespace PropManagerSite.GraphQL.State
             global::System.String __typename = obj.GetProperty("__typename").GetString()!;
             return __typename switch
             {
+                "Expense" => ParseExpenseEntityId(obj, __typename),
                 "Loan" => ParseLoanEntityId(obj, __typename),
                 "Property" => ParsePropertyEntityId(obj, __typename),
                 _ => throw new global::System.NotSupportedException()};
@@ -8231,9 +12928,27 @@ namespace PropManagerSite.GraphQL.State
         {
             return entityId.Name switch
             {
+                "Expense" => FormatExpenseEntityId(entityId),
                 "Loan" => FormatLoanEntityId(entityId),
                 "Property" => FormatPropertyEntityId(entityId),
                 _ => throw new global::System.NotSupportedException()};
+        }
+
+        private global::StrawberryShake.EntityId ParseExpenseEntityId(global::System.Text.Json.JsonElement obj, global::System.String type)
+        {
+            return new global::StrawberryShake.EntityId(type, obj.GetProperty("id").GetString()!);
+        }
+
+        private global::System.String FormatExpenseEntityId(global::StrawberryShake.EntityId entityId)
+        {
+            using var writer = new global::StrawberryShake.Internal.ArrayWriter();
+            using var jsonWriter = new global::System.Text.Json.Utf8JsonWriter(writer, _options);
+            jsonWriter.WriteStartObject();
+            jsonWriter.WriteString("__typename", entityId.Name);
+            jsonWriter.WriteString("id", (global::System.String)entityId.Value);
+            jsonWriter.WriteEndObject();
+            jsonWriter.Flush();
+            return global::System.Text.Encoding.UTF8.GetString(writer.GetInternalBuffer(), 0, writer.Length);
         }
 
         private global::StrawberryShake.EntityId ParseLoanEntityId(global::System.Text.Json.JsonElement obj, global::System.String type)

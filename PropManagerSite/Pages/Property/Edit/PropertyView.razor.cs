@@ -13,11 +13,7 @@ namespace PropManagerSite.Pages.Property.Edit
 
         [Parameter]
         public string Tab { get; set; }
-
-
-        [Inject]
-        PropManagerSiteQL PropManagerSiteQL { get; set; } = default!;
-
+              
         public IPropertyDetails PropertyDetails { get; set; } = default!;
 
         protected int SelectedTab = 0;
@@ -29,6 +25,11 @@ namespace PropManagerSite.Pages.Property.Edit
             {
                 switch (Tab)
                 {
+                    case "expenses":
+                        {
+                            SelectedTab = 2;
+                            break;
+                        }
                     case "loans":
                         {
                             SelectedTab = 1;

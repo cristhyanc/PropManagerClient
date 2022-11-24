@@ -8,13 +8,6 @@ namespace PropManagerSite.Pages
 {
     public  class PropertiesBase: PropComponentBase
     {
-        [Inject]
-        PropManagerSiteQL PropManagerSiteQL { get; set; } = default!;
-
-        [Inject]
-        NavigationManager NavManager { get; set; } = default!;
-
-        
         public List<IGetProperties_Properties> Properties { get; set; } = new List<IGetProperties_Properties>();
 
         protected override async Task OnInitializedAsync()

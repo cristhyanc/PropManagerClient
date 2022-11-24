@@ -4,38 +4,40 @@ using PropManagerSite.GraphQL;
 using PropManagerSite.Shared;
 using PropManagerSite.Shared.Notification;
 
-namespace PropManagerSite.Pages.Property.Edit.Loan
+namespace PropManagerSite.Pages.Property.Edit.Expense
 {
-    public class LoansBase: PropComponentBase
-    {       
+    public class ExpensesBase: PropComponentBase
+    {
+
         [Parameter]
         public IPropertyDetails? PropertyDetails { get; set; }
-               
+              
+
         [Parameter]
-        public EventCallback OnLoanDeleted { get; set; }
+        public EventCallback OnExpenseDeleted { get; set; }
 
-        protected void NewLoan()
+        protected void NewExpense()
         {
-            this.NavManager.NavigateTo($"property/{this.PropertyDetails!.Id}/loan/new");
-            
+            this.NavManager.NavigateTo($"property/{this.PropertyDetails!.Id}/expense/new");
+
         }
 
-        protected void EditLoan(IEditProperty_EditProperty_Property_Loans loan)
+        protected void EditExpense(IEditProperty_EditProperty_Property_Expenses_Expense expense)
         {
-            this.NavManager.NavigateTo($"property/{this.PropertyDetails!.Id}/loan/{loan.Id}");
+            this.NavManager.NavigateTo($"property/{this.PropertyDetails!.Id}/expense/{expense.Id}");
         }
 
-        protected async Task DeleteLoan(IEditProperty_EditProperty_Property_Loans loan)
+        protected async Task DeleteExpense(IEditProperty_EditProperty_Property_Expenses_Expense expense)
         {
             this.IsBusy = true;
             try
             {
-                var result = await PropManagerSiteQL.DeleteLoan.ExecuteAsync(new() { Id = loan.Id });
+                var result = await PropManagerSiteQL.DeleteExpense.ExecuteAsync(new() { Id = expense.Id });
 
                 if (result.Errors.IsNullOrEmpty())
                 {
                     await NotificationsService.ToastSuccess("Deleted!");
-                    await this.OnLoanDeleted.InvokeAsync();
+                    await this.OnExpenseDeleted.InvokeAsync();
                 }
                 else
                 {

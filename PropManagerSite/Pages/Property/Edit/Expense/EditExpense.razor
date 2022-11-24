@@ -1,0 +1,56 @@
+﻿@page "/property/{PropertyId}/expense/{ExpenseId}"
+@inherits EditExpenseBase
+
+
+<EditForm Model="ExpenseModel" OnValidSubmit="Save">
+    <DataAnnotationsValidator />
+
+    <div class="flex flex-col gap-1">
+
+        <h1 class="font-bold text-lg">Edit Expense</h1>
+        @if (@IsBusy)
+        {
+            <SfProgressBar Type="ProgressType.Circular" Value="20" Height="60" IsIndeterminate="true" Minimum="0" Maximum="100">
+                <ProgressBarAnimation Enable="true"></ProgressBarAnimation>
+            </SfProgressBar>
+        }
+        else
+        {
+            <div class="flex flex-row gap-5">
+                <div class="w-full">
+                    <SfTextBox CssClass="!h-11" Placeholder="Title" @bind-Value="@ExpenseModel.Title"
+                           FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+                    <ValidationMessage For="() => ExpenseModel.Title" />
+                </div>
+
+                <SfTextBox CssClass="!h-11" Placeholder="Description" @bind-Value="@ExpenseModel.Description"
+                       FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+            </div>
+
+            <div class="flex flex-row gap-5 items-center">
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal" @bind-Value="@ExpenseModel.TotalDeductable" Placeholder="TotalDeductable" FloatLabelType="@FloatLabelType.Auto" Format="###.##"></SfNumericTextBox>
+                <SfNumericTextBox CssClass="!h-11" TValue="decimal?" @bind-Value="@ExpenseModel.Price" Placeholder="Price" FloatLabelType="@FloatLabelType.Auto" Format="C2"></SfNumericTextBox>
+            </div>
+
+            <div class="flex flex-row gap-5 ">
+
+                <div>
+                    <SfDatePicker TValue="DateTimeOffset?" @bind-Value="@ExpenseModel.ExpenseDate" Placeholder="Date" FloatLabelType="@FloatLabelType.Auto" ShowClearButton="true"></SfDatePicker>
+                    <ValidationMessage For="() => ExpenseModel.ExpenseDate" />
+                </div>
+
+                <div class="flex flex-row justify-end gap-2 h-8 mt-6 w-full">
+                    <SfButton @onclick="Cancel" CssClass="e-danger">Cancel</SfButton>
+                    <SfButton CssClass="e-primary">Save</SfButton>
+
+                </div>
+            </div>
+
+        }
+    </div>
+</EditForm>
+<style>
+    .e-control-container {
+        height: 45px !important
+    }
+</style>

@@ -10,17 +10,10 @@ namespace PropManagerSite.Pages.Property
 {
     public class CreatePropertyBase : PropComponentBase
     {
-        [Inject]
-        PropManagerSiteQL PropManagerSiteQL { get; set; } = default!;
-
         protected CreatePropertyModel addPropertyModel = new();
 
-        [Inject]
-        NavigationManager NavManager { get; set; } = default!;
-
         public string[] EnumValues = Enum.GetNames(typeof(PropertyTypes));
-        
-      
+              
         protected void Cancel()
         {
             this.NavManager.NavigateTo("properties");

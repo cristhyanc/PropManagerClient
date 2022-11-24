@@ -19,13 +19,7 @@ namespace PropManagerSite.Pages.Property.Edit.Loan
 
         protected EditCreateLoan editLoanForm = new();
 
-        protected IGetLoan_Loans? loanDetails;
-
-        [Inject]
-        PropManagerSiteQL PropManagerSiteQL { get; set; } = default!;
-
-        [Inject]
-        NavigationManager NavManager { get; set; } = default!;
+        protected IGetLoan_Loans? loanDetails;       
 
         protected List<TypeItem> EnumValues = new() { (new TypeItem("Interest Only", LoanTypes.InterestOnly)), (new TypeItem("Principal And Interest", LoanTypes.PrincipalAndInterest)) };
 
@@ -49,6 +43,7 @@ namespace PropManagerSite.Pages.Property.Edit.Loan
                             editLoanForm.LMI = loanDetails.LMI;
                             editLoanForm.LoanType = loanDetails.LoanType;
                             editLoanForm.Years = loanDetails.Years;
+                            editLoanForm.DateOfLoan = loanDetails.DateOfLoan;
 
                         }
                         
@@ -84,6 +79,8 @@ namespace PropManagerSite.Pages.Property.Edit.Loan
                     LMI = editLoanForm.LMI,
                     LoanType = editLoanForm.LoanType,
                     Years = editLoanForm.Years,
+                    DateOfLoan=editLoanForm.DateOfLoan
+                    
                 };
 
                 var result = await PropManagerSiteQL.EddLoan.ExecuteAsync(input);
@@ -126,6 +123,7 @@ namespace PropManagerSite.Pages.Property.Edit.Loan
         public LoanTypes LoanType { get; set; }
         public decimal? LMI { get; set; }
         public int? Years { get; set; }
+        public DateTimeOffset? DateOfLoan { get; set; }
 
     }
 }

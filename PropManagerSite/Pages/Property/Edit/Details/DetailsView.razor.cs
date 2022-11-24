@@ -8,11 +8,7 @@ using Syncfusion.Blazor.Notifications;
 namespace PropManagerSite.Pages.Property.Edit.Details
 {
     public class DetailsViewBase: PropComponentBase
-    {
-        [Inject]
-        PropManagerSiteQL PropManagerSiteQL { get; set; } = default!;
-
-        
+    {              
         public EditPropertyInput formEditInput = new();
 
         [Parameter]
@@ -21,13 +17,8 @@ namespace PropManagerSite.Pages.Property.Edit.Details
         [Parameter]
         public EventCallback<IPropertyDetails> OnPropertySaved { get; set; }
 
-
         public string[] EnumValues = Enum.GetNames(typeof(PropertyTypes));
-
-        [Inject]
-        NavigationManager NavManager { get; set; } = default!;
-
-
+      
         protected override void OnParametersSet()
         {
             if(PropertyDetails is not null)

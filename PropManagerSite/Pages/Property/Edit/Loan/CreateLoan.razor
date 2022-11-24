@@ -36,12 +36,17 @@
                 <SfNumericTextBox CssClass="!h-11" TValue="decimal?" Placeholder="LMI" @bind-Value="@addCreateLoan.LMI" FloatLabelType="@FloatLabelType.Auto"></SfNumericTextBox>
             </div>
 
+            <div class="flex flex-row gap-5">
 
-            <div class="flex flex-row justify-end gap-2 mt-4">
-                <SfButton @onclick="Cancel" CssClass="e-danger">Cancel</SfButton>
-                <SfButton CssClass="e-primary">Save</SfButton>
+                <SfDatePicker    TValue="DateTimeOffset?" @bind-Value="@addCreateLoan.DateOfLoan" Placeholder="Date of Loan" FloatLabelType="@FloatLabelType.Auto" ShowClearButton="true"></SfDatePicker>
 
+                <div class="flex flex-row justify-end gap-2 h-8 mt-6 w-full">
+                    <SfButton @onclick="Cancel" CssClass="e-danger">Cancel</SfButton>
+                    <SfButton CssClass="e-primary">Save</SfButton>
+
+                </div>
             </div>
+            
         }
     </div>
 </EditForm>

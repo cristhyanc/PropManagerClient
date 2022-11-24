@@ -26,21 +26,49 @@ query GetLoan($loanId:UUID)
 {
     loans(where:{id: { eq: $loanId}})
     { 
+       ...loan   
+    }
+}
+
+query GetExpense($expenseId:UUID)
+{
+    expenses(where:{id: { eq: $expenseId}})
+    { 
+       ...expense   
+    }
+}
+
+fragment expense on Expense
+{
         id
+        title
+        description
+        price
+        totalDeductable
+        propertyId
+        expenseDate
+        property {
+          id
+        }
+        deleted
+}
+
+fragment loan on Loan
+{
+            id
           lenderName
           amount
           interest      
           lMI
           loanType
           years
+          dateOfLoan
           property
           {
             id
             name
           }
-    }
 }
-
 
 fragment propertyDetails on Property {
     id
@@ -54,14 +82,13 @@ fragment propertyDetails on Property {
     propertyType
     stampDuty
     carpark
-    loans{
-        id
-          lenderName
-          amount
-          interest      
-          lMI
-          loanType
-          years
+    loans
+    {
+      ...loan
+    }
+    expenses
+    {
+        ...expense    
     }
 }
 
