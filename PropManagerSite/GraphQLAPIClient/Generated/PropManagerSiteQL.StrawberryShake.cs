@@ -1965,7 +1965,7 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class EditProperty_EditProperty_Property_Expenses_Expense : global::System.IEquatable<EditProperty_EditProperty_Property_Expenses_Expense>, IEditProperty_EditProperty_Property_Expenses_Expense
     {
-        public EditProperty_EditProperty_Property_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
+        public EditProperty_EditProperty_Property_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::System.DateTimeOffset? dueDate, global::System.String? companyName, global::System.String? reference, global::System.Boolean paid, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
         {
             Id = id;
             Title = title;
@@ -1974,6 +1974,10 @@ namespace PropManagerSite.GraphQL
             TotalDeductable = totalDeductable;
             PropertyId = propertyId;
             ExpenseDate = expenseDate;
+            DueDate = dueDate;
+            CompanyName = companyName;
+            Reference = reference;
+            Paid = paid;
             Property = property;
             Deleted = deleted;
         }
@@ -1991,6 +1995,14 @@ namespace PropManagerSite.GraphQL
         public global::System.Guid PropertyId { get; }
 
         public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::System.DateTimeOffset? DueDate { get; }
+
+        public global::System.String? CompanyName { get; }
+
+        public global::System.String? Reference { get; }
+
+        public global::System.Boolean Paid { get; }
 
         public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property Property { get; }
 
@@ -2013,7 +2025,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && Property.Equals(other.Property) && Deleted == other.Deleted;
+            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && ((DueDate is null && other.DueDate is null) || DueDate != null && DueDate.Equals(other.DueDate)) && ((CompanyName is null && other.CompanyName is null) || CompanyName != null && CompanyName.Equals(other.CompanyName)) && ((Reference is null && other.Reference is null) || Reference != null && Reference.Equals(other.Reference)) && Paid == other.Paid && Property.Equals(other.Property) && Deleted == other.Deleted;
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -2056,6 +2068,22 @@ namespace PropManagerSite.GraphQL
                 hash ^= 397 * TotalDeductable.GetHashCode();
                 hash ^= 397 * PropertyId.GetHashCode();
                 hash ^= 397 * ExpenseDate.GetHashCode();
+                if (DueDate != null)
+                {
+                    hash ^= 397 * DueDate.GetHashCode();
+                }
+
+                if (CompanyName != null)
+                {
+                    hash ^= 397 * CompanyName.GetHashCode();
+                }
+
+                if (Reference != null)
+                {
+                    hash ^= 397 * Reference.GetHashCode();
+                }
+
+                hash ^= 397 * Paid.GetHashCode();
                 hash ^= 397 * Property.GetHashCode();
                 hash ^= 397 * Deleted.GetHashCode();
                 return hash;
@@ -2298,6 +2326,14 @@ namespace PropManagerSite.GraphQL
         public global::System.Guid PropertyId { get; }
 
         public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::System.DateTimeOffset? DueDate { get; }
+
+        public global::System.String? CompanyName { get; }
+
+        public global::System.String? Reference { get; }
+
+        public global::System.Boolean Paid { get; }
 
         public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property Property { get; }
 
@@ -3005,7 +3041,7 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class GetProperty_Properties_Expenses_Expense : global::System.IEquatable<GetProperty_Properties_Expenses_Expense>, IGetProperty_Properties_Expenses_Expense
     {
-        public GetProperty_Properties_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
+        public GetProperty_Properties_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::System.DateTimeOffset? dueDate, global::System.String? companyName, global::System.String? reference, global::System.Boolean paid, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
         {
             Id = id;
             Title = title;
@@ -3014,6 +3050,10 @@ namespace PropManagerSite.GraphQL
             TotalDeductable = totalDeductable;
             PropertyId = propertyId;
             ExpenseDate = expenseDate;
+            DueDate = dueDate;
+            CompanyName = companyName;
+            Reference = reference;
+            Paid = paid;
             Property = property;
             Deleted = deleted;
         }
@@ -3031,6 +3071,14 @@ namespace PropManagerSite.GraphQL
         public global::System.Guid PropertyId { get; }
 
         public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::System.DateTimeOffset? DueDate { get; }
+
+        public global::System.String? CompanyName { get; }
+
+        public global::System.String? Reference { get; }
+
+        public global::System.Boolean Paid { get; }
 
         public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property Property { get; }
 
@@ -3053,7 +3101,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && Property.Equals(other.Property) && Deleted == other.Deleted;
+            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && ((DueDate is null && other.DueDate is null) || DueDate != null && DueDate.Equals(other.DueDate)) && ((CompanyName is null && other.CompanyName is null) || CompanyName != null && CompanyName.Equals(other.CompanyName)) && ((Reference is null && other.Reference is null) || Reference != null && Reference.Equals(other.Reference)) && Paid == other.Paid && Property.Equals(other.Property) && Deleted == other.Deleted;
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -3096,6 +3144,22 @@ namespace PropManagerSite.GraphQL
                 hash ^= 397 * TotalDeductable.GetHashCode();
                 hash ^= 397 * PropertyId.GetHashCode();
                 hash ^= 397 * ExpenseDate.GetHashCode();
+                if (DueDate != null)
+                {
+                    hash ^= 397 * DueDate.GetHashCode();
+                }
+
+                if (CompanyName != null)
+                {
+                    hash ^= 397 * CompanyName.GetHashCode();
+                }
+
+                if (Reference != null)
+                {
+                    hash ^= 397 * Reference.GetHashCode();
+                }
+
+                hash ^= 397 * Paid.GetHashCode();
                 hash ^= 397 * Property.GetHashCode();
                 hash ^= 397 * Deleted.GetHashCode();
                 return hash;
@@ -3637,7 +3701,7 @@ namespace PropManagerSite.GraphQL
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class GetExpense_Expenses_Expense : global::System.IEquatable<GetExpense_Expenses_Expense>, IGetExpense_Expenses_Expense
     {
-        public GetExpense_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
+        public GetExpense_Expenses_Expense(global::System.Guid id, global::System.String title, global::System.String? description, global::System.Decimal? price, global::System.Decimal totalDeductable, global::System.Guid propertyId, global::System.DateTimeOffset expenseDate, global::System.DateTimeOffset? dueDate, global::System.String? companyName, global::System.String? reference, global::System.Boolean paid, global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property property, global::System.Boolean deleted)
         {
             Id = id;
             Title = title;
@@ -3646,6 +3710,10 @@ namespace PropManagerSite.GraphQL
             TotalDeductable = totalDeductable;
             PropertyId = propertyId;
             ExpenseDate = expenseDate;
+            DueDate = dueDate;
+            CompanyName = companyName;
+            Reference = reference;
+            Paid = paid;
             Property = property;
             Deleted = deleted;
         }
@@ -3663,6 +3731,14 @@ namespace PropManagerSite.GraphQL
         public global::System.Guid PropertyId { get; }
 
         public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::System.DateTimeOffset? DueDate { get; }
+
+        public global::System.String? CompanyName { get; }
+
+        public global::System.String? Reference { get; }
+
+        public global::System.Boolean Paid { get; }
 
         public global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property Property { get; }
 
@@ -3685,7 +3761,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && Property.Equals(other.Property) && Deleted == other.Deleted;
+            return (Id.Equals(other.Id)) && Title.Equals(other.Title) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate) && ((DueDate is null && other.DueDate is null) || DueDate != null && DueDate.Equals(other.DueDate)) && ((CompanyName is null && other.CompanyName is null) || CompanyName != null && CompanyName.Equals(other.CompanyName)) && ((Reference is null && other.Reference is null) || Reference != null && Reference.Equals(other.Reference)) && Paid == other.Paid && Property.Equals(other.Property) && Deleted == other.Deleted;
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -3728,6 +3804,22 @@ namespace PropManagerSite.GraphQL
                 hash ^= 397 * TotalDeductable.GetHashCode();
                 hash ^= 397 * PropertyId.GetHashCode();
                 hash ^= 397 * ExpenseDate.GetHashCode();
+                if (DueDate != null)
+                {
+                    hash ^= 397 * DueDate.GetHashCode();
+                }
+
+                if (CompanyName != null)
+                {
+                    hash ^= 397 * CompanyName.GetHashCode();
+                }
+
+                if (Reference != null)
+                {
+                    hash ^= 397 * Reference.GetHashCode();
+                }
+
+                hash ^= 397 * Paid.GetHashCode();
                 hash ^= 397 * Property.GetHashCode();
                 hash ^= 397 * Deleted.GetHashCode();
                 return hash;
@@ -3828,15 +3920,17 @@ namespace PropManagerSite.GraphQL
     {
         private global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _decimalFormatter = default !;
-        private global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _dateTimeFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _booleanFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter = default !;
         public global::System.String TypeName => "EditExpenseInput";
         public void Initialize(global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _stringFormatter = serializerResolver.GetInputValueFormatter("String");
             _decimalFormatter = serializerResolver.GetInputValueFormatter("Decimal");
-            _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
             _dateTimeFormatter = serializerResolver.GetInputValueFormatter("DateTime");
+            _booleanFormatter = serializerResolver.GetInputValueFormatter("Boolean");
+            _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
         }
 
         public global::System.Object? Format(global::System.Object? runtimeValue)
@@ -3869,9 +3963,29 @@ namespace PropManagerSite.GraphQL
                 fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("price", FormatPrice(input.Price)));
             }
 
+            if (inputInfo.IsReferenceSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("reference", FormatReference(input.Reference)));
+            }
+
+            if (inputInfo.IsCompanyNameSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("companyName", FormatCompanyName(input.CompanyName)));
+            }
+
             if (inputInfo.IsTotalDeductableSet)
             {
                 fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("totalDeductable", FormatTotalDeductable(input.TotalDeductable)));
+            }
+
+            if (inputInfo.IsDueDateSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("dueDate", FormatDueDate(input.DueDate)));
+            }
+
+            if (inputInfo.IsPaidSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("paid", FormatPaid(input.Paid)));
             }
 
             if (inputInfo.IsIdSet)
@@ -3921,9 +4035,50 @@ namespace PropManagerSite.GraphQL
             }
         }
 
+        private global::System.Object? FormatReference(global::System.String? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _stringFormatter.Format(input);
+            }
+        }
+
+        private global::System.Object? FormatCompanyName(global::System.String? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _stringFormatter.Format(input);
+            }
+        }
+
         private global::System.Object? FormatTotalDeductable(global::System.Decimal input)
         {
             return _decimalFormatter.Format(input);
+        }
+
+        private global::System.Object? FormatDueDate(global::System.DateTimeOffset? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _dateTimeFormatter.Format(input);
+            }
+        }
+
+        private global::System.Object? FormatPaid(global::System.Boolean input)
+        {
+            return _booleanFormatter.Format(input);
         }
 
         private global::System.Object? FormatId(global::System.Guid input)
@@ -3977,7 +4132,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Title.Equals(other.Title)) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && Id.Equals(other.Id) && ExpenseDate.Equals(other.ExpenseDate);
+            return (Title.Equals(other.Title)) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && ((Reference is null && other.Reference is null) || Reference != null && Reference.Equals(other.Reference)) && ((CompanyName is null && other.CompanyName is null) || CompanyName != null && CompanyName.Equals(other.CompanyName)) && TotalDeductable == other.TotalDeductable && ((DueDate is null && other.DueDate is null) || DueDate != null && DueDate.Equals(other.DueDate)) && Paid == other.Paid && Id.Equals(other.Id) && ExpenseDate.Equals(other.ExpenseDate);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -3996,7 +4151,23 @@ namespace PropManagerSite.GraphQL
                     hash ^= 397 * Price.GetHashCode();
                 }
 
+                if (Reference != null)
+                {
+                    hash ^= 397 * Reference.GetHashCode();
+                }
+
+                if (CompanyName != null)
+                {
+                    hash ^= 397 * CompanyName.GetHashCode();
+                }
+
                 hash ^= 397 * TotalDeductable.GetHashCode();
+                if (DueDate != null)
+                {
+                    hash ^= 397 * DueDate.GetHashCode();
+                }
+
+                hash ^= 397 * Paid.GetHashCode();
                 hash ^= 397 * Id.GetHashCode();
                 hash ^= 397 * ExpenseDate.GetHashCode();
                 return hash;
@@ -4009,8 +4180,16 @@ namespace PropManagerSite.GraphQL
         private global::System.Boolean _set_description;
         private global::System.Decimal? _value_price;
         private global::System.Boolean _set_price;
+        private global::System.String? _value_reference;
+        private global::System.Boolean _set_reference;
+        private global::System.String? _value_companyName;
+        private global::System.Boolean _set_companyName;
         private global::System.Decimal _value_totalDeductable;
         private global::System.Boolean _set_totalDeductable;
+        private global::System.DateTimeOffset? _value_dueDate;
+        private global::System.Boolean _set_dueDate;
+        private global::System.Boolean _value_paid;
+        private global::System.Boolean _set_paid;
         private global::System.Guid _value_id;
         private global::System.Boolean _set_id;
         private global::System.DateTimeOffset _value_expenseDate;
@@ -4048,6 +4227,28 @@ namespace PropManagerSite.GraphQL
         }
 
         global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsPriceSet => _set_price;
+        public global::System.String? Reference
+        {
+            get => _value_reference;
+            set
+            {
+                _set_reference = true;
+                _value_reference = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsReferenceSet => _set_reference;
+        public global::System.String? CompanyName
+        {
+            get => _value_companyName;
+            set
+            {
+                _set_companyName = true;
+                _value_companyName = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsCompanyNameSet => _set_companyName;
         public global::System.Decimal TotalDeductable
         {
             get => _value_totalDeductable;
@@ -4059,6 +4260,28 @@ namespace PropManagerSite.GraphQL
         }
 
         global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsTotalDeductableSet => _set_totalDeductable;
+        public global::System.DateTimeOffset? DueDate
+        {
+            get => _value_dueDate;
+            set
+            {
+                _set_dueDate = true;
+                _value_dueDate = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsDueDateSet => _set_dueDate;
+        public global::System.Boolean Paid
+        {
+            get => _value_paid;
+            set
+            {
+                _set_paid = true;
+                _value_paid = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IEditExpenseInputInfo.IsPaidSet => _set_paid;
         public global::System.Guid Id
         {
             get => _value_id;
@@ -4088,15 +4311,17 @@ namespace PropManagerSite.GraphQL
     {
         private global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _decimalFormatter = default !;
-        private global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter = default !;
         private global::StrawberryShake.Serialization.IInputValueFormatter _dateTimeFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _booleanFormatter = default !;
+        private global::StrawberryShake.Serialization.IInputValueFormatter _uUIDFormatter = default !;
         public global::System.String TypeName => "AddExpenseInput";
         public void Initialize(global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _stringFormatter = serializerResolver.GetInputValueFormatter("String");
             _decimalFormatter = serializerResolver.GetInputValueFormatter("Decimal");
-            _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
             _dateTimeFormatter = serializerResolver.GetInputValueFormatter("DateTime");
+            _booleanFormatter = serializerResolver.GetInputValueFormatter("Boolean");
+            _uUIDFormatter = serializerResolver.GetInputValueFormatter("UUID");
         }
 
         public global::System.Object? Format(global::System.Object? runtimeValue)
@@ -4129,9 +4354,29 @@ namespace PropManagerSite.GraphQL
                 fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("price", FormatPrice(input.Price)));
             }
 
+            if (inputInfo.IsReferenceSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("reference", FormatReference(input.Reference)));
+            }
+
+            if (inputInfo.IsCompanyNameSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("companyName", FormatCompanyName(input.CompanyName)));
+            }
+
             if (inputInfo.IsTotalDeductableSet)
             {
                 fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("totalDeductable", FormatTotalDeductable(input.TotalDeductable)));
+            }
+
+            if (inputInfo.IsDueDateSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("dueDate", FormatDueDate(input.DueDate)));
+            }
+
+            if (inputInfo.IsPaidSet)
+            {
+                fields.Add(new global::System.Collections.Generic.KeyValuePair<global::System.String, global::System.Object?>("paid", FormatPaid(input.Paid)));
             }
 
             if (inputInfo.IsPropertyIdSet)
@@ -4181,9 +4426,50 @@ namespace PropManagerSite.GraphQL
             }
         }
 
+        private global::System.Object? FormatReference(global::System.String? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _stringFormatter.Format(input);
+            }
+        }
+
+        private global::System.Object? FormatCompanyName(global::System.String? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _stringFormatter.Format(input);
+            }
+        }
+
         private global::System.Object? FormatTotalDeductable(global::System.Decimal input)
         {
             return _decimalFormatter.Format(input);
+        }
+
+        private global::System.Object? FormatDueDate(global::System.DateTimeOffset? input)
+        {
+            if (input is null)
+            {
+                return input;
+            }
+            else
+            {
+                return _dateTimeFormatter.Format(input);
+            }
+        }
+
+        private global::System.Object? FormatPaid(global::System.Boolean input)
+        {
+            return _booleanFormatter.Format(input);
         }
 
         private global::System.Object? FormatPropertyId(global::System.Guid input)
@@ -4237,7 +4523,7 @@ namespace PropManagerSite.GraphQL
                 return false;
             }
 
-            return (Title.Equals(other.Title)) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && TotalDeductable == other.TotalDeductable && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate);
+            return (Title.Equals(other.Title)) && ((Description is null && other.Description is null) || Description != null && Description.Equals(other.Description)) && Price == other.Price && ((Reference is null && other.Reference is null) || Reference != null && Reference.Equals(other.Reference)) && ((CompanyName is null && other.CompanyName is null) || CompanyName != null && CompanyName.Equals(other.CompanyName)) && TotalDeductable == other.TotalDeductable && ((DueDate is null && other.DueDate is null) || DueDate != null && DueDate.Equals(other.DueDate)) && Paid == other.Paid && PropertyId.Equals(other.PropertyId) && ExpenseDate.Equals(other.ExpenseDate);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -4256,7 +4542,23 @@ namespace PropManagerSite.GraphQL
                     hash ^= 397 * Price.GetHashCode();
                 }
 
+                if (Reference != null)
+                {
+                    hash ^= 397 * Reference.GetHashCode();
+                }
+
+                if (CompanyName != null)
+                {
+                    hash ^= 397 * CompanyName.GetHashCode();
+                }
+
                 hash ^= 397 * TotalDeductable.GetHashCode();
+                if (DueDate != null)
+                {
+                    hash ^= 397 * DueDate.GetHashCode();
+                }
+
+                hash ^= 397 * Paid.GetHashCode();
                 hash ^= 397 * PropertyId.GetHashCode();
                 hash ^= 397 * ExpenseDate.GetHashCode();
                 return hash;
@@ -4269,8 +4571,16 @@ namespace PropManagerSite.GraphQL
         private global::System.Boolean _set_description;
         private global::System.Decimal? _value_price;
         private global::System.Boolean _set_price;
+        private global::System.String? _value_reference;
+        private global::System.Boolean _set_reference;
+        private global::System.String? _value_companyName;
+        private global::System.Boolean _set_companyName;
         private global::System.Decimal _value_totalDeductable;
         private global::System.Boolean _set_totalDeductable;
+        private global::System.DateTimeOffset? _value_dueDate;
+        private global::System.Boolean _set_dueDate;
+        private global::System.Boolean _value_paid;
+        private global::System.Boolean _set_paid;
         private global::System.Guid _value_propertyId;
         private global::System.Boolean _set_propertyId;
         private global::System.DateTimeOffset _value_expenseDate;
@@ -4308,6 +4618,28 @@ namespace PropManagerSite.GraphQL
         }
 
         global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsPriceSet => _set_price;
+        public global::System.String? Reference
+        {
+            get => _value_reference;
+            set
+            {
+                _set_reference = true;
+                _value_reference = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsReferenceSet => _set_reference;
+        public global::System.String? CompanyName
+        {
+            get => _value_companyName;
+            set
+            {
+                _set_companyName = true;
+                _value_companyName = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsCompanyNameSet => _set_companyName;
         public global::System.Decimal TotalDeductable
         {
             get => _value_totalDeductable;
@@ -4319,6 +4651,28 @@ namespace PropManagerSite.GraphQL
         }
 
         global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsTotalDeductableSet => _set_totalDeductable;
+        public global::System.DateTimeOffset? DueDate
+        {
+            get => _value_dueDate;
+            set
+            {
+                _set_dueDate = true;
+                _value_dueDate = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsDueDateSet => _set_dueDate;
+        public global::System.Boolean Paid
+        {
+            get => _value_paid;
+            set
+            {
+                _set_paid = true;
+                _value_paid = value;
+            }
+        }
+
+        global::System.Boolean global::PropManagerSite.GraphQL.State.IAddExpenseInputInfo.IsPaidSet => _set_paid;
         public global::System.Guid PropertyId
         {
             get => _value_propertyId;
@@ -7223,6 +7577,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -7243,8 +7601,8 @@ namespace PropManagerSite.GraphQL
 
         public static EditPropertyMutationDocument Instance { get; } = new EditPropertyMutationDocument();
         public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Mutation;
-        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x6d, 0x75, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x45, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x24, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x20, 0x45, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x21, 0x29, 0x20, 0x7b, 0x20, 0x65, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x3a, 0x20, 0x24, 0x64, 0x61, 0x74, 0x61, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x20, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x46, 0x65, 0x65, 0x20, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x62, 0x61, 0x74, 0x68, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x6c, 0x61, 0x6e, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x20, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x54, 0x79, 0x70, 0x65, 0x20, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x44, 0x75, 0x74, 0x79, 0x20, 0x63, 0x61, 0x72, 0x70, 0x61, 0x72, 0x6b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x66, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "2dcc8bc58d8c70a0d25c26588a4c7787");
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x6d, 0x75, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x45, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x24, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x20, 0x45, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x21, 0x29, 0x20, 0x7b, 0x20, 0x65, 0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x3a, 0x20, 0x24, 0x64, 0x61, 0x74, 0x61, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x20, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x46, 0x65, 0x65, 0x20, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x62, 0x61, 0x74, 0x68, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x6c, 0x61, 0x6e, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x20, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x54, 0x79, 0x70, 0x65, 0x20, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x44, 0x75, 0x74, 0x79, 0x20, 0x63, 0x61, 0x72, 0x70, 0x61, 0x72, 0x6b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x66, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x64, 0x75, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x20, 0x70, 0x61, 0x69, 0x64, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "62ea971f0e5a276b79751f7b65d66f2e");
         public override global::System.String ToString()
         {
 #if NETSTANDARD2_0
@@ -7326,6 +7684,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -7460,6 +7822,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -7794,6 +8160,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -7814,8 +8184,8 @@ namespace PropManagerSite.GraphQL
 
         public static GetPropertyQueryDocument Instance { get; } = new GetPropertyQueryDocument();
         public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
-        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x24, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x20, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x46, 0x65, 0x65, 0x20, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x62, 0x61, 0x74, 0x68, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x6c, 0x61, 0x6e, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x20, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x54, 0x79, 0x70, 0x65, 0x20, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x44, 0x75, 0x74, 0x79, 0x20, 0x63, 0x61, 0x72, 0x70, 0x61, 0x72, 0x6b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x66, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "111fac70ed5db51c17fb291ce2536536");
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x28, 0x24, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x50, 0x72, 0x69, 0x63, 0x65, 0x20, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x46, 0x65, 0x65, 0x20, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x62, 0x61, 0x74, 0x68, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x20, 0x6c, 0x61, 0x6e, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x20, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x54, 0x79, 0x70, 0x65, 0x20, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x44, 0x75, 0x74, 0x79, 0x20, 0x63, 0x61, 0x72, 0x70, 0x61, 0x72, 0x6b, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x20, 0x6f, 0x6e, 0x20, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x6c, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x65, 0x73, 0x74, 0x20, 0x6c, 0x4d, 0x49, 0x20, 0x6c, 0x6f, 0x61, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x20, 0x79, 0x65, 0x61, 0x72, 0x73, 0x20, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x66, 0x4c, 0x6f, 0x61, 0x6e, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x64, 0x75, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x20, 0x70, 0x61, 0x69, 0x64, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "619b8d942888d28e038ae0b933103efb");
         public override global::System.String ToString()
         {
 #if NETSTANDARD2_0
@@ -7894,6 +8264,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -8027,6 +8401,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -8247,6 +8625,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -8267,8 +8649,8 @@ namespace PropManagerSite.GraphQL
 
         public static GetExpenseQueryDocument Instance { get; } = new GetExpenseQueryDocument();
         public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
-        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x24, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "07ad8e42e6aa4af6d30e1efaf06bcf3f");
+        public global::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]{0x71, 0x75, 0x65, 0x72, 0x79, 0x20, 0x47, 0x65, 0x74, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x28, 0x24, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x64, 0x3a, 0x20, 0x55, 0x55, 0x49, 0x44, 0x29, 0x20, 0x7b, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x73, 0x28, 0x77, 0x68, 0x65, 0x72, 0x65, 0x3a, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x3a, 0x20, 0x7b, 0x20, 0x65, 0x71, 0x3a, 0x20, 0x24, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x49, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x29, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x66, 0x72, 0x61, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x6f, 0x6e, 0x20, 0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x20, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x70, 0x72, 0x69, 0x63, 0x65, 0x20, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x44, 0x65, 0x64, 0x75, 0x63, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x49, 0x64, 0x20, 0x65, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x64, 0x75, 0x65, 0x44, 0x61, 0x74, 0x65, 0x20, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x20, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x20, 0x70, 0x61, 0x69, 0x64, 0x20, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x5f, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x20, 0x69, 0x64, 0x20, 0x2e, 0x2e, 0x2e, 0x20, 0x6f, 0x6e, 0x20, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x20, 0x7b, 0x20, 0x69, 0x64, 0x20, 0x7d, 0x20, 0x7d, 0x20, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x20, 0x7d};
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "646f3f0f4de728933862a37eb7c8f985");
         public override global::System.String ToString()
         {
 #if NETSTANDARD2_0
@@ -8300,6 +8682,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -8386,6 +8772,10 @@ namespace PropManagerSite.GraphQL
     ///   totalDeductable
     ///   propertyId
     ///   expenseDate
+    ///   dueDate
+    ///   companyName
+    ///   reference
+    ///   paid
     ///   property {
     ///     __typename
     ///     id
@@ -8495,7 +8885,7 @@ namespace PropManagerSite.GraphQL.State
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.15.0.0")]
     public partial class ExpenseEntity
     {
-        public ExpenseEntity(global::System.Guid id = default !, global::System.String title = default !, global::System.String? description = default !, global::System.Decimal? price = default !, global::System.Decimal totalDeductable = default !, global::System.Guid propertyId = default !, global::System.DateTimeOffset expenseDate = default !, global::StrawberryShake.EntityId property = default !, global::System.Boolean deleted = default !)
+        public ExpenseEntity(global::System.Guid id = default !, global::System.String title = default !, global::System.String? description = default !, global::System.Decimal? price = default !, global::System.Decimal totalDeductable = default !, global::System.Guid propertyId = default !, global::System.DateTimeOffset expenseDate = default !, global::System.DateTimeOffset? dueDate = default !, global::System.String? companyName = default !, global::System.String? reference = default !, global::System.Boolean paid = default !, global::StrawberryShake.EntityId property = default !, global::System.Boolean deleted = default !)
         {
             Id = id;
             Title = title;
@@ -8504,6 +8894,10 @@ namespace PropManagerSite.GraphQL.State
             TotalDeductable = totalDeductable;
             PropertyId = propertyId;
             ExpenseDate = expenseDate;
+            DueDate = dueDate;
+            CompanyName = companyName;
+            Reference = reference;
+            Paid = paid;
             Property = property;
             Deleted = deleted;
         }
@@ -8521,6 +8915,14 @@ namespace PropManagerSite.GraphQL.State
         public global::System.Guid PropertyId { get; }
 
         public global::System.DateTimeOffset ExpenseDate { get; }
+
+        public global::System.DateTimeOffset? DueDate { get; }
+
+        public global::System.String? CompanyName { get; }
+
+        public global::System.String? Reference { get; }
+
+        public global::System.Boolean Paid { get; }
 
         public global::StrawberryShake.EntityId Property { get; }
 
@@ -9585,7 +9987,7 @@ namespace PropManagerSite.GraphQL.State
                 snapshot = _entityStore.CurrentSnapshot;
             }
 
-            return new EditProperty_EditProperty_Property_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
+            return new EditProperty_EditProperty_Property_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.DueDate, entity.CompanyName, entity.Reference, entity.Paid, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
         }
 
         private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
@@ -10039,7 +10441,7 @@ namespace PropManagerSite.GraphQL.State
                 snapshot = _entityStore.CurrentSnapshot;
             }
 
-            return new GetProperty_Properties_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
+            return new GetProperty_Properties_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.DueDate, entity.CompanyName, entity.Reference, entity.Paid, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
         }
 
         private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
@@ -10325,7 +10727,7 @@ namespace PropManagerSite.GraphQL.State
                 snapshot = _entityStore.CurrentSnapshot;
             }
 
-            return new GetExpense_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
+            return new GetExpense_Expenses_Expense(entity.Id, entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.DueDate, entity.CompanyName, entity.Reference, entity.Paid, MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(entity.Property, snapshot), entity.Deleted);
         }
 
         private global::PropManagerSite.GraphQL.IEditProperty_EditProperty_Property_Expenses_Property MapNonNullableIEditProperty_EditProperty_Property_Expenses_Property(global::StrawberryShake.EntityId entityId, global::StrawberryShake.IEntityStoreSnapshot snapshot)
@@ -10368,7 +10770,15 @@ namespace PropManagerSite.GraphQL.State
 
         global::System.Boolean IsPriceSet { get; }
 
+        global::System.Boolean IsReferenceSet { get; }
+
+        global::System.Boolean IsCompanyNameSet { get; }
+
         global::System.Boolean IsTotalDeductableSet { get; }
+
+        global::System.Boolean IsDueDateSet { get; }
+
+        global::System.Boolean IsPaidSet { get; }
 
         global::System.Boolean IsIdSet { get; }
 
@@ -10384,7 +10794,15 @@ namespace PropManagerSite.GraphQL.State
 
         global::System.Boolean IsPriceSet { get; }
 
+        global::System.Boolean IsReferenceSet { get; }
+
+        global::System.Boolean IsCompanyNameSet { get; }
+
         global::System.Boolean IsTotalDeductableSet { get; }
+
+        global::System.Boolean IsDueDateSet { get; }
+
+        global::System.Boolean IsPaidSet { get; }
 
         global::System.Boolean IsPropertyIdSet { get; }
 
@@ -10507,8 +10925,9 @@ namespace PropManagerSite.GraphQL.State
         private readonly global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IEditExpenseResult> _resultDataFactory;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Boolean, global::System.Boolean> _booleanParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
         public EditExpenseBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IEditExpenseResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
@@ -10516,8 +10935,9 @@ namespace PropManagerSite.GraphQL.State
             _resultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
             _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
             _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
-            _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
             _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
+            _booleanParser = serializerResolver.GetLeafValueParser<global::System.Boolean, global::System.Boolean>("Boolean") ?? throw new global::System.ArgumentException("No serializer for type `Boolean` found.");
+            _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
         }
 
         public global::StrawberryShake.IOperationResult<IEditExpenseResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
@@ -10604,11 +11024,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.Property, entity.Deleted));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.DueDate, entity.CompanyName, entity.Reference, entity.Paid, entity.Property, entity.Deleted));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
                 }
 
                 return entityId;
@@ -10636,8 +11056,9 @@ namespace PropManagerSite.GraphQL.State
         private readonly global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddExpenseResult> _resultDataFactory;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Decimal, global::System.Decimal> _decimalParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.DateTimeOffset> _dateTimeParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Boolean, global::System.Boolean> _booleanParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Guid> _uUIDParser;
         public AddExpenseBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::PropManagerSite.GraphQL.IAddExpenseResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
@@ -10645,8 +11066,9 @@ namespace PropManagerSite.GraphQL.State
             _resultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
             _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
             _decimalParser = serializerResolver.GetLeafValueParser<global::System.Decimal, global::System.Decimal>("Decimal") ?? throw new global::System.ArgumentException("No serializer for type `Decimal` found.");
-            _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
             _dateTimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.DateTimeOffset>("DateTime") ?? throw new global::System.ArgumentException("No serializer for type `DateTime` found.");
+            _booleanParser = serializerResolver.GetLeafValueParser<global::System.Boolean, global::System.Boolean>("Boolean") ?? throw new global::System.ArgumentException("No serializer for type `Boolean` found.");
+            _uUIDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Guid>("UUID") ?? throw new global::System.ArgumentException("No serializer for type `UUID` found.");
         }
 
         public global::StrawberryShake.IOperationResult<IAddExpenseResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
@@ -10733,11 +11155,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.Property, entity.Deleted));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), entity.Title, entity.Description, entity.Price, entity.TotalDeductable, entity.PropertyId, entity.ExpenseDate, entity.DueDate, entity.CompanyName, entity.Reference, entity.Paid, entity.Property, entity.Deleted));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !, default !));
                 }
 
                 return entityId;
@@ -11649,11 +12071,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dueDate")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "companyName")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reference")), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "paid")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dueDate")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "companyName")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reference")), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "paid")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
                 }
 
                 return entityId;
@@ -11682,6 +12104,16 @@ namespace PropManagerSite.GraphQL.State
             return _dateTimeParser.Parse(obj.Value.GetString()!);
         }
 
+        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _booleanParser.Parse(obj.Value.GetBoolean()!);
+        }
+
         private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
         {
             if (!obj.HasValue)
@@ -11706,16 +12138,6 @@ namespace PropManagerSite.GraphQL.State
             }
 
             throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _booleanParser.Parse(obj.Value.GetBoolean()!);
         }
     }
 
@@ -12276,11 +12698,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dueDate")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "companyName")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reference")), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "paid")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dueDate")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "companyName")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reference")), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "paid")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
                 }
 
                 return entityId;
@@ -12309,6 +12731,16 @@ namespace PropManagerSite.GraphQL.State
             return _dateTimeParser.Parse(obj.Value.GetString()!);
         }
 
+        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _booleanParser.Parse(obj.Value.GetBoolean()!);
+        }
+
         private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
         {
             if (!obj.HasValue)
@@ -12333,16 +12765,6 @@ namespace PropManagerSite.GraphQL.State
             }
 
             throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _booleanParser.Parse(obj.Value.GetBoolean()!);
         }
     }
 
@@ -12672,11 +13094,11 @@ namespace PropManagerSite.GraphQL.State
             {
                 if (session.CurrentSnapshot.TryGetEntity(entityId, out global::PropManagerSite.GraphQL.State.ExpenseEntity? entity))
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dueDate")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "companyName")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reference")), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "paid")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
                 }
                 else
                 {
-                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
+                    session.SetEntity(entityId, new global::PropManagerSite.GraphQL.State.ExpenseEntity(DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), DeserializeDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), DeserializeNonNullableDecimal(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalDeductable")), DeserializeNonNullableGuid(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "propertyId")), DeserializeNonNullableDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "expenseDate")), DeserializeDateTimeOffset(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dueDate")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "companyName")), DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reference")), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "paid")), UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(session, global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "property"), entityIds), DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "deleted"))));
                 }
 
                 return entityId;
@@ -12745,6 +13167,26 @@ namespace PropManagerSite.GraphQL.State
             return _dateTimeParser.Parse(obj.Value.GetString()!);
         }
 
+        private global::System.DateTimeOffset? DeserializeDateTimeOffset(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            return _dateTimeParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _booleanParser.Parse(obj.Value.GetBoolean()!);
+        }
+
         private global::StrawberryShake.EntityId UpdateNonNullableIEditProperty_EditProperty_Property_Expenses_PropertyEntity(global::StrawberryShake.IEntityStoreUpdateSession session, global::System.Text.Json.JsonElement? obj, global::System.Collections.Generic.ISet<global::StrawberryShake.EntityId> entityIds)
         {
             if (!obj.HasValue)
@@ -12769,16 +13211,6 @@ namespace PropManagerSite.GraphQL.State
             }
 
             throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _booleanParser.Parse(obj.Value.GetBoolean()!);
         }
     }
 

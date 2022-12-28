@@ -47,6 +47,10 @@ fragment expense on Expense
         totalDeductable
         propertyId
         expenseDate
+        dueDate
+        companyName
+        reference
+        paid
         property {
           id
         }

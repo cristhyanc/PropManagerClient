@@ -23,10 +23,22 @@ else
             <GridColumns>
                 <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Expenses_Expense.Id) HeaderText=" ID" IsPrimaryKey="true" Visible=false></GridColumn>
                 <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Expenses_Expense.Title) HeaderText="Title"></GridColumn>
-                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Expenses_Expense.Description) HeaderText="Description"></GridColumn>
+                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Expenses_Expense.CompanyName) HeaderText="Company"></GridColumn>
                 <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Expenses_Expense.Price) HeaderText="Price" Format="C2"></GridColumn>
-                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Expenses_Expense.TotalDeductable) HeaderText="Total Deductable %"   ></GridColumn>
-                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Expenses_Expense.ExpenseDate) HeaderText="Expense Date" Format="dd/MM/yyyy"></GridColumn>
+                <GridColumn Field=@nameof(IEditProperty_EditProperty_Property_Expenses_Expense.DueDate) HeaderText="Due Date" Format="dd/MM/yyyy"></GridColumn>
+                <GridColumn HeaderText="Paid">
+                    <Template>
+                        @{
+                            var value = (context as IEditProperty_EditProperty_Property_Expenses_Expense);
+                            if (value.Paid){
+                                <div>Yes</div>
+                            }else
+                            {
+                                <div>No</div>
+                            }
+                        }
+                    </Template>
+                </GridColumn>
 
                 <GridColumn HeaderText="Manage Records" Width="150">
                     <Template>

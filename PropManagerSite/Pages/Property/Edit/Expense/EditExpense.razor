@@ -18,8 +18,7 @@
         {
             <div class="flex flex-row gap-5">
                 <div class="w-full">
-                    <SfTextBox CssClass="!h-11" Placeholder="Title" @bind-Value="@ExpenseModel.Title"
-                           FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+                    <SfTextBox CssClass="!h-11" Placeholder="Title" @bind-Value="@ExpenseModel.Title" FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
                     <ValidationMessage For="() => ExpenseModel.Title" />
                 </div>
 
@@ -31,26 +30,36 @@
                 <SfNumericTextBox CssClass="!h-11" TValue="decimal" @bind-Value="@ExpenseModel.TotalDeductable" Placeholder="TotalDeductable" FloatLabelType="@FloatLabelType.Auto" Format="###.##"></SfNumericTextBox>
                 <SfNumericTextBox CssClass="!h-11" TValue="decimal?" @bind-Value="@ExpenseModel.Price" Placeholder="Price" FloatLabelType="@FloatLabelType.Auto" Format="C2"></SfNumericTextBox>
             </div>
-
-            <div class="flex flex-row gap-5 ">
-
+            <div class="flex flex-row gap-5 items-center">
+                <SfTextBox CssClass="!h-11" Placeholder="Quote Reference" @bind-Value="@ExpenseModel.Reference" FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+                <SfTextBox CssClass="!h-11" Placeholder="Contractor/Company Name" @bind-Value="@ExpenseModel.CompanyName" FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+            </div>
+            <div class="grid grid-cols-4  gap-5 items-center content-center">
                 <div>
-                    <SfDatePicker TValue="DateTimeOffset?" @bind-Value="@ExpenseModel.ExpenseDate" Placeholder="Date" FloatLabelType="@FloatLabelType.Auto" ShowClearButton="true"></SfDatePicker>
+                    <SfDatePicker TValue="DateTimeOffset?" @bind-Value="@ExpenseModel.ExpenseDate" Placeholder="Quote Date" FloatLabelType="@FloatLabelType.Auto" ShowClearButton="true"></SfDatePicker>
                     <ValidationMessage For="() => ExpenseModel.ExpenseDate" />
                 </div>
-
-                <div class="flex flex-row justify-end gap-2 h-8 mt-6 w-full">
+                <div>
+                    <SfDatePicker TValue="DateTimeOffset?" @bind-Value="@ExpenseModel.DueDate" Placeholder="Due Date" FloatLabelType="@FloatLabelType.Auto" ShowClearButton="true"></SfDatePicker>
+                </div>
+                <SfSwitch @bind-Checked="@ExpenseModel.Paid" CssClass="mt-5" OnLabel="Paid" OffLabel="Unpaid" TChecked="bool"></SfSwitch>
+                <div class="flex flex-row justify-end gap-2 h-8 mt-8 w-full">
                     <SfButton @onclick="Cancel" CssClass="e-danger">Cancel</SfButton>
                     <SfButton CssClass="e-primary">Save</SfButton>
 
                 </div>
             </div>
-
         }
     </div>
 </EditForm>
 <style>
     .e-control-container {
         height: 45px !important
+    }
+
+    .e-switch-wrapper,
+    .e-css.e-switch-wrapper {
+        width:100px;
+        height:30px;
     }
 </style>

@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using PropManagerSite.GraphQL;
 using PropManagerSite.Shared;
 using PropManagerSite.Shared.Notification;
+using System.Linq;
 
 namespace PropManagerSite.Pages.Property.Edit.Expense
 {
@@ -12,10 +13,9 @@ namespace PropManagerSite.Pages.Property.Edit.Expense
         [Parameter]
         public IPropertyDetails? PropertyDetails { get; set; }
               
-
         [Parameter]
         public EventCallback OnExpenseDeleted { get; set; }
-
+                
         protected void NewExpense()
         {
             this.NavManager.NavigateTo($"property/{this.PropertyDetails!.Id}/expense/new");
@@ -55,4 +55,5 @@ namespace PropManagerSite.Pages.Property.Edit.Expense
             }
         }
     }
+     
 }

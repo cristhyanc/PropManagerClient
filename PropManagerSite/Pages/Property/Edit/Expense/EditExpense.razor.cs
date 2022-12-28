@@ -38,6 +38,11 @@ namespace PropManagerSite.Pages.Property.Edit.Expense
                             ExpenseModel.ExpenseDate = expenseDetails.ExpenseDate;
                             ExpenseModel.Description = expenseDetails.Description;
                             ExpenseModel.TotalDeductable = expenseDetails.TotalDeductable;
+                            ExpenseModel.DueDate = expenseDetails.DueDate;
+                            ExpenseModel.Paid = expenseDetails.Paid;
+                            ExpenseModel.CompanyName = expenseDetails.CompanyName;
+                            ExpenseModel.Reference = expenseDetails.Reference;
+                            
                         }
                     }
                     else
@@ -69,7 +74,11 @@ namespace PropManagerSite.Pages.Property.Edit.Expense
                     Description = ExpenseModel.Description,
                     ExpenseDate = ExpenseModel.ExpenseDate!.Value,
                     TotalDeductable = ExpenseModel.TotalDeductable,
-                    Id=Guid.Parse(this.ExpenseId)
+                    CompanyName = ExpenseModel.CompanyName,
+                    Paid = ExpenseModel.Paid,
+                    DueDate = ExpenseModel.DueDate,
+                    Reference= ExpenseModel.Reference,
+                    Id =Guid.Parse(this.ExpenseId)
                 };
 
                 var result = await PropManagerSiteQL.EditExpense.ExecuteAsync(input);
@@ -109,6 +118,10 @@ namespace PropManagerSite.Pages.Property.Edit.Expense
             public decimal TotalDeductable { get; set; } = 100;
             [Required]
             public DateTimeOffset? ExpenseDate { get; set; }
+            public string? CompanyName { get; set; }
+            public string? Reference { get; set; }
+            public DateTimeOffset? DueDate { get; set; }
+            public bool Paid { get; set; }
         }
 
     }

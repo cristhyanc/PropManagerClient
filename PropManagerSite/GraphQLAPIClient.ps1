@@ -1,0 +1,1 @@
+﻿dotnet graphql update -u https://localhost:44368/graphql/

@@ -68,6 +68,14 @@ input ExpenseFilterInput {
   propertyId: ComparableGuidOperationFilterInput
   deleted: BooleanOperationFilterInput
   expenseDate: ComparableDateTimeOffsetOperationFilterInput
+  expenseRecurrence: ListFilterInputTypeOfExpenseRecurrenceFilterInput
+  startDate: ComparableDateTimeOffsetOperationFilterInput
+  endDate: ComparableDateTimeOffsetOperationFilterInput
+  frequency: ComparableInt32OperationFilterInput
+  reference: StringOperationFilterInput
+  companyName: StringOperationFilterInput
+  dueDate: ComparableNullableOfDateTimeOffsetOperationFilterInput
+  paid: BooleanOperationFilterInput
 }
 
 input ComparableGuidOperationFilterInput {
@@ -208,6 +216,39 @@ input ComparableDateTimeOffsetOperationFilterInput {
   nlte: DateTime
 }
 
+input ListFilterInputTypeOfExpenseRecurrenceFilterInput {
+  all: ExpenseRecurrenceFilterInput
+  none: ExpenseRecurrenceFilterInput
+  some: ExpenseRecurrenceFilterInput
+  any: Boolean
+}
+
+input ComparableInt32OperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int!]
+  nin: [Int!]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input ExpenseRecurrenceFilterInput {
+  and: [ExpenseRecurrenceFilterInput!]
+  or: [ExpenseRecurrenceFilterInput!]
+  id: ComparableGuidOperationFilterInput
+  expense: ExpenseFilterInput
+  expenseId: ComparableGuidOperationFilterInput
+  recurrenceDate: ComparableDateTimeOffsetOperationFilterInput
+  deleted: BooleanOperationFilterInput
+  completed: BooleanOperationFilterInput
+}
+
 input DeleteExpenseInput {
   id: UUID!
 }
@@ -216,7 +257,11 @@ input EditExpenseInput {
   title: String!
   description: String
   price: Decimal
+  reference: String
+  companyName: String
   totalDeductable: Decimal!
+  dueDate: DateTime
+  paid: Boolean!
   id: UUID!
   expenseDate: DateTime!
 }
@@ -225,7 +270,11 @@ input AddExpenseInput {
   title: String!
   description: String
   price: Decimal
+  reference: String
+  companyName: String
   totalDeductable: Decimal!
+  dueDate: DateTime
+  paid: Boolean!
   propertyId: UUID!
   expenseDate: DateTime!
 }
@@ -240,6 +289,14 @@ type Expense {
   propertyId: UUID!
   deleted: Boolean!
   expenseDate: DateTime!
+  expenseRecurrence: [ExpenseRecurrence!]!
+  startDate: DateTime!
+  endDate: DateTime!
+  frequency: Int!
+  reference: String
+  companyName: String
+  dueDate: DateTime
+  paid: Boolean!
 }
 
 input DeleteLoanInput {
@@ -348,6 +405,15 @@ enum LoanTypes {
 
 "The `DateTime` scalar represents an ISO-8601 compliant date time type."
 scalar DateTime
+
+type ExpenseRecurrence {
+  id: UUID!
+  expense: Expense!
+  expenseId: UUID!
+  recurrenceDate: DateTime!
+  deleted: Boolean!
+  completed: Boolean!
+}
 
 type AddPropertyPayload {
   property: Property

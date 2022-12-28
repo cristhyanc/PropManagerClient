@@ -31,7 +31,11 @@ namespace PropManagerSite.Pages.Property.Edit.Expense
                     Description = ExpenseModel.Description,
                     ExpenseDate = ExpenseModel.ExpenseDate!.Value,
                     TotalDeductable= ExpenseModel.TotalDeductable,
-                    PropertyId=this.PropertyId
+                    CompanyName = ExpenseModel.CompanyName,
+                    Paid = ExpenseModel.Paid,
+                    DueDate = ExpenseModel.DueDate,
+                    Reference = ExpenseModel.Reference,
+                    PropertyId =this.PropertyId
                 };
 
                 var result = await PropManagerSiteQL.AddExpense.ExecuteAsync(input);
@@ -69,9 +73,13 @@ namespace PropManagerSite.Pages.Property.Edit.Expense
             public string Title { get; set; } = default!;
             public string? Description { get; set; }
             public decimal? Price { get; set; }
+            public string? Reference { get; set; }
             public decimal TotalDeductable { get; set; } = 100;
             [Required]
             public DateTimeOffset? ExpenseDate { get; set; }
+            public string? CompanyName { get; set; }
+            public DateTimeOffset? DueDate { get; set; }
+            public bool Paid { get; set; }
         }
     }
 }

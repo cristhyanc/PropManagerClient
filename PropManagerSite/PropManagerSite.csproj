@@ -25,11 +25,12 @@
     <PackageReference Include="Microsoft.Graph" Version="4.45.0" />
     <PackageReference Include="StrawberryShake.CodeGeneration.CSharp.Analyzers" Version="12.15.0" />
     <PackageReference Include="StrawberryShake.Transport.Http" Version="12.15.0" />
-    <PackageReference Include="Syncfusion.Blazor.Calendars" Version="20.3.0.50" />
-    <PackageReference Include="Syncfusion.Blazor.Cards" Version="20.3.0.52" />
-    <PackageReference Include="Syncfusion.Blazor.Grid" Version="20.3.0.50" />
-    <PackageReference Include="Syncfusion.Blazor.Notifications" Version="20.3.0.52" />
-    <PackageReference Include="Syncfusion.Blazor.ProgressBar" Version="20.3.0.57" />
+    <PackageReference Include="Syncfusion.Blazor.Buttons" Version="20.4.0.40" />
+    <PackageReference Include="Syncfusion.Blazor.Calendars" Version="20.4.0.40" />
+    <PackageReference Include="Syncfusion.Blazor.Cards" Version="20.4.0.40" />
+    <PackageReference Include="Syncfusion.Blazor.Grid" Version="20.4.0.40" />
+    <PackageReference Include="Syncfusion.Blazor.Notifications" Version="20.4.0.40" />
+    <PackageReference Include="Syncfusion.Blazor.ProgressBar" Version="20.4.0.40" />
   </ItemGroup>
 
   <ItemGroup>
